@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="algorithm," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="经典算法问题http://www.cnblogs.com/libra-yong/p/6390303.html 1、三色旗问题">
+<meta name="keywords" content="algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="classical-algorithm">
+<meta property="og:url" content="http://yoursite.com/2017/08/24/classical-algorithm/index.html">
+<meta property="og:site_name" content="Muyinsuifeng">
+<meta property="og:description" content="经典算法问题http://www.cnblogs.com/libra-yong/p/6390303.html 1、三色旗问题">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://github.com/muyinsuifeng/myleetcode/raw/master/image/knightRunChess.gif">
+<meta property="og:image" content="https://github.com/muyinsuifeng/myleetcode/raw/master/image/twoColorHannoi.jpg">
+<meta property="og:image" content="https://github.com/muyinsuifeng/myleetcode/raw/master/image/threeColorHannoi.jpg">
+<meta property="og:image" content="https://github.com/muyinsuifeng/myleetcode/raw/master/image/threeColorHannoi2.jpg">
+<meta property="og:image" content="https://github.com/muyinsuifeng/myleetcode/raw/master/image/MonteCarloGetPi.jpg">
+<meta property="og:updated_time" content="2017-08-24T07:36:18.225Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="classical-algorithm">
+<meta name="twitter:description" content="经典算法问题http://www.cnblogs.com/libra-yong/p/6390303.html 1、三色旗问题">
+<meta name="twitter:image" content="https://github.com/muyinsuifeng/myleetcode/raw/master/image/knightRunChess.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/24/classical-algorithm/"/>
+
+
+
+
+
+  <title>classical-algorithm | Muyinsuifeng</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Muyinsuifeng</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-algorithm">
+          <a href="/algorithm/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            algorithm
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-leetcode">
+          <a href="/leetcode/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
+            
+            leetcode
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/24/classical-algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gia Furler">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Muyinsuifeng">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">classical-algorithm</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-24T15:35:41+08:00">
+                2017-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://www.cnblogs.com/libra-yong/p/6390303.html" target="_blank" rel="external">经典算法问题http://www.cnblogs.com/libra-yong/p/6390303.html</a></p>
+<h1 id="1、三色旗问题"><a href="#1、三色旗问题" class="headerlink" title="1、三色旗问题"></a>1、三色旗问题</h1><a id="more"></a>
+<ul>
+<li>问题：<ul>
+<li>假设有一条绳子，上面有红，白，蓝三种颜色的旗子，起初绳子上的旗子颜色并没有顺序，您希望将之分类，并排列为蓝，白，红的顺序，要如何移动次数才会最少，注意您只能在绳子上进行这份动作，而且一次只能调换两个色旗子。</li>
+</ul>
+</li>
+<li>解法：<ul>
+<li>在一条绳子上移动，在程式中也就意味着只能使用一个阵列，而不能使用其他的阵列来作辅助，问题的解法很简单您可以自己想像一下在移动旗子，从绳子开头进行，遇到蓝色往前移，遇到白色留在中间，遇到红色往后移，如下所示：<br>只是要让移动的次数最少的话， 就要有些技巧：<br> 1.如果图中W所在位置为白色，则W+1, 表示未处理的部分移至白色群组。<br> 2.如果W部分为蓝色， 则B与W的元素对调，而B与W必须各 +1， 表示两个群组都多了一个元素。<br> 2.如果W所在的位置是红色，则将W与R交换，但R要减 1，表示未处理的部分减 1.</li>
+</ul>
+</li>
+<li>注意：<ul>
+<li>B，W，R并不是三色旗的个数，它们只是一个移动的指标；什么时候移动结束呢？一开始时未处理的R指标会是等于旗子的总数，当R的索引数减至少于W的索引数时，表示接下来的旗子就是红色了，此时就可以结束移动</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">threeColorFlag</span><span class="params">( <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt; v, <span class="keyword">int</span> b, <span class="keyword">int</span> w, <span class="keyword">int</span> r)</span></span>&#123;<span class="comment">//b,w表示blue和white的末尾index,r表示red的头index</span></div><div class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>( w &lt; r) &#123;</div><div class="line">        <span class="keyword">if</span>( v[w] == w)</div><div class="line">            w++;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( v[w] == b)&#123;</div><div class="line">            swap( v[w], v[b]);</div><div class="line">            b++;</div><div class="line">            w++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">while</span>( w &lt; r &amp;&amp; v[r] == r)</div><div class="line">                r--;</div><div class="line">            swap( v[w], v[r]);</div><div class="line">            r--;</div><div class="line">        &#125;</div><div class="line">        count++;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; count;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span>&#123;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt; v(&#123;<span class="string">'r'</span>, <span class="string">'w'</span>, <span class="string">'b'</span>, <span class="string">'w'</span>, <span class="string">'w'</span>, <span class="string">'b'</span>, <span class="string">'r'</span>, <span class="string">'b'</span>, <span class="string">'w'</span>, <span class="string">'r'</span>&#125;);</div><div class="line">    threeColorFlag( v, <span class="number">0</span>, <span class="number">0</span>, v.size()<span class="number">-1</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line">``` </div><div class="line"># <span class="number">2</span>、老鼠走迷宫</div><div class="line">- 说明：</div><div class="line">    + 老鼠走迷宫是递回求解的基本题型，我们在二维阵列中使用<span class="number">2</span>表示迷宫墙壁，使用<span class="number">1</span>表示老鼠行走的路径，试以程式求出由入口至出口的路径。</div><div class="line">- 解法：</div><div class="line">    + 老鼠走迷宫是递回求解的基本题型，我们在二维阵列中使用<span class="number">2</span>表示迷宫墙壁，使用<span class="number">1</span>表示老鼠行走的路径，试以程式求出由入口至出口的路径。</div><div class="line"></div><div class="line">```c++</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; offsetx(&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">-1</span>&#125;);</div><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; offsety(&#123;<span class="number">1</span>,<span class="number">0</span>,<span class="number">-1</span>,<span class="number">0</span>&#125;);</div><div class="line"><span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">mouseRunMaze</span><span class="params">( <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; &amp;v, <span class="keyword">int</span> startx, <span class="keyword">int</span> starty, <span class="keyword">int</span> endx, <span class="keyword">int</span> endy)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>( startx == endx&amp;&amp; starty == endy)&#123;</div><div class="line">        count ++;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; count &lt;&lt; <span class="string">"th way"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">auto</span> i : v)&#123;</div><div class="line">            <span class="keyword">for</span>( <span class="keyword">auto</span> j : i)</div><div class="line">                <span class="built_in">cout</span> &lt;&lt; j &lt;&lt; ends;</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">        v[startx][starty] = <span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)&#123;</div><div class="line">            <span class="keyword">int</span> tx = startx + offsetx[i];</div><div class="line">            <span class="keyword">int</span> ty = starty + offsety[i];</div><div class="line">            <span class="keyword">if</span>( tx &gt;= <span class="number">1</span> &amp;&amp; tx &lt; v.size()<span class="number">-1</span>&amp;&amp; ty &gt;= <span class="number">1</span>&amp;&amp; ty &lt; v[<span class="number">0</span>].size()<span class="number">-1</span> &amp;&amp; v[tx][ty] == <span class="number">0</span>)&#123;</div><div class="line">                v[tx][ty] = <span class="number">1</span>;</div><div class="line">                mouseRunMaze( v, tx, ty, <span class="number">5</span>, <span class="number">5</span>);</div><div class="line">                v[tx][ty] = <span class="number">0</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span>&#123;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; v(&#123;&#123;<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>&#125;,</div><div class="line">                        &#123;<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">2</span>&#125;,</div><div class="line">                        &#123;<span class="number">2</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">2</span>&#125;,</div><div class="line">                        &#123;<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">2</span>&#125;,</div><div class="line">                        &#123;<span class="number">2</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">2</span>&#125;,</div><div class="line">                        &#123;<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">2</span>&#125;,</div><div class="line">                        &#123;<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>&#125;&#125;);</div><div class="line">    <span class="keyword">int</span> x = <span class="number">1</span>;</div><div class="line">    <span class="keyword">int</span> y = <span class="number">1</span>;</div><div class="line">    mouseRunMaze( v, x, y, <span class="number">5</span>, <span class="number">5</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//output 1th way</span></div><div class="line">&lt;!-- <span class="number">2</span> <span class="number">2</span> <span class="number">2</span> <span class="number">2</span> <span class="number">2</span> <span class="number">2</span> <span class="number">2</span></div><div class="line"><span class="number">2</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">2</span></div><div class="line"><span class="number">2</span> <span class="number">1</span> <span class="number">2</span> <span class="number">0</span> <span class="number">2</span> <span class="number">0</span> <span class="number">2</span></div><div class="line"><span class="number">2</span> <span class="number">1</span> <span class="number">1</span> <span class="number">2</span> <span class="number">0</span> <span class="number">2</span> <span class="number">2</span></div><div class="line"><span class="number">2</span> <span class="number">2</span> <span class="number">1</span> <span class="number">2</span> <span class="number">0</span> <span class="number">2</span> <span class="number">2</span></div><div class="line"><span class="number">2</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">2</span></div><div class="line"><span class="number">2</span> <span class="number">2</span> <span class="number">2</span> <span class="number">2</span> <span class="number">2</span> <span class="number">2</span> <span class="number">2</span> --&gt;</div></pre></td></tr></table></figure>
+<h1 id="3、骑士走棋盘"><a href="#3、骑士走棋盘" class="headerlink" title="3、骑士走棋盘"></a>3、骑士走棋盘</h1><ul>
+<li>说明：<ul>
+<li>骑士旅游Knight tour在十八世纪初倍受数学家与拼图迷的注意，它什么时候被提出已不可考，骑士的走法为西洋棋的走法，骑士可以由任一个位置出发，它要如何走完所有的位置。</li>
+<li><!-- ![KnightRunChess](./image/knightRunChess.gif "KnightRunChess") -->
+<img src="https://github.com/muyinsuifeng/myleetcode/raw/master/image/knightRunChess.gif" alt="KnightRunChess" title="KnightRunChess"></li>
+</ul>
+</li>
+<li>解法：<ul>
+<li>骑士的走法,基本上可以用递回来解决,但是纯粹的递回在维度大时相当没有效率,一个聪明的解法由J.CWarnsdorff在1823年提出， 简单地说，<strong>先将最难的位置走完，接下来的路就宽广了，骑士所想要的下一步，为下一不再 选择时，所能走的步数最少的一步,骑士在每一步都有8种可能的下一步走法(边界上除外),为了提高效率,可以选择所要走的下一步为下一步要选择时所能走的步数最少的一步</strong>。使用这个方法，在不使用递回的情况下，可以有较高的机率找出走法（找不到走的机率也是有的）  </li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">knightRunChess</span><span class="params">( <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; &amp;board, <span class="keyword">int</span> startx, <span class="keyword">int</span> starty)</span>        <span class="comment">//遍历函数,传入数组表示棋盘,x,y表示骑士的初始位置坐标</span></span></div><div class="line"><span class="function"><span class="comment">//具体步骤:</span></span></div><div class="line"><span class="function"><span class="comment">//首先记录当前位置走的次序,然后遍历棋盘,得到可能的下一跳数目,通过min函数找到最合适的下一跳,记录下一跳位置走的次序.如果能够遍历完成,返回true表示骑士不重复的走完棋盘.</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">possibleWay</span><span class="params">( <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; &amp;board, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nextx, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nexty, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span><span class="comment">//计算下一步的可能方向,传入数组表示棋盘,数组记录多个下一步可能方向,x,y为当前骑士位置坐标</span></span></div><div class="line"><span class="function"><span class="comment">//具体步骤:</span></span></div><div class="line"><span class="function"><span class="comment">//将所有的下一跳以坐标表示,若当前位置上下一跳的元素值为0表示未走过为一种可能方向,下一跳数组记录下一跳坐标,计数器累加,返回计数器</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">minDirection</span><span class="params">( <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; &amp;board, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nextx, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nexty)</span>  <span class="comment">//从多个可能方向中找出下一方向数最少的方向</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span></div><div class="line"><span class="function"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span></div><div class="line"><span class="function"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">possibleWay</span><span class="params">( <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; &amp;board, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nextx, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nexty, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>&#123;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; offsetx(&#123;<span class="number">-2</span>,<span class="number">-1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">-1</span>,<span class="number">-2</span>&#125;);</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; offsety(&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">-1</span>,<span class="number">-2</span>,<span class="number">-2</span>,<span class="number">-1</span>&#125;);</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ().swap(nextx);</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ().swap(nexty);</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> k = <span class="number">0</span>; k &lt; offsetx.size(); ++k)&#123;</div><div class="line">        <span class="keyword">int</span> nexti = i + offsetx[k];</div><div class="line">        <span class="keyword">int</span> nextj = j + offsety[k];</div><div class="line">        <span class="keyword">if</span>( nexti &lt; <span class="number">0</span> || nexti &gt; <span class="number">7</span>||nextj &lt; <span class="number">0</span> || nextj &gt; <span class="number">7</span>) <span class="keyword">continue</span>;</div><div class="line">        <span class="keyword">if</span>( board[nexti][nextj] == <span class="number">0</span>)&#123;</div><div class="line">            nextx.push_back(nexti);</div><div class="line">            nexty.push_back(nextj);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// cout &lt;&lt; "nextx :";</span></div><div class="line">    <span class="comment">// for( auto q : nextx)</span></div><div class="line">    <span class="comment">//  cout &lt;&lt; q &lt;&lt; ends;</span></div><div class="line">    <span class="comment">// cout &lt;&lt; endl;</span></div><div class="line">    <span class="comment">// cout &lt;&lt; "nexty :";</span></div><div class="line">    <span class="comment">// for( auto q : nexty)</span></div><div class="line">    <span class="comment">//  cout &lt;&lt; q &lt;&lt; ends;</span></div><div class="line">    <span class="comment">// cout &lt;&lt; endl;</span></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">minDirection</span><span class="params">( <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; &amp;board, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nextx, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nexty)</span></span>&#123;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; offsetx(&#123;<span class="number">-2</span>,<span class="number">-1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">-1</span>,<span class="number">-2</span>&#125;);</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; offsety(&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">-1</span>,<span class="number">-2</span>,<span class="number">-2</span>,<span class="number">-1</span>&#125;);</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; stepNumber( nextx.size(), <span class="number">0</span>);<span class="comment">//记录该方向下一跳的数目</span></div><div class="line">    <span class="keyword">int</span> mindirection = <span class="number">-1</span>;</div><div class="line">    <span class="keyword">if</span>( nextx.size() == <span class="number">1</span>) mindirection = <span class="number">0</span>;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nextx.size(); ++i)</div><div class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span>; j &lt; offsetx.size(); ++j)&#123;</div><div class="line">                <span class="keyword">int</span> tx = nextx[i] + offsetx[j];</div><div class="line">                <span class="keyword">int</span> ty = nexty[i] + offsety[j];</div><div class="line">                <span class="keyword">if</span>( tx &lt; <span class="number">0</span> || tx &gt; <span class="number">7</span>|| ty &lt; <span class="number">0</span> || ty &gt; <span class="number">7</span>) <span class="keyword">continue</span>;</div><div class="line">                <span class="keyword">if</span>( board[tx][ty] == <span class="number">0</span>)</div><div class="line">                    stepNumber[i] ++;</div><div class="line">            &#125;</div><div class="line">        mindirection = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; stepNumber.size(); ++i)</div><div class="line">            <span class="keyword">if</span>( stepNumber[i] &lt; stepNumber[mindirection] )</div><div class="line">                mindirection = i;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> mindirection;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">knightRunChess</span><span class="params">( <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; &amp;board, <span class="keyword">int</span> startx, <span class="keyword">int</span> starty)</span></span>&#123;</div><div class="line">    board[startx][starty] = <span class="number">1</span>;<span class="comment">//当前位置为第一次走的位置</span></div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nextx;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nexty;<span class="comment">//下一跳容器</span></div><div class="line">    <span class="keyword">int</span> i = startx;</div><div class="line">    <span class="keyword">int</span> j = starty;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> k = <span class="number">2</span>; k &lt;= <span class="number">64</span>; ++k)&#123;</div><div class="line">        possibleWay( board, nextx, nexty, i, j);<span class="comment">//计算下一跳可能的数目</span></div><div class="line">        <span class="keyword">if</span>( nextx.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        <span class="keyword">int</span> mindirection = minDirection( board, nextx, nexty);</div><div class="line">        i = nextx[mindirection];</div><div class="line">        j = nexty[mindirection];</div><div class="line">        board[i][j] = k;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">auto</span> q : board)&#123;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">auto</span> w : q)</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; w &lt;&lt; ends;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;   </div><div class="line">        </div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span>&#123;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; board(<span class="number">8</span>, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(<span class="number">8</span>, <span class="number">0</span>));</div><div class="line">    <span class="keyword">int</span> startx = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> starty = <span class="number">0</span>;</div><div class="line">    <span class="keyword">if</span>(knightRunChess( board, startx, starty))</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"success"</span>;</div><div class="line">    <span class="keyword">else</span> </div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"defeat"</span>;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="4、八枚银币"><a href="#4、八枚银币" class="headerlink" title="4、八枚银币"></a>4、八枚银币</h1><ul>
+<li>说明：<ul>
+<li>现有八枚银币a, b, c, d, e, f, g, h，已知其中一枚是假币，其重量不同于真币，但不知是较轻或较重，如何使用天平以最少的比较次数，决定出哪枚是假币，并得知假币比真币较轻或较重。</li>
+</ul>
+</li>
+<li>解法：<ul>
+<li>单就求假币的问题是不难，但问题限制使用最少的比较次数，所以我们<strong>不能以单纯的回圈比较来求解</strong>，我们可以<strong>使用决策树(deciseion tree)</strong>，使用分析与树状图来协助求解。一个简单的状况是这样的，我们比较a+b+c 与 d+e+f ， 如果相等，则假币必是g或h，我们先比较g或h哪个较重，如果g较重，再与a比较(a是真币)，如果g等于a，则g为真币，则h为假币，由于h币g轻而g是真币，则h假币的重量比真币轻。 </li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">compare</span><span class="params">(<span class="keyword">int</span> coins[], <span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> k)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">if</span>(coins[i] &gt; coins[k])</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"\n假币 %d 较重"</span>, i + <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"\n假币 %d 较轻"</span>, j + <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">eightcoins</span><span class="params">(<span class="keyword">int</span> coins[])</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">if</span>(coins[<span class="number">0</span>] + coins[<span class="number">1</span>] + coins[<span class="number">2</span>] == coins[<span class="number">3</span>] + coins[<span class="number">4</span>] + coins[<span class="number">5</span>])</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(coins[<span class="number">6</span>] &gt; coins[<span class="number">7</span>])</div><div class="line">        &#123;</div><div class="line">            compare(coins, <span class="number">6</span>, <span class="number">7</span>, <span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            compare(coins, <span class="number">7</span>, <span class="number">6</span>, <span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(coins[<span class="number">0</span>] + coins[<span class="number">1</span>] + coins[<span class="number">2</span>] &gt; coins[<span class="number">3</span>] + coins[<span class="number">4</span>] + coins[<span class="number">5</span>])</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(coins[<span class="number">0</span>] + coins[<span class="number">3</span>] == coins[<span class="number">1</span>] + coins[<span class="number">4</span>])</div><div class="line">        &#123;</div><div class="line">            compare(coins, <span class="number">2</span>, <span class="number">5</span>, <span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(coins[<span class="number">0</span>] + coins[<span class="number">3</span>] &gt; coins[<span class="number">1</span>] + coins[<span class="number">4</span>])</div><div class="line">        &#123;</div><div class="line">            compare(coins, <span class="number">0</span>, <span class="number">4</span>, <span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(coins[<span class="number">0</span>] + coins[<span class="number">3</span>] &lt; coins[<span class="number">1</span>] + coins[<span class="number">4</span>])</div><div class="line">        &#123;</div><div class="line">            compare(coins, <span class="number">1</span>, <span class="number">3</span>, <span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(coins[<span class="number">0</span>] + coins[<span class="number">1</span>] + coins[<span class="number">2</span>] &lt; coins[<span class="number">3</span>] + coins[<span class="number">4</span>] + coins[<span class="number">5</span>])</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(coins[<span class="number">0</span>] + coins[<span class="number">3</span>] == coins[<span class="number">1</span>] + coins[<span class="number">4</span>])</div><div class="line">        &#123;</div><div class="line">            compare(coins, <span class="number">5</span>, <span class="number">2</span>, <span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(coins[<span class="number">0</span>] + coins[<span class="number">3</span>] &gt; coins[<span class="number">1</span>] + coins[<span class="number">4</span>])</div><div class="line">        &#123;</div><div class="line">            compare(coins, <span class="number">3</span>, <span class="number">1</span>, <span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(coins[<span class="number">0</span>] + coins[<span class="number">3</span>] &lt; coins[<span class="number">1</span>] + coins[<span class="number">4</span>])</div><div class="line">        &#123;</div><div class="line">            compare(coins, <span class="number">4</span>, <span class="number">0</span>, <span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="5、汉若塔问题"><a href="#5、汉若塔问题" class="headerlink" title="5、汉若塔问题"></a>5、汉若塔问题</h1><h2 id="5-1普通汉若塔问题"><a href="#5-1普通汉若塔问题" class="headerlink" title="5.1普通汉若塔问题"></a>5.1普通汉若塔问题</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">hanoi</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">char</span> sources, <span class="keyword">char</span> temp, <span class="keyword">char</span> target)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>( n == <span class="number">1</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">"move the "</span> &lt;&lt; n &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; target &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">        hanoi( n<span class="number">-1</span>, sources, target, temp);</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"move the "</span> &lt;&lt; n &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; target &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        hanoi( n<span class="number">-1</span>, temp, temp, target);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> n = <span class="number">3</span>;</div><div class="line">    hanoi( n, <span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="5-2-双色汉若塔问题"><a href="#5-2-双色汉若塔问题" class="headerlink" title="5.2 双色汉若塔问题"></a>5.2 双色汉若塔问题</h2><ul>
+<li>问题描述：<ul>
+<li>就是要把所有的黄色盘子最终都放在第二个柱子上（顺序还是小的在上，大的在下！），而蓝色的盘子全部放在第三根柱子上（从小到大）！这个就要复杂一下啦，其实原理都是一样的！<!-- ![twoColorHannoi](./image/twoColorHannoi.jpg "Optional title") -->
+<img src="https://github.com/muyinsuifeng/myleetcode/raw/master/image/twoColorHannoi.jpg" alt="twoColorHannoi" title="Optional title"></li>
+</ul>
+</li>
+<li>解法：<ul>
+<li>设盘子原来在A柱上，目标为B、C柱。显然与单色汉诺塔问题相同为典型的递归问题。将最后的盘子移动的目标步骤为：<ul>
+<li>(1) 除最后两个盘子外，将所有的盘子移动到C；</li>
+<li>(2) 将最后的两个盘子移动到B；</li>
+<li>(3) 再将C上所有的盘子移动到A；</li>
+<li>(4) 最后将B上的一个盘子移动C。</li>
+</ul>
+</li>
+<li>易得移动出最后两个盘子以外，可以将大小相同颜色不同的盘子看作一个来移动，因此下边提到的个数均代表大小相同颜色不同的盘子。将n个盘子（实际盘子个数位2n）从A移动到C的步骤为：<ul>
+<li>(1)  首先将n – 1个盘子从A移动到B;</li>
+<li>(2)  将最后的盘子从A移动到C；</li>
+<li>(3)  再将B上的盘子移动到C。<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment">二色汉诺塔 </span></div><div class="line"><span class="comment">*/</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">hanoi</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">char</span> sources, <span class="keyword">char</span> temp, <span class="keyword">char</span> target)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>( n == <span class="number">1</span>) &#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"move the yello "</span> &lt;&lt; n &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; target &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"move the blue "</span> &lt;&lt; n &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; target &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">        hanoi( n<span class="number">-1</span>, sources, target, temp);  </div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"move the yello "</span> &lt;&lt; n &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; target &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"move the blue "</span> &lt;&lt; n &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; target &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        hanoi( n<span class="number">-1</span>, temp, temp, target);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">twoColorHannoi</span><span class="params">( <span class="keyword">int</span> n, <span class="keyword">char</span> sources, <span class="keyword">char</span> temp, <span class="keyword">char</span> target)</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> i;</div><div class="line">    <span class="keyword">for</span>( i = n/<span class="number">2</span>; i &gt; <span class="number">1</span>; --i)&#123;</div><div class="line">        hanoi( i - <span class="number">1</span>, sources, temp, target);  </div><div class="line">        <span class="built_in">cout</span>&lt;&lt; <span class="string">"move yello "</span> &lt;&lt; i &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; temp &lt;&lt; <span class="built_in">endl</span>; </div><div class="line">        <span class="built_in">cout</span>&lt;&lt; <span class="string">"move blue "</span> &lt;&lt; i &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; temp &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        hanoi( i - <span class="number">1</span>, target, temp, sources);  </div><div class="line">        <span class="built_in">cout</span>&lt;&lt; <span class="string">"move blue "</span> &lt;&lt; i &lt;&lt; <span class="string">"from "</span> &lt;&lt; temp &lt;&lt; <span class="string">"to "</span> &lt;&lt; target &lt;&lt; <span class="built_in">endl</span>; </div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="built_in">cout</span>&lt;&lt; <span class="string">"move yello "</span> &lt;&lt; i &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; temp &lt;&lt; <span class="built_in">endl</span>; </div><div class="line">    <span class="built_in">cout</span>&lt;&lt; <span class="string">"move blue "</span> &lt;&lt; i &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; target &lt;&lt; <span class="built_in">endl</span>; </div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> n = <span class="number">6</span>;</div><div class="line">    twoColorHannoi( n, <span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">// move the yello 1from Ato B</span></div><div class="line"><span class="comment">// move the blue 1from Ato B</span></div><div class="line"><span class="comment">// move the yello 2from Ato C</span></div><div class="line"><span class="comment">// move the blue 2from Ato C</span></div><div class="line"><span class="comment">// move the yello 1from Bto C</span></div><div class="line"><span class="comment">// move the blue 1from Bto C</span></div><div class="line"><span class="comment">// move yello 3from Ato B</span></div><div class="line"><span class="comment">// move blue 3from Ato B</span></div><div class="line"><span class="comment">// move the yello 1from Cto B</span></div><div class="line"><span class="comment">// move the blue 1from Cto B</span></div><div class="line"><span class="comment">// move the yello 2from Cto A</span></div><div class="line"><span class="comment">// move the blue 2from Cto A</span></div><div class="line"><span class="comment">// move the yello 1from Bto A</span></div><div class="line"><span class="comment">// move the blue 1from Bto A</span></div><div class="line"><span class="comment">// move blue 3from Bto C</span></div><div class="line"><span class="comment">// move the yello 1from Ato C</span></div><div class="line"><span class="comment">// move the blue 1from Ato C</span></div><div class="line"><span class="comment">// move yello 2from Ato B</span></div><div class="line"><span class="comment">// move blue 2from Ato B</span></div><div class="line"><span class="comment">// move the yello 1from Cto A</span></div><div class="line"><span class="comment">// move the blue 1from Cto A</span></div><div class="line"><span class="comment">// move blue 2from Bto C</span></div><div class="line"><span class="comment">// move yello 1from Ato B</span></div><div class="line"><span class="comment">// move blue 1from Ato C</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-3-三色汉若塔问题"><a href="#5-3-三色汉若塔问题" class="headerlink" title="5.3 三色汉若塔问题"></a>5.3 三色汉若塔问题</h2><ul>
+<li>问题描述：<ul>
+<li>就是要把所有的黄色盘子最终都放在第二个柱子上（顺序还是小的在上，大的在下！），而蓝色的盘子全部放在第三根柱子上（从小到大）而红色的盘子全部放在第一根柱子上（从小到大）</li>
+</ul>
+</li>
+</ul>
+<!-- ![threeColorHannoi](./image/threeColorHannoi.jpg "Optional title")
+![threeColorHannoi2](./image/threeColorHannoi2.jpg "Optional title") -->
+<p><img src="https://github.com/muyinsuifeng/myleetcode/raw/master/image/threeColorHannoi.jpg" alt="threeColorHannoi" title="Optional title"><br><img src="https://github.com/muyinsuifeng/myleetcode/raw/master/image/threeColorHannoi2.jpg" alt="threeColorHannoi2" title="Optional title"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment">三色汉诺塔 </span></div><div class="line"><span class="comment">*/</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">hannoi</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">char</span> sources, <span class="keyword">char</span> temp, <span class="keyword">char</span> target)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>( n == <span class="number">1</span>) &#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"move the red "</span> &lt;&lt; n &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; target &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"move the yello "</span> &lt;&lt; n &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; target &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"move the blue "</span> &lt;&lt; n &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; target &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">        hannoi( n<span class="number">-1</span>, sources, target, temp);  </div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"move the red "</span> &lt;&lt; n &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; target &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"move the yello "</span> &lt;&lt; n &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; target &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"move the blue "</span> &lt;&lt; n &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; target &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        hannoi( n<span class="number">-1</span>, temp, temp, target);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">twoColorHannoi</span><span class="params">( <span class="keyword">int</span> n, <span class="keyword">char</span> sources, <span class="keyword">char</span> temp, <span class="keyword">char</span> target)</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> i;</div><div class="line">    <span class="keyword">if</span>( n == <span class="number">3</span>)&#123;</div><div class="line">        <span class="built_in">cout</span>&lt;&lt; <span class="string">"move red "</span> &lt;&lt; n/<span class="number">3</span> &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; temp &lt;&lt; <span class="built_in">endl</span>; </div><div class="line">        <span class="built_in">cout</span>&lt;&lt; <span class="string">"move yello "</span> &lt;&lt; n/<span class="number">3</span> &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; temp &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="built_in">cout</span>&lt;&lt; <span class="string">"move blue "</span> &lt;&lt; n/<span class="number">3</span> &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; target &lt;&lt; <span class="built_in">endl</span>; </div><div class="line">        <span class="built_in">cout</span>&lt;&lt; <span class="string">"move yello "</span> &lt;&lt; n/<span class="number">3</span> &lt;&lt; <span class="string">"from "</span> &lt;&lt; temp &lt;&lt; <span class="string">"to "</span> &lt;&lt; target &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="built_in">cout</span>&lt;&lt; <span class="string">"move res "</span> &lt;&lt; n/<span class="number">3</span> &lt;&lt; <span class="string">"from "</span> &lt;&lt; temp &lt;&lt; <span class="string">"to "</span> &lt;&lt; sources &lt;&lt; <span class="built_in">endl</span>; </div><div class="line">        <span class="built_in">cout</span>&lt;&lt; <span class="string">"move yello "</span> &lt;&lt; n/<span class="number">3</span> &lt;&lt; <span class="string">"from "</span> &lt;&lt; target &lt;&lt; <span class="string">"to "</span> &lt;&lt; temp &lt;&lt; <span class="built_in">endl</span>; </div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        hannoi( n/<span class="number">3</span><span class="number">-1</span>, sources, temp, target);</div><div class="line">        <span class="built_in">cout</span>&lt;&lt; <span class="string">"move red "</span> &lt;&lt; n/<span class="number">3</span> &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; temp &lt;&lt; <span class="built_in">endl</span>; </div><div class="line">        <span class="built_in">cout</span>&lt;&lt; <span class="string">"move yello "</span> &lt;&lt; n/<span class="number">3</span> &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; temp &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="built_in">cout</span>&lt;&lt; <span class="string">"move blue "</span> &lt;&lt; n/<span class="number">3</span> &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; temp &lt;&lt; <span class="built_in">endl</span>; </div><div class="line">        hannoi( n/<span class="number">3</span><span class="number">-1</span>, target, temp, sources);</div><div class="line">        <span class="built_in">cout</span>&lt;&lt; <span class="string">"move blue "</span> &lt;&lt; n/<span class="number">3</span> &lt;&lt; <span class="string">"from "</span> &lt;&lt; temp &lt;&lt; <span class="string">"to "</span> &lt;&lt; target &lt;&lt; <span class="built_in">endl</span>; </div><div class="line">        <span class="built_in">cout</span>&lt;&lt; <span class="string">"move yello "</span> &lt;&lt; n/<span class="number">3</span> &lt;&lt; <span class="string">"from "</span> &lt;&lt; temp &lt;&lt; <span class="string">"to "</span> &lt;&lt; target &lt;&lt; <span class="built_in">endl</span>; </div><div class="line">        <span class="built_in">cout</span>&lt;&lt; <span class="string">"move red "</span> &lt;&lt; n/<span class="number">3</span> &lt;&lt; <span class="string">"from "</span> &lt;&lt; temp &lt;&lt; <span class="string">"to "</span> &lt;&lt; target &lt;&lt; <span class="built_in">endl</span>; </div><div class="line">        hannoi( n/<span class="number">3</span><span class="number">-1</span>, sources, target, temp);</div><div class="line">        <span class="built_in">cout</span>&lt;&lt; <span class="string">"move red "</span> &lt;&lt; n/<span class="number">3</span> &lt;&lt; <span class="string">"from "</span> &lt;&lt; target &lt;&lt; <span class="string">"to "</span> &lt;&lt; sources &lt;&lt; <span class="built_in">endl</span>; </div><div class="line">        <span class="built_in">cout</span>&lt;&lt; <span class="string">"move yello "</span> &lt;&lt; n/<span class="number">3</span> &lt;&lt; <span class="string">"from "</span> &lt;&lt; target &lt;&lt; <span class="string">"to "</span> &lt;&lt; sources &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        hannoi( n/<span class="number">3</span><span class="number">-1</span>, temp, sources, target);</div><div class="line">        <span class="built_in">cout</span>&lt;&lt; <span class="string">"move yello "</span> &lt;&lt; n/<span class="number">3</span> &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; temp &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">for</span>( i = n/<span class="number">3</span> - <span class="number">1</span>; i &gt; <span class="number">0</span>; --i)&#123;</div><div class="line">            <span class="keyword">if</span>( i &gt; <span class="number">1</span>)</div><div class="line">                hannoi( i<span class="number">-1</span>, target, sources, temp);</div><div class="line">            <span class="built_in">cout</span>&lt;&lt; <span class="string">"move red "</span> &lt;&lt; i &lt;&lt; <span class="string">"from "</span> &lt;&lt; target &lt;&lt; <span class="string">"to "</span> &lt;&lt; sources &lt;&lt; <span class="built_in">endl</span>; </div><div class="line">            <span class="built_in">cout</span>&lt;&lt; <span class="string">"move yello "</span> &lt;&lt; i &lt;&lt; <span class="string">"from "</span> &lt;&lt; target &lt;&lt; <span class="string">"to "</span> &lt;&lt; sources &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">            <span class="keyword">if</span>( i &gt; <span class="number">1</span>)</div><div class="line">                hannoi( i<span class="number">-1</span>, temp, sources, target);</div><div class="line">            <span class="built_in">cout</span>&lt;&lt; <span class="string">"move yello "</span> &lt;&lt; i &lt;&lt; <span class="string">"from "</span> &lt;&lt; sources &lt;&lt; <span class="string">"to "</span> &lt;&lt; temp &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> n = <span class="number">6</span>;</div><div class="line">    twoColorHannoi( n, <span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="6、蒙地卡罗法求PI"><a href="#6、蒙地卡罗法求PI" class="headerlink" title="6、蒙地卡罗法求PI"></a>6、蒙地卡罗法求PI</h1><ul>
+<li>说明：<ul>
+<li>蒙地卡罗为摩洛哥王国之首都，该国位于法国与义大利国境，以赌博闻名。蒙地卡罗的基本原理为以乱数配合面积公式来进行解题，这种以机率来解题的方式带有赌博的意味，虽然在精确度上有所疑虑，但其解题的思考方向却是个值得学习的方式。</li>
+</ul>
+</li>
+<li>解法：<ul>
+<li>蒙地卡罗的解法适用于与面积有关的题目，例如求PI值或椭圆面积，这边介绍如何求PI值；假设有一个圆半径为1，所以四分之一圆面积就为PI，而包括此四分之一圆的正方形面积就为1 <!-- ![MonteCarloGetPi](./image/MonteCarloGetPi.jpg "Optional title") -->
+<img src="https://github.com/muyinsuifeng/myleetcode/raw/master/image/MonteCarloGetPi.jpg" alt="MonteCarloGetPi" title="Optional title"><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//半径为1的四分之一的圆的面积为Pi/4,然后包含那四分之一圆的正方形的面积为1</span></div><div class="line"><span class="comment">//Pi/4 = ((0,0)-(1,1)的随机数中的点到(0,0)的长度小于1的概率)</span></div><div class="line"><span class="comment">//Pi = 4*c/n</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">int</span> n = <span class="number">1000000000</span>;<span class="comment">//n用来代表投射的次数,也就是精度</span></div><div class="line">    <span class="keyword">int</span> c = <span class="number">0</span>;<span class="comment">//落在圆上面的次数</span></div><div class="line">    srand(time(<span class="literal">NULL</span>));</div><div class="line">    <span class="keyword">double</span> x,y;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i++)&#123;</div><div class="line">        x = (<span class="keyword">double</span>)(rand()/RAND_MAX);</div><div class="line">        y = (<span class="keyword">double</span>)(rand()/RAND_MAX);</div><div class="line">        <span class="keyword">if</span> ((x*x+y*y) &lt; <span class="number">1.0</span>)</div><div class="line">            c++;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"the Pi is: "</span>&lt;&lt;(<span class="keyword">double</span>)<span class="number">4</span>*c/n&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">     <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/24/bitOperation/" rel="next" title="bitOperation">
+                <i class="fa fa-chevron-left"></i> bitOperation
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/24/DFS-algorithm/" rel="prev" title="DFS-algorithm">
+                DFS-algorithm <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Gia Furler" />
+          <p class="site-author-name" itemprop="name">Gia Furler</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives">
+            
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/muyinsuifeng" title="GitHub" target="_blank">GitHub</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="muyinsuifeng@gmail.com" title="E-Mail" target="_blank">E-Mail</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="muyinsuifeng@gmail.com" title="Google" target="_blank">Google</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、三色旗问题"><span class="nav-number">1.</span> <span class="nav-text">1、三色旗问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、骑士走棋盘"><span class="nav-number">2.</span> <span class="nav-text">3、骑士走棋盘</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、八枚银币"><span class="nav-number">3.</span> <span class="nav-text">4、八枚银币</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5、汉若塔问题"><span class="nav-number">4.</span> <span class="nav-text">5、汉若塔问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1普通汉若塔问题"><span class="nav-number">4.1.</span> <span class="nav-text">5.1普通汉若塔问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-双色汉若塔问题"><span class="nav-number">4.2.</span> <span class="nav-text">5.2 双色汉若塔问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-三色汉若塔问题"><span class="nav-number">4.3.</span> <span class="nav-text">5.3 三色汉若塔问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6、蒙地卡罗法求PI"><span class="nav-number">5.</span> <span class="nav-text">6、蒙地卡罗法求PI</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gia Furler</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    本站访客数:<span id="busuanzi_value_site_uv"></span>
+  </span>
+  </div>
+  <div class="powered-by">Powered by <a class="theme-link" href="https://hexo.io">Hexo</a></div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

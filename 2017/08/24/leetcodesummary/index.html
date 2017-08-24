@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="leetcode," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="利用堆栈：http://oj.leetcode.com/problems/evaluate-reverse-polish-notation/http://oj.leetcode.com/problems/longest-valid-parentheses/（也可以用一维数组，贪心）http://oj.leetcode.com/problems/valid-parentheses/http://oj">
+<meta name="keywords" content="leetcode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcodesummary">
+<meta property="og:url" content="http://yoursite.com/2017/08/24/leetcodesummary/index.html">
+<meta property="og:site_name" content="Muyinsuifeng">
+<meta property="og:description" content="利用堆栈：http://oj.leetcode.com/problems/evaluate-reverse-polish-notation/http://oj.leetcode.com/problems/longest-valid-parentheses/（也可以用一维数组，贪心）http://oj.leetcode.com/problems/valid-parentheses/http://oj">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-08-24T07:39:16.482Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="leetcodesummary">
+<meta name="twitter:description" content="利用堆栈：http://oj.leetcode.com/problems/evaluate-reverse-polish-notation/http://oj.leetcode.com/problems/longest-valid-parentheses/（也可以用一维数组，贪心）http://oj.leetcode.com/problems/valid-parentheses/http://oj">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/24/leetcodesummary/"/>
+
+
+
+
+
+  <title>leetcodesummary | Muyinsuifeng</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Muyinsuifeng</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-algorithm">
+          <a href="/algorithm/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            algorithm
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-leetcode">
+          <a href="/leetcode/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
+            
+            leetcode
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/24/leetcodesummary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gia Furler">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Muyinsuifeng">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">leetcodesummary</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-24T15:38:38+08:00">
+                2017-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>利用堆栈：<br><a href="http://oj.leetcode.com/problems/evaluate-reverse-polish-notation/" target="_blank" rel="external">http://oj.leetcode.com/problems/evaluate-reverse-polish-notation/</a><br><a href="http://oj.leetcode.com/problems/longest-valid-parentheses/" target="_blank" rel="external">http://oj.leetcode.com/problems/longest-valid-parentheses/</a><br>（也可以用一维数组，贪心）<br><a href="http://oj.leetcode.com/problems/valid-parentheses/" target="_blank" rel="external">http://oj.leetcode.com/problems/valid-parentheses/</a><br><a href="http://oj.leetcode.com/problems/largest-rectangle-in-histogram/" target="_blank" rel="external">http://oj.leetcode.com/problems/largest-rectangle-in-histogram/</a><br>特别注意细节：<a href="http://oj.leetcode.com/problems/trapping-rain-water/" target="_blank" rel="external">http://oj.leetcode.com/problems/trapping-rain-water/</a><br><a id="more"></a></p>
+<p>多种数据结构：<br><a href="http://oj.leetcode.com/problems/lru-cache/" target="_blank" rel="external">http://oj.leetcode.com/problems/lru-cache/</a><br><a href="http://oj.leetcode.com/problems/substring-with-concatenation-of-all-words/" target="_blank" rel="external">http://oj.leetcode.com/problems/substring-with-concatenation-of-all-words/</a> (注意遍历方法）<br>HASH：<a href="http://oj.leetcode.com/problems/longest-consecutive-sequence/" target="_blank" rel="external">http://oj.leetcode.com/problems/longest-consecutive-sequence/</a></p>
+<p>简单编程：<br><a href="http://oj.leetcode.com/problems/longest-common-prefix/" target="_blank" rel="external">http://oj.leetcode.com/problems/longest-common-prefix/</a><br><a href="http://oj.leetcode.com/problems/string-to-integer-atoi/" target="_blank" rel="external">http://oj.leetcode.com/problems/string-to-integer-atoi/</a>  (分析，控制语句）</p>
+<p>排序 &amp; 查找：<br>二分查找：<a href="http://oj.leetcode.com/problems/search-a-2d-matrix/" target="_blank" rel="external">http://oj.leetcode.com/problems/search-a-2d-matrix/</a><br>二分查找进阶：<a href="http://oj.leetcode.com/problems/search-for-a-range/" target="_blank" rel="external">http://oj.leetcode.com/problems/search-for-a-range/</a><br>二分查找应用：<a href="http://oj.leetcode.com/problems/sqrtx/" target="_blank" rel="external">http://oj.leetcode.com/problems/sqrtx/</a><br>二分查找应用：<a href="http://oj.leetcode.com/problems/search-insert-position/" target="_blank" rel="external">http://oj.leetcode.com/problems/search-insert-position/</a><br>二分查找变种：<a href="http://oj.leetcode.com/problems/search-in-rotated-sorted-array/" target="_blank" rel="external">http://oj.leetcode.com/problems/search-in-rotated-sorted-array/</a><br>二分查找变种：<a href="http://oj.leetcode.com/problems/search-in-rotated-sorted-array-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/search-in-rotated-sorted-array-ii/</a></p>
+<p>简单数学：<br><a href="http://oj.leetcode.com/problems/pascals-triangle/" target="_blank" rel="external">http://oj.leetcode.com/problems/pascals-triangle/</a><br><a href="http://oj.leetcode.com/problems/pascals-triangle-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/pascals-triangle-ii/</a><br><a href="http://oj.leetcode.com/problems/powx-n/" target="_blank" rel="external">http://oj.leetcode.com/problems/powx-n/</a><br><a href="http://oj.leetcode.com/problems/reverse-integer/" target="_blank" rel="external">http://oj.leetcode.com/problems/reverse-integer/</a><br><a href="http://oj.leetcode.com/problems/plus-one/" target="_blank" rel="external">http://oj.leetcode.com/problems/plus-one/</a><br><a href="http://oj.leetcode.com/problems/unique-paths/" target="_blank" rel="external">http://oj.leetcode.com/problems/unique-paths/</a><br><a href="http://oj.leetcode.com/problems/palindrome-number/" target="_blank" rel="external">http://oj.leetcode.com/problems/palindrome-number/</a><br><a href="http://oj.leetcode.com/problems/permutation-sequence/" target="_blank" rel="external">http://oj.leetcode.com/problems/permutation-sequence/</a><br><a href="http://oj.leetcode.com/problems/merge-intervals/" target="_blank" rel="external">http://oj.leetcode.com/problems/merge-intervals/</a><br><a href="http://oj.leetcode.com/problems/valid-number/" target="_blank" rel="external">http://oj.leetcode.com/problems/valid-number/</a><br><a href="http://oj.leetcode.com/problems/climbing-stairs/" target="_blank" rel="external">http://oj.leetcode.com/problems/climbing-stairs/</a><br><a href="http://oj.leetcode.com/problems/roman-to-integer/" target="_blank" rel="external">http://oj.leetcode.com/problems/roman-to-integer/</a><br><a href="http://oj.leetcode.com/problems/integer-to-roman/" target="_blank" rel="external">http://oj.leetcode.com/problems/integer-to-roman/</a><br><a href="http://oj.leetcode.com/problems/divide-two-integers/" target="_blank" rel="external">http://oj.leetcode.com/problems/divide-two-integers/</a><br>区间：<a href="http://oj.leetcode.com/problems/insert-interval/" target="_blank" rel="external">http://oj.leetcode.com/problems/insert-interval/</a></p>
+<p>大数的数学运算：<br><a href="http://oj.leetcode.com/problems/add-binary/" target="_blank" rel="external">http://oj.leetcode.com/problems/add-binary/</a><br><a href="http://oj.leetcode.com/problems/add-two-numbers/" target="_blank" rel="external">http://oj.leetcode.com/problems/add-two-numbers/</a></p>
+<p>数组：<br><a href="http://oj.leetcode.com/problems/remove-element/" target="_blank" rel="external">http://oj.leetcode.com/problems/remove-element/</a><br><a href="http://oj.leetcode.com/problems/merge-sorted-array/" target="_blank" rel="external">http://oj.leetcode.com/problems/merge-sorted-array/</a><br><a href="http://oj.leetcode.com/problems/first-missing-positive/" target="_blank" rel="external">http://oj.leetcode.com/problems/first-missing-positive/</a><br><a href="http://oj.leetcode.com/problems/spiral-matrix/" target="_blank" rel="external">http://oj.leetcode.com/problems/spiral-matrix/</a><br><a href="http://oj.leetcode.com/problems/spiral-matrix-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/spiral-matrix-ii/</a><br><a href="http://oj.leetcode.com/problems/rotate-image/" target="_blank" rel="external">http://oj.leetcode.com/problems/rotate-image/</a><br>遍历技巧：<a href="http://oj.leetcode.com/problems/container-with-most-water/" target="_blank" rel="external">http://oj.leetcode.com/problems/container-with-most-water/</a><br><a href="http://oj.leetcode.com/problems/two-sum/" target="_blank" rel="external">http://oj.leetcode.com/problems/two-sum/</a><br><a href="http://oj.leetcode.com/problems/3sum/" target="_blank" rel="external">http://oj.leetcode.com/problems/3sum/</a><br><a href="http://oj.leetcode.com/problems/3sum-closest/" target="_blank" rel="external">http://oj.leetcode.com/problems/3sum-closest/</a><br><a href="http://oj.leetcode.com/problems/4sum/" target="_blank" rel="external">http://oj.leetcode.com/problems/4sum/</a><br><a href="http://oj.leetcode.com/problems/set-matrix-zeroes/" target="_blank" rel="external">http://oj.leetcode.com/problems/set-matrix-zeroes/</a><br>用好标记数组：<a href="http://oj.leetcode.com/problems/valid-sudoku/" target="_blank" rel="external">http://oj.leetcode.com/problems/valid-sudoku/</a><br><a href="http://oj.leetcode.com/problems/next-permutation/" target="_blank" rel="external">http://oj.leetcode.com/problems/next-permutation/</a><br><a href="http://oj.leetcode.com/problems/word-search/" target="_blank" rel="external">http://oj.leetcode.com/problems/word-search/</a><br><a href="http://oj.leetcode.com/problems/remove-duplicates-from-sorted-array/" target="_blank" rel="external">http://oj.leetcode.com/problems/remove-duplicates-from-sorted-array/</a><br><a href="http://oj.leetcode.com/problems/remove-duplicates-from-sorted-array-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/remove-duplicates-from-sorted-array-ii/</a><br><a href="http://oj.leetcode.com/problems/sort-colors/" target="_blank" rel="external">http://oj.leetcode.com/problems/sort-colors/</a></p>
+<p>暴力方法/细节实现：<br><a href="http://oj.leetcode.com/problems/max-points-on-a-line/" target="_blank" rel="external">http://oj.leetcode.com/problems/max-points-on-a-line/</a></p>
+<p>链表：<br>归并排序：<a href="http://oj.leetcode.com/problems/sort-list/" target="_blank" rel="external">http://oj.leetcode.com/problems/sort-list/</a><br>插入排序：<a href="http://oj.leetcode.com/problems/insertion-sort-list/" target="_blank" rel="external">http://oj.leetcode.com/problems/insertion-sort-list/</a><br>反转、插入：<a href="http://oj.leetcode.com/problems/reorder-list/" target="_blank" rel="external">http://oj.leetcode.com/problems/reorder-list/</a><br>检测是否有环：<a href="http://oj.leetcode.com/problems/linked-list-cycle/" target="_blank" rel="external">http://oj.leetcode.com/problems/linked-list-cycle/</a><br>确定链表环的起点：<a href="http://oj.leetcode.com/problems/linked-list-cycle-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/linked-list-cycle-ii/</a><br>Deep Copy 带有随机指针的链表：<a href="http://oj.leetcode.com/problems/copy-list-with-random-pointer/" target="_blank" rel="external">http://oj.leetcode.com/problems/copy-list-with-random-pointer/</a><br>链表细节：<a href="http://oj.leetcode.com/problems/rotate-list/" target="_blank" rel="external">http://oj.leetcode.com/problems/rotate-list/</a><br><a href="http://oj.leetcode.com/problems/remove-duplicates-from-sorted-list/" target="_blank" rel="external">http://oj.leetcode.com/problems/remove-duplicates-from-sorted-list/</a><br>删除细节：<a href="http://oj.leetcode.com/problems/remove-duplicates-from-sorted-list-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/remove-duplicates-from-sorted-list-ii/</a><br><a href="http://oj.leetcode.com/problems/partition-list/" target="_blank" rel="external">http://oj.leetcode.com/problems/partition-list/</a><br><a href="http://oj.leetcode.com/problems/swap-nodes-in-pairs/" target="_blank" rel="external">http://oj.leetcode.com/problems/swap-nodes-in-pairs/</a><br>Merge 两个链表：<a href="http://oj.leetcode.com/problems/merge-two-sorted-lists/" target="_blank" rel="external">http://oj.leetcode.com/problems/merge-two-sorted-lists/</a><br>Merge 多链表：<a href="http://oj.leetcode.com/problems/merge-k-sorted-lists/" target="_blank" rel="external">http://oj.leetcode.com/problems/merge-k-sorted-lists/</a><br>细节：<a href="http://oj.leetcode.com/problems/reverse-nodes-in-k-group/" target="_blank" rel="external">http://oj.leetcode.com/problems/reverse-nodes-in-k-group/</a><br><a href="http://oj.leetcode.com/problems/remove-nth-node-from-end-of-list/" target="_blank" rel="external">http://oj.leetcode.com/problems/remove-nth-node-from-end-of-list/</a><br><a href="http://oj.leetcode.com/problems/reverse-linked-list-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/reverse-linked-list-ii/</a></p>
+<p>二叉树遍历：递归 &amp; 非递归<br><a href="http://oj.leetcode.com/problems/same-tree/" target="_blank" rel="external">http://oj.leetcode.com/problems/same-tree/</a><br>前序：<a href="http://oj.leetcode.com/problems/binary-tree-preorder-traversal/" target="_blank" rel="external">http://oj.leetcode.com/problems/binary-tree-preorder-traversal/</a><br>中序：<a href="http://oj.leetcode.com/problems/binary-tree-inorder-traversal/" target="_blank" rel="external">http://oj.leetcode.com/problems/binary-tree-inorder-traversal/</a><br>后序：<a href="http://oj.leetcode.com/problems/binary-tree-postorder-traversal/" target="_blank" rel="external">http://oj.leetcode.com/problems/binary-tree-postorder-traversal/</a><br>遍历变种：<a href="http://oj.leetcode.com/problems/sum-root-to-leaf-numbers/" target="_blank" rel="external">http://oj.leetcode.com/problems/sum-root-to-leaf-numbers/</a><br>遍历变种：<a href="http://oj.leetcode.com/problems/path-sum/" target="_blank" rel="external">http://oj.leetcode.com/problems/path-sum/</a><br>遍历变种：<a href="http://oj.leetcode.com/problems/path-sum-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/path-sum-ii/</a><br>遍历变种：<a href="http://oj.leetcode.com/problems/maximum-depth-of-binary-tree/" target="_blank" rel="external">http://oj.leetcode.com/problems/maximum-depth-of-binary-tree/</a><br>遍历变种：<a href="http://oj.leetcode.com/problems/minimum-depth-of-binary-tree/" target="_blank" rel="external">http://oj.leetcode.com/problems/minimum-depth-of-binary-tree/</a><br>重建二叉树：<a href="http://oj.leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/" target="_blank" rel="external">http://oj.leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/</a><br>重建二叉树：<a href="http://oj.leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/" target="_blank" rel="external">http://oj.leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/</a><br>层次遍历变种：<a href="http://oj.leetcode.com/problems/binary-tree-zigzag-level-order-traversal/" target="_blank" rel="external">http://oj.leetcode.com/problems/binary-tree-zigzag-level-order-traversal/</a><br>遍历变种：<a href="http://oj.leetcode.com/problems/symmetric-tree/" target="_blank" rel="external">http://oj.leetcode.com/problems/symmetric-tree/</a><br>遍历应用：<a href="http://oj.leetcode.com/problems/binary-tree-maximum-path-sum/" target="_blank" rel="external">http://oj.leetcode.com/problems/binary-tree-maximum-path-sum/</a><br>遍历应用：<a href="http://oj.leetcode.com/problems/balanced-binary-tree/" target="_blank" rel="external">http://oj.leetcode.com/problems/balanced-binary-tree/</a><br>遍历应用：<a href="http://oj.leetcode.com/problems/recover-binary-search-tree/" target="_blank" rel="external">http://oj.leetcode.com/problems/recover-binary-search-tree/</a><br>遍历应用：<a href="http://oj.leetcode.com/problems/flatten-binary-tree-to-linked-list/" target="_blank" rel="external">http://oj.leetcode.com/problems/flatten-binary-tree-to-linked-list/</a><br>level遍历：<a href="http://oj.leetcode.com/problems/binary-tree-level-order-traversal/" target="_blank" rel="external">http://oj.leetcode.com/problems/binary-tree-level-order-traversal/</a><br>level 遍历：<a href="http://oj.leetcode.com/problems/binary-tree-level-order-traversal-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/binary-tree-level-order-traversal-ii/</a><br>level 遍历变种：<a href="http://oj.leetcode.com/problems/populating-next-right-pointers-in-each-node/" target="_blank" rel="external">http://oj.leetcode.com/problems/populating-next-right-pointers-in-each-node/</a><br>level 遍历变种：<a href="http://oj.leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/</a></p>
+<p>问题分析/智商/细节：<br><a href="http://oj.leetcode.com/problems/single-number/" target="_blank" rel="external">http://oj.leetcode.com/problems/single-number/</a><br><a href="http://oj.leetcode.com/problems/single-number-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/single-number-ii/</a><br><a href="http://oj.leetcode.com/problems/candy/" target="_blank" rel="external">http://oj.leetcode.com/problems/candy/</a>   ？<br><a href="http://oj.leetcode.com/problems/gas-station/" target="_blank" rel="external">http://oj.leetcode.com/problems/gas-station/</a></p>
+<p>动态规划：<br><a href="http://oj.leetcode.com/problems/triangle/" target="_blank" rel="external">http://oj.leetcode.com/problems/triangle/</a>  （最短路径）<br><a href="http://oj.leetcode.com/problems/subsets/" target="_blank" rel="external">http://oj.leetcode.com/problems/subsets/</a> （另一种形式）<br><a href="http://oj.leetcode.com/problems/subsets-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/subsets-ii/</a><br><a href="http://oj.leetcode.com/problems/edit-distance/" target="_blank" rel="external">http://oj.leetcode.com/problems/edit-distance/</a> （经典）<br><a href="http://oj.leetcode.com/problems/word-break/" target="_blank" rel="external">http://oj.leetcode.com/problems/word-break/</a><br><a href="http://oj.leetcode.com/problems/word-break-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/word-break-ii/</a><br><a href="http://oj.leetcode.com/problems/unique-binary-search-trees/" target="_blank" rel="external">http://oj.leetcode.com/problems/unique-binary-search-trees/</a>  （动态规划避免递归）<br><a href="http://oj.leetcode.com/problems/unique-paths-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/unique-paths-ii/</a><br><a href="http://oj.leetcode.com/problems/scramble-string/" target="_blank" rel="external">http://oj.leetcode.com/problems/scramble-string/</a><br><a href="http://oj.leetcode.com/problems/palindrome-partitioning/" target="_blank" rel="external">http://oj.leetcode.com/problems/palindrome-partitioning/</a><br><a href="http://oj.leetcode.com/problems/palindrome-partitioning-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/palindrome-partitioning-ii/</a><br><a href="http://oj.leetcode.com/problems/interleaving-string/" target="_blank" rel="external">http://oj.leetcode.com/problems/interleaving-string/</a><br><a href="http://oj.leetcode.com/problems/distinct-subsequences/" target="_blank" rel="external">http://oj.leetcode.com/problems/distinct-subsequences/</a><br><a href="http://oj.leetcode.com/problems/decode-ways/" target="_blank" rel="external">http://oj.leetcode.com/problems/decode-ways/</a><br><a href="http://oj.leetcode.com/problems/gray-code/" target="_blank" rel="external">http://oj.leetcode.com/problems/gray-code/</a><br><a href="http://oj.leetcode.com/problems/minimum-path-sum/" target="_blank" rel="external">http://oj.leetcode.com/problems/minimum-path-sum/</a></p>
+<p>回溯：<br><a href="http://oj.leetcode.com/problems/combinations/" target="_blank" rel="external">http://oj.leetcode.com/problems/combinations/</a><br><a href="http://oj.leetcode.com/problems/generate-parentheses/" target="_blank" rel="external">http://oj.leetcode.com/problems/generate-parentheses/</a><br><a href="http://oj.leetcode.com/problems/combination-sum/" target="_blank" rel="external">http://oj.leetcode.com/problems/combination-sum/</a><br><a href="http://oj.leetcode.com/problems/combination-sum-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/combination-sum-ii/</a><br><a href="http://oj.leetcode.com/problems/sudoku-solver/" target="_blank" rel="external">http://oj.leetcode.com/problems/sudoku-solver/</a><br>经典N皇后：<a href="http://oj.leetcode.com/problems/n-queens/" target="_blank" rel="external">http://oj.leetcode.com/problems/n-queens/</a><br><a href="http://oj.leetcode.com/problems/n-queens-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/n-queens-ii/</a><br><a href="http://oj.leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank" rel="external">http://oj.leetcode.com/problems/letter-combinations-of-a-phone-number/</a></p>
+<p>贪心：<br><a href="http://oj.leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="external">http://oj.leetcode.com/problems/best-time-to-buy-and-sell-stock/</a><br><a href="http://oj.leetcode.com/problems/jump-game/" target="_blank" rel="external">http://oj.leetcode.com/problems/jump-game/</a><br><a href="http://oj.leetcode.com/problems/jump-game-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/jump-game-ii/</a><br><a href="http://oj.leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/</a><br><a href="http://oj.leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/" target="_blank" rel="external">http://oj.leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/</a><br><a href="http://oj.leetcode.com/problems/maximum-subarray/" target="_blank" rel="external">http://oj.leetcode.com/problems/maximum-subarray/</a><br><a href="http://oj.leetcode.com/problems/minimum-window-substring/" target="_blank" rel="external">http://oj.leetcode.com/problems/minimum-window-substring/</a><br><a href="http://oj.leetcode.com/problems/maximal-rectangle/" target="_blank" rel="external">http://oj.leetcode.com/problems/maximal-rectangle/</a><br><a href="http://oj.leetcode.com/problems/longest-substring-without-repeating-characters/" target="_blank" rel="external">http://oj.leetcode.com/problems/longest-substring-without-repeating-characters/</a></p>
+<p>分治 &amp; 递归：<br><a href="http://oj.leetcode.com/problems/unique-binary-search-trees-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/unique-binary-search-trees-ii/</a><br><a href="http://oj.leetcode.com/problems/restore-ip-addresses/" target="_blank" rel="external">http://oj.leetcode.com/problems/restore-ip-addresses/</a>  （时间复杂度有限，递归满足）<br><a href="http://oj.leetcode.com/problems/permutations/" target="_blank" rel="external">http://oj.leetcode.com/problems/permutations/</a><br><a href="http://oj.leetcode.com/problems/permutations-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/permutations-ii/</a><br><a href="http://oj.leetcode.com/problems/convert-sorted-array-to-binary-search-tree/" target="_blank" rel="external">http://oj.leetcode.com/problems/convert-sorted-array-to-binary-search-tree/</a><br><a href="http://oj.leetcode.com/problems/convert-sorted-list-to-binary-search-tree/" target="_blank" rel="external">http://oj.leetcode.com/problems/convert-sorted-list-to-binary-search-tree/</a><br><a href="http://oj.leetcode.com/problems/median-of-two-sorted-arrays/" target="_blank" rel="external">http://oj.leetcode.com/problems/median-of-two-sorted-arrays/</a><br><a href="http://oj.leetcode.com/problems/validate-binary-search-tree/" target="_blank" rel="external">http://oj.leetcode.com/problems/validate-binary-search-tree/</a></p>
+<p>字符串：<br><a href="http://oj.leetcode.com/problems/count-and-say/" target="_blank" rel="external">http://oj.leetcode.com/problems/count-and-say/</a><br><a href="http://oj.leetcode.com/problems/implement-strstr/" target="_blank" rel="external">http://oj.leetcode.com/problems/implement-strstr/</a>  （子串查找）<br><a href="http://oj.leetcode.com/problems/anagrams/" target="_blank" rel="external">http://oj.leetcode.com/problems/anagrams/</a><br><a href="http://oj.leetcode.com/problems/text-justification/" target="_blank" rel="external">http://oj.leetcode.com/problems/text-justification/</a> (细节）<br><a href="http://oj.leetcode.com/problems/simplify-path/" target="_blank" rel="external">http://oj.leetcode.com/problems/simplify-path/</a>  （基础控制语句 if-else-for）<br><a href="http://oj.leetcode.com/problems/multiply-strings/" target="_blank" rel="external">http://oj.leetcode.com/problems/multiply-strings/</a><br><a href="http://oj.leetcode.com/problems/regular-expression-matching/" target="_blank" rel="external">http://oj.leetcode.com/problems/regular-expression-matching/</a><br><a href="http://oj.leetcode.com/problems/wildcard-matching/" target="_blank" rel="external">http://oj.leetcode.com/problems/wildcard-matching/</a><br><a href="http://oj.leetcode.com/problems/longest-palindromic-substring/" target="_blank" rel="external">http://oj.leetcode.com/problems/longest-palindromic-substring/</a><br><a href="http://oj.leetcode.com/problems/zigzag-conversion/" target="_blank" rel="external">http://oj.leetcode.com/problems/zigzag-conversion/</a><br><a href="http://oj.leetcode.com/problems/length-of-last-word/" target="_blank" rel="external">http://oj.leetcode.com/problems/length-of-last-word/</a><br><a href="http://oj.leetcode.com/problems/valid-palindrome/" target="_blank" rel="external">http://oj.leetcode.com/problems/valid-palindrome/</a></p>
+<p>图：<br>深搜/广搜：<a href="http://oj.leetcode.com/problems/clone-graph/" target="_blank" rel="external">http://oj.leetcode.com/problems/clone-graph/</a></p>
+<p>搜索 &amp; 遍历：<br><a href="http://oj.leetcode.com/problems/word-ladder/" target="_blank" rel="external">http://oj.leetcode.com/problems/word-ladder/</a><br><a href="http://oj.leetcode.com/problems/word-ladder-ii/" target="_blank" rel="external">http://oj.leetcode.com/problems/word-ladder-ii/</a><br>广搜：<a href="http://oj.leetcode.com/problems/surrounded-regions/" target="_blank" rel="external">http://oj.leetcode.com/problems/surrounded-regions/</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/leetcode/" rel="tag"><i class="fa fa-tag"></i> leetcode</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/24/dp-algorithm/" rel="next" title="dp-algorithm">
+                <i class="fa fa-chevron-left"></i> dp-algorithm
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Gia Furler" />
+          <p class="site-author-name" itemprop="name">Gia Furler</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives">
+            
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/muyinsuifeng" title="GitHub" target="_blank">GitHub</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="muyinsuifeng@gmail.com" title="E-Mail" target="_blank">E-Mail</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="muyinsuifeng@gmail.com" title="Google" target="_blank">Google</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gia Furler</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    本站访客数:<span id="busuanzi_value_site_uv"></span>
+  </span>
+  </div>
+  <div class="powered-by">Powered by <a class="theme-link" href="https://hexo.io">Hexo</a></div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

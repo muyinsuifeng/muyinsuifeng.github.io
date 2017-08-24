@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="algorithm,binarytree," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="http://www.cnblogs.com/felixfang/p/3828915.html 1、求两个节点的最低公共祖先">
+<meta name="keywords" content="algorithm,binarytree">
+<meta property="og:type" content="article">
+<meta property="og:title" content="binarytree-algorithm">
+<meta property="og:url" content="http://yoursite.com/2017/08/24/binarytree-algorithm/index.html">
+<meta property="og:site_name" content="Muyinsuifeng">
+<meta property="og:description" content="http://www.cnblogs.com/felixfang/p/3828915.html 1、求两个节点的最低公共祖先">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-08-24T06:58:40.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="binarytree-algorithm">
+<meta name="twitter:description" content="http://www.cnblogs.com/felixfang/p/3828915.html 1、求两个节点的最低公共祖先">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/24/binarytree-algorithm/"/>
+
+
+
+
+
+  <title>binarytree-algorithm | Muyinsuifeng</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Muyinsuifeng</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-algorithm">
+          <a href="/algorithm/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            algorithm
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-leetcode">
+          <a href="/leetcode/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
+            
+            leetcode
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/24/binarytree-algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gia Furler">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Muyinsuifeng">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">binarytree-algorithm</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-24T14:55:46+08:00">
+                2017-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://www.cnblogs.com/felixfang/p/3828915.html" target="_blank" rel="external">http://www.cnblogs.com/felixfang/p/3828915.html</a></p>
+<h1 id="1、求两个节点的最低公共祖先"><a href="#1、求两个节点的最低公共祖先" class="headerlink" title="1、求两个节点的最低公共祖先"></a>1、求两个节点的最低公共祖先</h1><a id="more"></a>
+<ul>
+<li>对于给定二叉树，输入两个树节点，求它们的最低公共祖先<h2 id="1-1特殊情况-有parent节点"><a href="#1-1特殊情况-有parent节点" class="headerlink" title="1.1特殊情况  有parent节点"></a>1.1特殊情况  有parent节点</h2></li>
+<li>如果当<strong>节点带有parent指针</strong>时，可以方便的从给定的节点便利到根节点，这是求最低公共祖先，就是求两链表的第一个交点<ul>
+<li>首先需要考虑空指针输入，有一个输入为NULL，就不会有点交点<ul>
+<li>1、如果一个有环一个无环，则肯定没交点</li>
+<li>2、如果都没无环寻找两链表的第一个交点，就是先求出两链表长度差diff后，让长的链表先走diff，然后一次比较，若相等则返回</li>
+<li>3、在两个链表都有环的情况下，如果一个环的入口在另一个环上，则返回true</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="function">ListNode* <span class="title">traverse</span><span class="params">(ListNode* head, <span class="keyword">int</span> &amp;len, <span class="keyword">bool</span> &amp;circled)</span></span>&#123;</div><div class="line">    ListNode* p1 = head -&gt; next, *p2 = head -&gt; next;</div><div class="line">    <span class="keyword">int</span> step = <span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span>(; p2 != <span class="literal">NULL</span>; ++step, p1 = p1 -&gt; next, p2 = p2 -&gt; next)&#123;</div><div class="line">        p2 = p2 -&gt; next;</div><div class="line">        ++step;</div><div class="line">        <span class="keyword">if</span>(!p2 || p1 == p2) <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span>(!p2)&#123;    <span class="comment">//无环 </span></div><div class="line">        len = step;    <span class="comment">//用len记录链表长度 </span></div><div class="line">        circled = <span class="literal">false</span>;</div><div class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;<span class="comment">//有环 </span></div><div class="line">        circled = <span class="literal">true</span>; </div><div class="line">        len = <span class="number">0</span>; <span class="comment">//用len记录头结点到环入口距离 </span></div><div class="line">        <span class="keyword">for</span>(p1 = head; p1 != p2; p1 = p1 -&gt; next, p2 = p2 -&gt; next, ++len);</div><div class="line">        <span class="keyword">return</span> p1;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function">ListNode* <span class="title">FindFirstCommonListNode</span><span class="params">(ListNode* head1, ListNode* head2)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>( !head1 || !head2) <span class="keyword">return</span> <span class="literal">nullptr</span>;</div><div class="line">    <span class="keyword">if</span>( head1 == head2) <span class="keyword">return</span> head1;</div><div class="line">    <span class="keyword">int</span> len1 = <span class="number">0</span>, len2 = <span class="number">0</span>; <span class="keyword">bool</span> cc1 = <span class="literal">false</span>, cc2 = <span class="literal">false</span>;</div><div class="line">    ListNode* CcleEnt1 = traverse(head1, len1, cc1);</div><div class="line">    ListNode* CcleEnt2 = traverse(head2, len2, cc2);</div><div class="line">    </div><div class="line">    <span class="keyword">if</span>((!cc1 &amp;&amp; cc2) || (cc1 &amp;&amp; !cc2)) <span class="keyword">return</span> <span class="literal">NULL</span>;    <span class="comment">//若一个有环，一个无环，则肯定没有交点</span></div><div class="line">    <span class="keyword">if</span>(len1 &gt; <span class="number">0</span> &amp;&amp; len2 &gt; <span class="number">0</span>)&#123;    <span class="comment">//当两链表都无环，或者都有环且首节点都不在环上时 </span></div><div class="line">        ListNode *st1 = (len1 &gt; len2 ? head1 : head2);</div><div class="line">        ListNode *st2 = (len1 &gt; len2 ? head2 : head1);</div><div class="line">        ListNode *cce1 = (len1 &gt; len2 ? CcleEnt1 : CcleEnt2);</div><div class="line">        ListNode *cce2 = (len1 &gt; len2 ? CcleEnt2 : CcleEnt1);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (len1 - len2 &gt; <span class="number">0</span> ? len1 - len2 : len2 - len1); ++i, st1 = st1 -&gt; next);</div><div class="line">        <span class="keyword">for</span>(; st1 != cce1 &amp;&amp; st2 != cce2 &amp;&amp; (st1 != st2); st1 = st1 -&gt; next, st2 = st2 -&gt; next);</div><div class="line">        <span class="keyword">if</span>(st1) <span class="keyword">return</span> st1;</div><div class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;    <span class="comment">//len1, len2 中有一个为0 说明其中至少有一条链表是纯环链表。</span></div><div class="line">        ListNode *st1 = (len1 == <span class="number">0</span> ? head1 : head2); <span class="comment">//选择那个纯环链表的head，验证它是否在另一个链表的环上，在的话它就是第一个交点，不在的话就没有交点。 </span></div><div class="line">        ListNode *st2 = (len1 == <span class="number">0</span> ? head2 : head1);</div><div class="line">        ListNode *p = st2 -&gt; next;</div><div class="line">        <span class="keyword">for</span>(; p != st2 &amp;&amp; p != st1; p = p -&gt; next);</div><div class="line">        <span class="keyword">if</span>(p == st1) <span class="keyword">return</span> st1;</div><div class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="1-2、特殊情况-搜索二叉树"><a href="#1-2、特殊情况-搜索二叉树" class="headerlink" title="1.2、特殊情况  搜索二叉树"></a>1.2、特殊情况  搜索二叉树</h2><ul>
+<li>如果在<strong>没有parent指针</strong>，或者<strong>给定的是两个节点的数值而非节点的地址</strong>，那么只有从根节点开始遍历一遍。( 对于一些特殊性质的二叉树，可以提高搜索效率)<ul>
+<li>比如说BST可以将传统二叉树的遍历时间(O(n))降低到(O(logn))<ul>
+<li>如果给定的节点在二叉树中，我们只需要将节点的值(a = q-&gt;val,b = p-&gt;val)和root-&gt;val比较，如果root-&gt;val在[a,b]则返回root，如果root-&gt;val 在(0, a)root = root-&gt;left继续，如果root-&gt;val 在( b, ..), 则root = root-&gt;right继续</li>
+<li>如果给定节点的值 ，并不能保证这两个值(a, b)在二叉树中，相对于上面的算法，唯一的变化是:当root-&gt;val在[a,b]中时，我们不能断定最低公共祖先是root，需要在左(右)枝继续搜索a 或者b，才能断定最低公共祖先是root</li>
+<li><pre><code>        7
+   3        8
+1     5
+</code></pre>如上图当a = 2， b = 6时，搜索到3时可以看到3在[a,b]中但是,3并不是a,b的最小公共祖先，这个时候需要继续往左右枝进行搜索，会发现5才是。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-3-传统二叉树"><a href="#1-3-传统二叉树" class="headerlink" title="1.3 传统二叉树"></a>1.3 传统二叉树</h2><ul>
+<li>对于普通的二叉树，只能从根节点开始找两个节点。</li>
+<li><p>这里假设给定的是两个节点的val，并且这两节点不一定在树中，返回最小公共祖先的值，没有的话返回”not exist”</p>
+<h3 id="解法一-time-O-2n-space-O-logn"><a href="#解法一-time-O-2n-space-O-logn" class="headerlink" title="解法一  time O(2n)  space O(logn)"></a>解法一  time O(2n)  space O(logn)</h3><p>TreeNode定义如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></div><div class="line">    TreeNode *left;</div><div class="line">    TreeNode *right;</div><div class="line">    <span class="keyword">int</span> val;</div><div class="line">    TreeNode(<span class="keyword">int</span> v): val(v), left(<span class="literal">NULL</span>), right(<span class="literal">NULL</span>)&#123;&#125;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>思路：</p>
+<ul>
+<li>我们先在root的左子树寻找a和b<ul>
+<li>如果找到了，说明最低公共祖先在左子树，root = root-&gt;left</li>
+<li>如果找不到，说明最低公共祖先只可能在右子树，root = root-&gt;right</li>
+<li>若果找到了a 没找到b ，那就在右子树找b，如果找到了返回b<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">findVal</span><span class="params">( TreeNode* root, <span class="keyword">int</span> v)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>( !root) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    <span class="keyword">if</span>( root-&gt;val == v) <span class="keyword">return</span> ture;</div><div class="line">    <span class="keyword">return</span> findVal( root-&gt;right, v) || findVal( root-&gt;left, v);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="built_in">string</span> <span class="title">FindCmmnAncstr</span><span class="params">(TreeNode* node, <span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>( !ndoe) <span class="keyword">return</span> <span class="string">"not exist"</span>;</div><div class="line">    <span class="keyword">if</span>( node-&gt;val == a)&#123;</div><div class="line">        <span class="keyword">if</span>( findVal( node, b)) <span class="keyword">return</span> to_string(a);</div><div class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="string">"not exist"</span>;</div><div class="line">    &#125;<span class="keyword">if</span>( node-&gt;val == b)&#123;</div><div class="line">        <span class="keyword">if</span>( findVal( node, a)) <span class="keyword">return</span> to_string(b);</div><div class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="string">"not exist"</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">bool</span> lefta = FindVal( node -&gt; left, a);</div><div class="line">    <span class="keyword">bool</span> leftb = FindVal( node -&gt; left, b);</div><div class="line">    <span class="keyword">if</span>( lefta &amp;&amp; leftb) <span class="keyword">return</span> FindCmmnAncstr( node -&gt; left, a, b);</div><div class="line">    <span class="keyword">if</span>( !lefta &amp;&amp; !leftb) <span class="keyword">return</span> FindCmmnAncstr( node -&gt; right, a, b);</div><div class="line">    <span class="keyword">if</span>( lefta)&#123;</div><div class="line">        <span class="keyword">if</span>( FindVal(node -&gt; right, b)) <span class="keyword">return</span> to_string(node -&gt; val);</div><div class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="string">"not exist"</span>;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">if</span>(FindVal(node -&gt; right, a)) <span class="keyword">return</span> to_string(node -&gt; val);</div><div class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="string">"not exist"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="解法二-time-O-n-space-O-3logn"><a href="#解法二-time-O-n-space-O-3logn" class="headerlink" title="解法二 time O(n) space O(3logn)"></a>解法二 time O(n) space O(3logn)</h3><ul>
+<li>上面的解法因为有节点被重复遍历，导致时间复杂度的提高</li>
+<li>为了避免重复遍历，我们可以将找到a，b后所经过的节点路径存储下来，然后比较两条路径，找到相同的部分<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">FindVal</span><span class="params">(TreeNode* node, <span class="keyword">int</span> v, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;path)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>(!node) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    path.push_back(node -&gt; val);</div><div class="line">    <span class="keyword">if</span>(node -&gt; val == v)    </div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    <span class="keyword">if</span>(FindVal(node -&gt; left, v, path) || FindVal(node -&gt; right, v, path))</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    path.pop_back();</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="built_in">string</span> <span class="title">FindCmmnAncstr2</span><span class="params">(TreeNode* node, <span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>(!node) <span class="keyword">return</span> <span class="string">"My God"</span>;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; path1; <span class="comment">//寻找a的经过路径</span></div><div class="line">    FindVal(node, a, path1);</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; path2; <span class="comment">//寻找b的经过路径</span></div><div class="line">    FindVal(node, b, path2);</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it1 = path1.begin();</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it2 = path2.begin();</div><div class="line">    <span class="keyword">int</span> acstor = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(; it1 &lt; path1.end() &amp;&amp; it2 &lt; path2.end() &amp;&amp; (*it1) == (*it2); acstor = *it2, ++it1, ++it2);</div><div class="line">    <span class="keyword">return</span> (acstor &gt; <span class="number">0</span> ? to_string(acstor) : <span class="string">"My God"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="解法三-time-O-3n-space-O-2logn"><a href="#解法三-time-O-3n-space-O-2logn" class="headerlink" title="解法三 time O(3n) space O(2logn)"></a>解法三 time O(3n) space O(2logn)</h3><ul>
+<li><p>参考<a href="http://www.gocalf.com/blog/least-common-ancestor.html" target="_blank" rel="external">http://www.gocalf.com/blog/least-common-ancestor.html</a>,作者用到了NLR前序遍历来使得不用像方法二中那样缓存整条分支。</p>
+<ul>
+<li><p>我们这里不再使用地归来寻找节点，而改用栈来实现NLR</p>
+<ul>
+<li><p>用栈遍历如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">stack</span>&lt;TreeNode*&gt; st;</div><div class="line">st.push( root);</div><div class="line"><span class="keyword">while</span>( !st.empty())&#123;</div><div class="line">    TreeNode* node = st.top();</div><div class="line">    st.pop();</div><div class="line">    <span class="comment">//do something to node</span></div><div class="line">    </div><div class="line">    <span class="keyword">if</span>( node-&gt;left) st.push( node-&gt;left);</div><div class="line">    <span class="keyword">if</span>( node-&gt;right) st.push( node-&gt;right);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改后</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">stack</span>&lt;TreeNode*&gt; st;</div><div class="line">st.push( root)</div><div class="line"><span class="keyword">while</span>(!st.empty())&#123;</div><div class="line">     TreeNode* node = st.top();</div><div class="line">     <span class="comment">//Do something to node.</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span>( node -&gt; left)&#123;</div><div class="line">        st.push( node -&gt; left);</div><div class="line">        node -&gt; left = <span class="literal">NULL</span>;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        st.pop();</div><div class="line">        <span class="keyword">if</span>( node -&gt; right) st.push( node -&gt; right);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>思路：</p>
+<ul>
+<li>对于LCA，只可能有一下两种情况<ul>
+<li>1、LCA是其中一个节点，另一个是他的子孙</li>
+<li>2、两个节点分别位于LCA的左右子树当中</li>
+</ul>
+</li>
+<li><p>对于上面两种情况我们可以分别处理</p>
+<ul>
+<li>1、前序遍历首先找到的节点就是LCA，剩下的是就是确定第二个节点是否在他的下面</li>
+<li><p>2、假设在前序遍历中，首先找到了一个节点( 如下图H),根据上面修改的非递归前序遍历的算法特性，这是stack里存储了A, B, D, G ，然后根据LCA的特性可以发现LCA要么是H自身要么是A, B, D, G，接下来只要继续遍历找到另一个节点，这时看看A, B, D, G谁还在栈里，下面的那个就是LCA</p>
+<pre><code>       A
+    B
+C
+    D
+E
+    F
+        G
+    H
+</code></pre></li>
+</ul>
+</li>
+<li>但是如果用上面的遍历方法的话，在寻找b的时候，如果b在H的子树上，在找到a的时候H已经被弹出了，所以要修改为如下<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">stack</span>&lt;TreeNode*&gt; st;</div><div class="line">st.push( root);</div><div class="line"><span class="keyword">while</span>( !st.empty())&#123;</div><div class="line">    TreeNode* node = st.back();</div><div class="line">    <span class="comment">//do something to node</span></div><div class="line">    <span class="comment">//</span></div><div class="line">    <span class="keyword">if</span>( node-&gt;left)&#123;</div><div class="line">        st.push( node-&gt;left);</div><div class="line">        node-&gt;left = <span class="literal">nullptr</span>;</div><div class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>( node-&gt;right)&#123;</div><div class="line">        st.push( node-&gt;right);</div><div class="line">        node-&gt;right = <span class="literal">nullptr</span>;</div><div class="line">    &#125;<span class="keyword">else</span> st.pop();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>所以第三种方法可如如下代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="built_in">string</span> <span class="title">FindCmmnAncstr</span><span class="params">(TreeNode* node, <span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>( !node) <span class="keyword">return</span> <span class="string">"not exist"</span>;</div><div class="line">    <span class="built_in">stack</span>&lt;TreeNode*&gt; st;</div><div class="line">    <span class="built_in">unordered_map</span>&lt;TreeNode*, <span class="keyword">int</span>&gt; mp;<span class="comment">//mp用来标记此时在栈中的“最低公共祖先”候选人</span></div><div class="line">    st.push( node);</div><div class="line">    <span class="keyword">int</span> firstNumberAnother;<span class="comment">//记录第一个被找的数的另一个数</span></div><div class="line">    TreeNode* n = <span class="literal">nullptr</span>;</div><div class="line">    <span class="keyword">while</span>( !st.empty())&#123;<span class="comment">//寻找第一个数</span></div><div class="line">        n = st.top();</div><div class="line">        <span class="comment">//do something to node</span></div><div class="line">        <span class="keyword">if</span>( n-&gt;val == a|| n-&gt;val == b)&#123;</div><div class="line">            firstNumberAnother = ( n-&gt;val == a)? b: a;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>( n-&gt;left)&#123;</div><div class="line">            st.push( n-&gt;left);</div><div class="line">            n-&gt;left = <span class="literal">nullptr</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            st.pop();</div><div class="line">            <span class="keyword">if</span>( n -&gt; right) st.push( n -&gt; right);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span>( st.empty()) <span class="keyword">return</span> <span class="string">"not exist"</span>;</div><div class="line">    <span class="built_in">vector</span>&lt;TreeNode*&gt;::iterator it = st.begin();</div><div class="line">    <span class="keyword">for</span>( ; it != st.end(); ++it)</div><div class="line">        mp[*it] ++;</div><div class="line">    <span class="keyword">while</span>(!st.empty())&#123; <span class="comment">//寻找firstNumberAnother的过程</span></div><div class="line">        n = st.top();</div><div class="line">        <span class="keyword">if</span>(n -&gt; val == firstNumberAnother) <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">if</span>(n -&gt; left)&#123;</div><div class="line">            st.push(n -&gt; left);</div><div class="line">            n -&gt; left = <span class="literal">nullptr</span>;</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(n -&gt; right)&#123;</div><div class="line">            st.push(n -&gt; right);</div><div class="line">            n -&gt; right = <span class="literal">nullptr</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            st.pop();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">while</span>( !st.empty())&#123;<span class="comment">//从上到下遍历栈，找到第一个被标记为“候选人”的节点就是最低公共祖先。</span></div><div class="line">        <span class="keyword">if</span>( mp.count( st.top())) <span class="keyword">return</span> to_string( st.top()-&gt;val);</div><div class="line">        st.pop();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="string">"not exist"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
+          
+            <a href="/tags/binarytree/" rel="tag"><i class="fa fa-tag"></i> binarytree</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/22/my-first-blog/" rel="next" title="my-first-blog">
+                <i class="fa fa-chevron-left"></i> my-first-blog
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/24/bitOperation/" rel="prev" title="bitOperation">
+                bitOperation <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Gia Furler" />
+          <p class="site-author-name" itemprop="name">Gia Furler</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives">
+            
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/muyinsuifeng" title="GitHub" target="_blank">GitHub</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="muyinsuifeng@gmail.com" title="E-Mail" target="_blank">E-Mail</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="muyinsuifeng@gmail.com" title="Google" target="_blank">Google</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、求两个节点的最低公共祖先"><span class="nav-number">1.</span> <span class="nav-text">1、求两个节点的最低公共祖先</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1特殊情况-有parent节点"><span class="nav-number">1.1.</span> <span class="nav-text">1.1特殊情况  有parent节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2、特殊情况-搜索二叉树"><span class="nav-number">1.2.</span> <span class="nav-text">1.2、特殊情况  搜索二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-传统二叉树"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 传统二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解法一-time-O-2n-space-O-logn"><span class="nav-number">1.3.1.</span> <span class="nav-text">解法一  time O(2n)  space O(logn)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法二-time-O-n-space-O-3logn"><span class="nav-number">1.3.2.</span> <span class="nav-text">解法二 time O(n) space O(3logn)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法三-time-O-3n-space-O-2logn"><span class="nav-number">1.3.3.</span> <span class="nav-text">解法三 time O(3n) space O(2logn)</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gia Furler</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    本站访客数:<span id="busuanzi_value_site_uv"></span>
+  </span>
+  </div>
+  <div class="powered-by">Powered by <a class="theme-link" href="https://hexo.io">Hexo</a></div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="algorithm,DP," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="1、三角形找一条从底到顶的最小路径    [a1]    [b1,b2]   [c1,c2,c3]  [d1,d2,d3,d4] [... ... ... ..]">
+<meta name="keywords" content="algorithm,DP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dp-algorithm">
+<meta property="og:url" content="http://yoursite.com/2017/08/24/dp-algorithm/index.html">
+<meta property="og:site_name" content="Muyinsuifeng">
+<meta property="og:description" content="1、三角形找一条从底到顶的最小路径    [a1]    [b1,b2]   [c1,c2,c3]  [d1,d2,d3,d4] [... ... ... ..]">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://github.com/muyinsuifeng/myleetcode/raw/master/image/out_of_boundary_paths_2.png">
+<meta property="og:updated_time" content="2017-08-24T07:38:08.518Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="dp-algorithm">
+<meta name="twitter:description" content="1、三角形找一条从底到顶的最小路径    [a1]    [b1,b2]   [c1,c2,c3]  [d1,d2,d3,d4] [... ... ... ..]">
+<meta name="twitter:image" content="https://github.com/muyinsuifeng/myleetcode/raw/master/image/out_of_boundary_paths_2.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/24/dp-algorithm/"/>
+
+
+
+
+
+  <title>dp-algorithm | Muyinsuifeng</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Muyinsuifeng</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-algorithm">
+          <a href="/algorithm/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            algorithm
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-leetcode">
+          <a href="/leetcode/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
+            
+            leetcode
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/24/dp-algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gia Furler">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Muyinsuifeng">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">dp-algorithm</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-24T15:37:34+08:00">
+                2017-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1、三角形找一条从底到顶的最小路径"><a href="#1、三角形找一条从底到顶的最小路径" class="headerlink" title="1、三角形找一条从底到顶的最小路径"></a>1、三角形找一条从底到顶的最小路径</h1><pre><code>    [a1]
+   [b1,b2]
+  [c1,c2,c3]
+ [d1,d2,d3,d4]
+[... ... ... ..]
+</code></pre><a id="more"></a>
+<pre><code>思路:可以从倒数第二排开始把，下面一排相邻的俩个的最小值加到该位置上
+     然后依次向上计算，到顶时，就是从底到顶的最小路径
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">mininumTotal</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; v)</span></span>&#123;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = v.size()<span class="number">-2</span>; i &gt;= <span class="number">0</span>; ++i)&#123;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span>; j &lt; v[i].size(); ++j)</div><div class="line">            v[i][j] += max( v[i+<span class="number">1</span>][j], v[i+<span class="number">1</span>][j+<span class="number">1</span>]);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> v[<span class="number">0</span>][<span class="number">0</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="2、最大字数和"><a href="#2、最大字数和" class="headerlink" title="2、最大字数和"></a>2、最大字数和</h1><pre><code>求一个数组连续下标和的最大值（数组元素可正可负可为0）
+思路:
+令cursum(i)表示数组下标以i为起点往0看的最大连续下标最大的和，而maxsum(i)
+表示前i个元素的最大子数组之和。那么我们就可以推出下一个maxsum(i+1)
+应该为cursum(i+1)和maxsum(i)中选取一个最大值。递推式为：
+cursum(i) = max{A[i],cursum(i-1)+A[i]};//判断当前cursum(i-1)和为负数的时
+                                       //候，重新从i开始统计
+maxsum(i) = max{maxsum(i-1),cursum(i)}
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSubArray</span><span class="params">( <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v)</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> cursum;</div><div class="line">    <span class="keyword">int</span> maxsum;</div><div class="line">    sursum = maxsum = v[<span class="number">0</span>];</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; v.size(); ++i)&#123;</div><div class="line">        curmax = max( curmax + v[i], v[i]);</div><div class="line">        maxsum = max( maxsum, curmax);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> maxsum;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="2-1-扩展问题"><a href="#2-1-扩展问题" class="headerlink" title="2.1 扩展问题:"></a>2.1 扩展问题:</h2><pre><code>如果数组是环形的
+</code></pre><h3 id="2-1-1"><a href="#2-1-1" class="headerlink" title="2.1.1"></a>2.1.1</h3><pre><code>方法一:将数组copy一份连接到原数组后面，用上面的方法求解
+</code></pre><h3 id="2-1-2"><a href="#2-1-2" class="headerlink" title="2.1.2"></a>2.1.2</h3><pre><code>方法二:先用原解求出没有跨过边界的max1，然后求出从A[0]开始的最大段(A[0]-A[j])
+       然后求出从A[n-1]向前的最大段(A[i]-A[n-1]),刚好可以使用curmax.如果i&lt;=j
+       则max2=A[0]+..+A[n-1]否则max2 = A[0]+...+A[j]+A[i]+...A[n-1]
+       最后max = max(max1,max2);
+</code></pre><h2 id="2-2-扩展问题"><a href="#2-2-扩展问题" class="headerlink" title="2.2 扩展问题:"></a>2.2 扩展问题:</h2><pre><code>如果是求和的绝对值最大子串
+</code></pre><h3 id="2-2-1"><a href="#2-2-1" class="headerlink" title="2.2.1"></a>2.2.1</h3><pre><code>思路:先计算所有sum[0-j] 0&lt;= j &lt;n，然后对sum[0-j]的数组进行排序，那么对于任何i,j段
+        的和等于：sum[i-j]= sum[0-j] - sum[0-i];设置数组sum用来存储子数组0-j的和  
+        因为已经对sum进行了排序，排序后只需要找到sum[sum.size()-1]-sum[0],sum[z]  
+        (0&lt;=z&lt;sum.size())的绝对值的最大值即可。z为排序后的索引  
+        如果是sum[z]情形，z为排序后的索引，则maxAbs = abs(sum[0-i])  
+        如果是sum[sum.size()-1]-sum[0]情形，则maxAbs = abs(sum[i]-sum[j])  
+        时间复杂度：o(nlogn) 空间复杂度：o(n) 
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxAbsSum2</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;num)</span></span>&#123;  </div><div class="line">    <span class="keyword">if</span>(num.size()==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;  </div><div class="line">    <span class="keyword">if</span>(num.size()==<span class="number">1</span>) <span class="keyword">return</span> <span class="built_in">abs</span>(num[<span class="number">0</span>]);  </div><div class="line">    <span class="keyword">int</span> max_abs_sum;  </div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; sum;  </div><div class="line">    <span class="keyword">int</span> cur_sum = <span class="number">0</span>;  </div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;num.size(); i++)&#123;  </div><div class="line">        cur_sum += num[i];  </div><div class="line">        <span class="keyword">if</span>(cur_sum == <span class="number">0</span>)  </div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;  </div><div class="line">        sum.push_back(cur_sum);  </div><div class="line">    &#125;  </div><div class="line">    sort(sum.begin(), sum.end());  </div><div class="line">    max_abs_sum = <span class="built_in">abs</span>(sum[sum.size()<span class="number">-1</span>]-sum[<span class="number">0</span>]);  <span class="comment">//2 -5 10 -1 5 -1</span></div><div class="line">                                            <span class="comment">//sum   2 -3 7  6  11 10</span></div><div class="line">                                            <span class="comment">//        __       __ </span></div><div class="line">                                        <span class="comment">//reorder  -3  2 6  7 10  11</span></div><div class="line">                                        <span class="comment">//max_abs_sum  11-(-3) = 14</span></div><div class="line">                                        <span class="comment">//max(sum)     11</span></div><div class="line">                                        <span class="comment">//=&gt;  max = 14</span></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;sum.size(); i++) &#123;  </div><div class="line">        cur_sum = <span class="built_in">abs</span>(sum[i]);  </div><div class="line">        <span class="keyword">if</span>(cur_sum&gt;max_abs_sum)  </div><div class="line">            max_abs_sum = cur_sum;  </div><div class="line">    &#125;  </div><div class="line">    <span class="keyword">return</span> max_abs_sum;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="3、回文最小化分次数"><a href="#3、回文最小化分次数" class="headerlink" title="3、回文最小化分次数"></a>3、回文最小化分次数</h1><pre><code>给定字符串S，使得每个子串为回文子串，的最小划分次数
+思路:
+dp[i] = min(dp[j]+1) 这里j &lt; i&amp;&amp; [j+1,i]是一个回文子串
+    &lt;1&gt;现将dp[i]+1赋给dp[i+1]
+    &lt;2&gt;然后依次判断[k,i+1](0&lt;k&lt;=i+1)是不是回文，是的话将dp[i+1] = dp[k-1]+1
+       求出dp[i+1]的最小值
+    &lt;3&gt;求到最后得出结果
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">isPalindrome</span><span class="params">(<span class="built_in">string</span> s,<span class="keyword">int</span> startIndex,<span class="keyword">int</span> endIndex)</span></span>&#123;</div><div class="line">    <span class="keyword">for</span>(;startIndex&lt;endIndex;startIndex++,endIndex--)</div><div class="line">        <span class="keyword">if</span>(s[startIndex]!=s[endIndex]) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">minCut</span><span class="params">(<span class="built_in">string</span> s)</span></span>&#123;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(s.size()+<span class="number">1</span>, <span class="number">0</span>);</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); ++i)&#123;</div><div class="line">        dp[i+<span class="number">1</span>] = dp[i]+<span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span>; j &lt; s.size(); ++j)&#123;</div><div class="line">            <span class="keyword">if</span>( isPalindrome(s, j, i))</div><div class="line">                <span class="keyword">if</span>(dp[i+<span class="number">1</span>] &gt; dp[j]+<span class="number">1</span>)</div><div class="line">                    dp[i+<span class="number">1</span>] = dp[j]+<span class="number">1</span>;</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> dp[s.size()];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code>上面这种方法的isPalindrome的方法复杂度太大总时间复杂度有 o(n^3)
+所以要把判断回文的方法取简，定义二维数组P[n][n] =&gt; if [i,j]是回文，则p[i][j] = #include &lt;future&gt;
+p[i][j] = (s[i] == s[j] &amp;&amp; p[i+1][j-1])
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">minCut</span><span class="params">(<span class="built_in">string</span> s)</span></span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> n =s.size();</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(n+<span class="number">1</span>, <span class="number">0</span>);</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; &gt; p(n , <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;(n, <span class="literal">false</span>));</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</div><div class="line">        dp[i+<span class="number">1</span>] = dp[n]+<span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n+<span class="number">1</span>; ++i)</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = i; j &gt; <span class="number">0</span>; --j)&#123;</div><div class="line">            <span class="keyword">if</span>( s[i] == s[j]&amp;&amp; (i - j &lt; <span class="number">2</span>|| p[i<span class="number">-1</span>][j+<span class="number">1</span>]))&#123;</div><div class="line">                p[i][j] = <span class="literal">true</span>;</div><div class="line">                dp[i] = min(dp[i],dp[j<span class="number">-1</span>]+<span class="number">1</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    <span class="keyword">return</span> f[n];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="4、最佳时间买卖股票"><a href="#4、最佳时间买卖股票" class="headerlink" title="4、最佳时间买卖股票"></a>4、最佳时间买卖股票</h1><h2 id="4-1"><a href="#4-1" class="headerlink" title="4.1"></a>4.1</h2><pre><code>给一个数prices[]，prices[i]代表股票在第i天的售价，求出只做一次交易(一次买入和卖出)能得到的最大收益。
+非dp问题，只要找出最大的差值即可
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; prices)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>(prices.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> low = prices[<span class="number">0</span>];</div><div class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;prices.size(); i++)&#123;</div><div class="line">        <span class="keyword">if</span>(prices[i] &lt; low) low = prices[i];</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(prices[i] - low &gt; ans) ans = prices[i] - low;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> ans;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="4-2、不限交易次数"><a href="#4-2、不限交易次数" class="headerlink" title="4.2、不限交易次数"></a>4.2、不限交易次数</h2><pre><code>非dp问题 ：
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; prices)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(prices.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;prices.size(); i++)&#123;</div><div class="line">        <span class="keyword">if</span>(prices[i] &gt; prices[i<span class="number">-1</span>])</div><div class="line">            ans += prices[i]-prices[i<span class="number">-1</span>];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> ans;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="4-3、此题是限制在两次交易内"><a href="#4-3、此题是限制在两次交易内" class="headerlink" title="4.3、此题是限制在两次交易内"></a>4.3、此题是限制在两次交易内</h2><pre><code>dp问题
+</code></pre><h3 id="4-3-1-方法一"><a href="#4-3-1-方法一" class="headerlink" title="4.3.1 方法一:"></a>4.3.1 方法一:</h3><pre><code>把prices分成prices[0,m]和prices[m,prices.size()-1]然后分别用4.1的方法计算，要做n次划分所以时间复杂度是 O(n^2)
+            这是一个非dp的算法，复杂度比较高
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; prices)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> m = <span class="number">0</span>; m&lt;prices.size(); m++)&#123;</div><div class="line">        <span class="keyword">int</span> tmp = maxProfitOnce(prices, <span class="number">0</span>, m) + maxProfitOnce(prices, m, prices.size()<span class="number">-1</span>);</div><div class="line">        <span class="keyword">if</span>(tmp &gt; ans) ans = tmp;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> ans;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxProfitOnce</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; prices,<span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>(start &gt;= end) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> low = prices[start];</div><div class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=start+<span class="number">1</span>; i&lt;=end; i++)&#123;</div><div class="line">        <span class="keyword">if</span>(prices[i] &lt; low) low = prices[i];</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(prices[i] - low &gt; ans) ans = prices[i] - low;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> ans;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="4-3-2-方法二-dp算法"><a href="#4-3-2-方法二-dp算法" class="headerlink" title="4.3.2 方法二:dp算法,"></a>4.3.2 方法二:dp算法,</h3><pre><code>&lt;1&gt;先用4.1的方法计算出子序列[0,...,i]中的最大利润，用数组保存。O(n)
+&lt;2&gt;逆向扫描，计算子序列[i, ... ,n-1]上的最大利润。 O(n)也就是说把maxProfitOnce过程变为 O(1)从而使得中的复杂度降为 O(n)
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; prices)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(prices.size() &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> n = prices.size();</div><div class="line"></div><div class="line">    <span class="comment">//正向遍历，opt[i]表示 prices[0...i]内做一次交易的最大收益.</span></div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; opt(n, <span class="number">0</span>);</div><div class="line">    opt[<span class="number">0</span>] = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> low = prices[<span class="number">0</span>];</div><div class="line">    <span class="keyword">int</span> curAns = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>, valley = prices[<span class="number">0</span>]; i &lt; n; ++i) &#123;</div><div class="line">        valley = min(valley, prices[i]);</div><div class="line">        opt[i] = max(opt[i - <span class="number">1</span>], prices[i] - valley);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//逆向遍历, opt[i]表示 prices[i...n-1]内做一次交易的最大收益.</span></div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; optReverse(n, <span class="number">0</span>);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">2</span>, peak = prices[n - <span class="number">1</span>]; i &gt;= <span class="number">0</span>; --i) &#123;</div><div class="line">        peak = max(peak, prices[i]);</div><div class="line">        optReverse[i] = max(optReverse[i], peak - prices[i]);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//再进行划分，分别计算两个部分</span></div><div class="line">    <span class="keyword">int</span> max_profit = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</div><div class="line">        max_profit = max(max_profit, opt[i] + optReverse[i]);</div><div class="line">    <span class="keyword">return</span> max_profit;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="4-4-Leetcode-309-Best-Time-to-Buy-and-Sell-Stock-with-Cooldown"><a href="#4-4-Leetcode-309-Best-Time-to-Buy-and-Sell-Stock-with-Cooldown" class="headerlink" title="4.4 Leetcode 309. Best Time to Buy and Sell Stock with Cooldown"></a>4.4 Leetcode 309. Best Time to Buy and Sell Stock with Cooldown</h2><pre><code>dp 问题，在每次售出股票之后有一天的冷冻期 不可以买股票
+    思路：
+        可以考虑一共有三种状态设为state0, state1,state2
+        这三种状态的转移关系有
+
+            state0--buy--&gt;state1--sell--&gt;state2
+            ^ |  ^        ^ |              |  
+            | |  |        | |              |
+            ---  |        ---              |
+                 --------cool down----------
+        state0[i] = max( state0[i-1], state2[i-1]);
+        state1[i] = max( state1[i-1], state0[i-1] - prices[i]);
+        state2[i] = state1[i-1] + prices[i];
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> n = prices.size();</div><div class="line">    <span class="keyword">if</span>( n &lt;= <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; state0( n);</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; state1( n);</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; state2( n);</div><div class="line">    state0[<span class="number">0</span>] = <span class="number">0</span>;</div><div class="line">    state1[<span class="number">0</span>] = INT_MIN;</div><div class="line">    state2[<span class="number">0</span>] = INT_MIN;    </div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i)&#123;</div><div class="line">        state0[i] = max( state0[i - <span class="number">1</span>], state2[i - <span class="number">1</span>]);</div><div class="line">        state1[i] = max( state1[i - <span class="number">1</span>], state0[i - <span class="number">1</span>] - prices[i]);</div><div class="line">        state2[i] = state1[i - <span class="number">1</span>] + prices[i];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> max( state0[n<span class="number">-1</span>], state2[n<span class="number">-1</span>]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="5、判断字符串s3是否由s1-s2交叉存取组成"><a href="#5、判断字符串s3是否由s1-s2交叉存取组成" class="headerlink" title="5、判断字符串s3是否由s1,s2交叉存取组成"></a>5、判断字符串s3是否由s1,s2交叉存取组成</h1><pre><code>For example,
+Given:
+s1 = &quot;aabcc&quot;,
+s2 = &quot;dbbca&quot;,
+When s3 = &quot;aa dbbc bc a c&quot;, return true.
+When s3 = &quot;aa dbbb (error)accc&quot;, return false.
+
+思路:
+    设状态dp[i][j]，表示s1[0,i]和s2[0,j]匹配s3[0,i+j].如果s1的最后一个字符等于s3的最后一个字符，则
+    dp[i][j]=dp[i-1][j]；
+    如果s2的最后一个字符等于s3的最后一个字符，则 
+    dp[i][j]=dp[i][j-1]。
+    因此状态转移方程如下： 
+    dp[i][j] = (s1[i - 1] == s3 [i + j - 1] &amp;&amp; dp[i - 1][j]) || (s2[j - 1] == s3 [i + j - 1] &amp;&amp; dp[i][j - 1]);
+    1 |d0|b0|b0|c0|a0|
+    ------------------
+    a1|0 |0 |0 |0 |0 |
+    ------------------
+    a1|d1|b1|b1|c1|0 |
+    ------------------
+    b0|b1|b1|0 |b1|0 |
+    ------------------
+    c0|0 |c1|b1|c1|a1|
+    ------------------
+    c0|0 |0 |c1|0 |c1|
+    ------------------
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isInterleave</span><span class="params">(<span class="built_in">string</span> s1, <span class="built_in">string</span> s2, <span class="built_in">string</span> s3)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>( s1.size() + s2.size() != s3.size()) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; &gt; dp(s1.size()+<span class="number">1</span>, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;(s2.size()+<span class="number">1</span>, <span class="literal">false</span>));</div><div class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">true</span>;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= s1.size(); ++i)</div><div class="line">        <span class="keyword">if</span>( dp[i][<span class="number">0</span>] &amp;&amp; s1[i<span class="number">-1</span>] == s3[i<span class="number">-1</span>]) dp[i][<span class="number">0</span>] = <span class="literal">true</span>;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= s2.size(); ++i)</div><div class="line">        <span class="keyword">if</span>( dp[<span class="number">0</span>][i] &amp;&amp; s2[i<span class="number">-1</span>] == s3[i<span class="number">-1</span>]) dp[<span class="number">0</span>][i] = <span class="literal">true</span>;</div><div class="line"></div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= s1.size(); ++i)</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= s2.size(); ++j)</div><div class="line">            <span class="keyword">if</span>( (dp[i<span class="number">-1</span>][j]&amp;&amp;s1[i<span class="number">-1</span>] == s3[i+j<span class="number">-1</span>])||(dp[i][j<span class="number">-1</span>]&amp;&amp;s2[j<span class="number">-1</span>] == s3[i+j<span class="number">-1</span>]))</div><div class="line">                dp[i][j] = <span class="literal">true</span>;</div><div class="line">    <span class="keyword">return</span> dp[s1.size()][s2.size()];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code>上面这个算法的时间复杂度是 O(n^2) 空间复杂度是 O(n^2)
+但如果改由最小的那个string的长度来存的话空间复杂度可以降低到 O(n)
+使用到了滚动数组的原理来将空间复杂度降低
+1 |d0|b0|b0|c0|a0| dp(s2.size())
+------------------
+a1|0 |0 |0 |0 |0 | dp(s2.size())
+------------------
+a1|d1|b1|b1|c1|0 | dp(s2.size())
+------------------
+b0|b1|b1|0 |b1|0 | dp(s2.size())
+------------------
+c0|0 |c1|b1|c1|a1| dp(s2.size())
+------------------
+c0|0 |0 |c1|0 |c1| dp(s2.size())
+------------------
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isInterleave</span><span class="params">(<span class="built_in">string</span> s1, <span class="built_in">string</span> s2, <span class="built_in">string</span> s3)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>( s1.size() + s2.size() != s3.size()) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    <span class="keyword">if</span> (s1.size() &lt; s2.size())</div><div class="line">        <span class="keyword">return</span> isInterleave(s2, s1, s3);</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; dp(s2.size() + <span class="number">1</span>, <span class="literal">true</span>);</div><div class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= s2.size(); ++i)</div><div class="line">        dp[i] = s2[i - <span class="number">1</span>] == s3[i - <span class="number">1</span>] &amp;&amp; dp[i - <span class="number">1</span>];</div><div class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= s1.size(); ++i)&#123;</div><div class="line">        dp[<span class="number">0</span>] = s1[i - <span class="number">1</span>] == s3[i - <span class="number">1</span>] &amp;&amp; dp[<span class="number">0</span>];</div><div class="line">        <span class="keyword">for</span> ( <span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= s2.size(); ++j)</div><div class="line">            dp[j] = (s1[i - <span class="number">1</span>] == s3[i + j - <span class="number">1</span>] &amp;&amp; dp[j]) || (s2[j - <span class="number">1</span>] == s3[i + j - <span class="number">1</span>] &amp;&amp; dp[j - <span class="number">1</span>]); </div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> dp[s2.size()];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="6、给定一个矩形表格，求从顶到底的最小和"><a href="#6、给定一个矩形表格，求从顶到底的最小和" class="headerlink" title="6、给定一个矩形表格，求从顶到底的最小和"></a>6、给定一个矩形表格，求从顶到底的最小和</h1><pre><code>给一个矩阵表格，其中只有非负数，找到一条从[0,0]到[i,j] 的最小路径和，只能左右走
+思路:
+设dp[i][j]是从[0,0]到[i,j]的路径和，则转移方程是
+dp[i][j] = min(dp[i-1][j],dp[i][j-1]) + array[i][j];
+</code></pre><h2 id="6-1-备忘录法（递归）"><a href="#6-1-备忘录法（递归）" class="headerlink" title="6.1 备忘录法（递归）"></a>6.1 备忘录法（递归）</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; dp;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; &amp;<span class="built_in">array</span>, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span> (x &lt; <span class="number">0</span> || y &lt; <span class="number">0</span>) <span class="keyword">return</span> INT_MAX; <span class="comment">// 越界，终止条件，注意，不是 0</span></div><div class="line">    <span class="keyword">if</span> (x == <span class="number">0</span> &amp;&amp; y == <span class="number">0</span>) <span class="keyword">return</span> <span class="built_in">array</span>[<span class="number">0</span>][<span class="number">0</span>]; <span class="comment">// 回到起点，收敛条件</span></div><div class="line">    <span class="keyword">return</span> min(getOrUpdate(<span class="built_in">array</span>, x - <span class="number">1</span>, y), getOrUpdate(<span class="built_in">array</span>, x, y - <span class="number">1</span>))</div><div class="line">         + <span class="built_in">array</span>[x][y];</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">getOrUpdate</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; &amp;<span class="built_in">array</span>, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span> (x &lt; <span class="number">0</span> || y &lt; <span class="number">0</span>) </div><div class="line">            <span class="keyword">return</span> INT_MAX; <span class="comment">// 越界，注意，不是 0</span></div><div class="line">    <span class="keyword">if</span> (dp[x][y] &gt;= <span class="number">0</span>) <span class="comment">//dp &gt;= 0 更新</span></div><div class="line">            <span class="keyword">return</span> dp[x][y];</div><div class="line">    <span class="keyword">else</span></div><div class="line">         <span class="keyword">return</span> dp[x][y] = dfs(<span class="built_in">array</span>, x, y);<span class="comment">//dp = -1 获取</span></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">minPathSum</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;<span class="built_in">array</span>)</span></span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> m = <span class="built_in">array</span>.size();</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> n = <span class="built_in">array</span>[<span class="number">0</span>].size();</div><div class="line">    dp = <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt;(m, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(n,<span class="number">-1</span>));</div><div class="line">    <span class="keyword">return</span> dfs(<span class="built_in">array</span>, m<span class="number">-1</span>, n<span class="number">-1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="6-2-二维动态规划"><a href="#6-2-二维动态规划" class="headerlink" title="6.2 二维动态规划"></a>6.2 二维动态规划</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">minPathSum</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;<span class="built_in">array</span>)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>( <span class="built_in">array</span>.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> m = <span class="built_in">array</span>.size();</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> n = <span class="built_in">array</span>[<span class="number">0</span>].size();</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; dp(m, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;);</div><div class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="built_in">array</span>[<span class="number">0</span>][<span class="number">0</span>];</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; m; ++i)</div><div class="line">        dp[i][<span class="number">0</span>] = dp[i<span class="number">-1</span>][<span class="number">0</span>] + <span class="built_in">array</span>[i][<span class="number">0</span>];</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i)</div><div class="line">        dp[<span class="number">0</span>][i] = dp[<span class="number">0</span>][i<span class="number">-1</span>] + <span class="built_in">array</span>[<span class="number">0</span>][i];</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; m; ++i)</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">1</span>; j &lt; n; ++j)</div><div class="line">            dp[i][j] = min(dp[i<span class="number">-1</span>][j],dp[i][j<span class="number">-1</span>])+<span class="built_in">array</span>[i][j];</div><div class="line">    <span class="keyword">return</span> dp[m<span class="number">-1</span>][n<span class="number">-1</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="6-3-动态规划-O-n-2-滚动数组-O-n"><a href="#6-3-动态规划-O-n-2-滚动数组-O-n" class="headerlink" title="6.3 动态规划 O(n^2) + 滚动数组 O(n)"></a>6.3 动态规划 O(n^2) + 滚动数组 O(n)</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">minPathSum</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;<span class="built_in">array</span>)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>( <span class="built_in">array</span>.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> m = <span class="built_in">array</span>.size();</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> n = <span class="built_in">array</span>[<span class="number">0</span>].size();</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(n, INT_MAX);</div><div class="line">    dp[<span class="number">0</span>] = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i)&#123;</div><div class="line">        dp[<span class="number">0</span>] += <span class="built_in">array</span>[i][<span class="number">0</span>];</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">1</span>; j &lt; n; ++j)</div><div class="line">            dp[j] = min(dp[j<span class="number">-1</span>], dp[j]) + <span class="built_in">array</span>[i][j];<span class="comment">//滚动数组dp[j]是更新前的dp[j]相当于dp[i-1][j]</span></div><div class="line">                                                      <span class="comment">//dp[j-1]是同一排前一个dp相当于dp[i][j-1]</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> dp[n<span class="number">-1</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="7、使俩字符串相等所需要的最小编辑次数"><a href="#7、使俩字符串相等所需要的最小编辑次数" class="headerlink" title="7、使俩字符串相等所需要的最小编辑次数"></a>7、使俩字符串相等所需要的最小编辑次数</h1><pre><code>每次只能有一个步骤：&lt;1&gt;插入&lt;2&gt;删除&lt;3&gt;替换
+思路:
+    设状态dp[i][j]表示为A[0,i]和B[0,j]之间的最小编辑距离。
+    假设A[0,i]形式为str1c,B[0,j]形式为str2d
+    &lt;1&gt;如果c == d则dp[i][j] = dp[i-1][j-1]
+    &lt;2&gt;如果c != d，
+        &lt;1&gt;如果c替换成d，则dp[i][j] = dp[i-1][j-1]+1
+        &lt;2&gt;如果在c后面添加一个d，则dp[i][j] = dp[i][j-1] + 1
+        &lt;3&gt;如果将c删除，则dp[i][j] = dp[i-1][j] + 1
+        &lt;4&gt;然后取这四种情况的最小值
+</code></pre><h2 id="7-1-二维动态规划-O-nm-O-nm"><a href="#7-1-二维动态规划-O-nm-O-nm" class="headerlink" title="7.1 二维动态规划 O(nm) O(nm)"></a>7.1 二维动态规划 O(n<em>m) O(n</em>m)</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">minDistance</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp; word1, <span class="keyword">const</span> <span class="built_in">string</span> &amp; word2)</span></span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> n = word1.size();</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> m = word2.size();</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; dp(n+<span class="number">1</span>, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(m+<span class="number">1</span>));</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</div><div class="line">        dp[i][<span class="number">0</span>] = i;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i)</div><div class="line">        dp[<span class="number">0</span>][i] = i;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i)</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">1</span>; j &lt; m; ++j)&#123;</div><div class="line">            <span class="keyword">if</span>( word1[i] == word2[j])</div><div class="line">                dp[i][j] = dp[i<span class="number">-1</span>][j<span class="number">-1</span>];</div><div class="line">            <span class="keyword">else</span></div><div class="line">                dp[i][j] = min(dp[i<span class="number">-1</span>][j<span class="number">-1</span>], min(dp[i<span class="number">-1</span>][j],dp[i][j<span class="number">-1</span>])) + <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">    <span class="keyword">return</span> dp[n,m];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="7-2-动态规划-O-n-m-滚动数组-O-m"><a href="#7-2-动态规划-O-n-m-滚动数组-O-m" class="headerlink" title="7.2 动态规划  O(n*m) + 滚动数组 O(m)"></a>7.2 动态规划  O(n*m) + 滚动数组 O(m)</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">minDistance</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp; word1, <span class="keyword">const</span> <span class="built_in">string</span> &amp; word2)</span></span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> n = word1.size();</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> m = word2.size();</div><div class="line">    <span class="keyword">if</span>( n &lt; m) minDistance( word2, word1);</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(m+<span class="number">1</span>);</div><div class="line">    <span class="keyword">int</span> record = <span class="number">0</span>;<span class="comment">//记录dp[i-1][j-1]</span></div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i)</div><div class="line">        dp[i] = i;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i)&#123;</div><div class="line">        record = dp[<span class="number">0</span>];</div><div class="line">        dp[<span class="number">0</span>] = i;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">1</span>; j &lt; m; ++j)&#123;</div><div class="line">            <span class="keyword">int</span> pre_record = dp[j];</div><div class="line">            <span class="keyword">if</span>( word1[i<span class="number">-1</span>] == word2[j<span class="number">-1</span>])</div><div class="line">                dp[j] = pre_record;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                dp[j] = min( record, min( dp[j],dp[j<span class="number">-1</span>]));</div><div class="line">            record = pre_record;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> dp[m];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="8、给定一串数字，1对应A，2对应B-26对应Z，求有多少种解码方式"><a href="#8、给定一串数字，1对应A，2对应B-26对应Z，求有多少种解码方式" class="headerlink" title="8、给定一串数字，1对应A，2对应B,26对应Z，求有多少种解码方式"></a>8、给定一串数字，1对应A，2对应B,26对应Z，求有多少种解码方式</h1><pre><code>例如：12 可以被翻译为1 2=&gt; AB 也可以被翻译为12=&gt; L,所以12的解码方式数是2
+思路:
+    和爬楼梯问题是一样的，
+    爬楼梯问题是一个人每次可以上1层或者2层楼梯问上到第n层有多少种走法
+    设dp[n]表示爬n阶楼梯的不同方法，为了爬到第n阶楼梯，有俩中选择
+        &lt;1&gt;从第n-1阶楼梯前进1步
+        &lt;2&gt;从第n-2阶楼梯前进2步
+        所以得出dp[n] = dp[n-1] + dp[n-2]
+
+解码这个问题就是问一个两位数 (最多到26，这里要判断一下)是按一个一个数来解码还是把它看做一个俩位数来解码
+</code></pre><h2 id="8-1-动态规划-O-n-滚动数组-O-1"><a href="#8-1-动态规划-O-n-滚动数组-O-1" class="headerlink" title="8.1 动态规划 O(n) + 滚动数组 O(1)"></a>8.1 动态规划 O(n) + 滚动数组 O(1)</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">numDecodings</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;s)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>( s.empty()||s[<span class="number">0</span>] == <span class="string">'0'</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> prev = <span class="number">0</span>;<span class="comment">//dp[0] = 0;</span></div><div class="line">    <span class="keyword">int</span> cur = <span class="number">1</span>;<span class="comment">//dp[1] = 1;</span></div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; s.size(); ++i)&#123;</div><div class="line">        <span class="keyword">if</span>( s[i<span class="number">-1</span>] == <span class="string">'0'</span>)</div><div class="line">            cur = <span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span>( i &lt; <span class="number">2</span>||!(s[i<span class="number">-2</span>] == <span class="string">'1'</span>|| (s[i<span class="number">-2</span>] == <span class="string">'2'</span>&amp;&amp;s[i<span class="number">-1</span>] &lt;= <span class="string">'6'</span>)))<span class="comment">//判断一下是否可以当做俩位数来解</span></div><div class="line">            pre = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> tmp = cur;</div><div class="line">        cur = pre + cur;<span class="comment">//dp[n] = dp[n-1] + dp[n-2]</span></div><div class="line">        prev = tmp;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> cur;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="9、不同的子序列Distinct-Subsequences"><a href="#9、不同的子序列Distinct-Subsequences" class="headerlink" title="9、不同的子序列Distinct Subsequences"></a>9、不同的子序列Distinct Subsequences</h1><pre><code>给定两个字符串a，b求b在a中出现的次数，要求可以是不连续的，但是b在a中的顺序必须和b以前的一致。 
+例如： a = &apos;rabbbit&apos; b = &apos;rabbit&apos; 
+//          rabb it
+//          rab bit
+//          ra bbit
+            所以返回3
+思路: 
+    类似一个数字分解的问题
+    设dp[i][j] 表示b的前j个字符在a的前i个字符中出现的次数
+        &lt;1&gt;如果a[i] == b[j] 那么dp[i][j] = dp[i-1][j-1] + dp[i-1][j]
+            意思是：如果当前a[i] == b[j]，那么当前这个字母即可以保留也可以抛弃，所以变换方法等于保留这个字母的变换方法加上不用这个字母的变换方法。
+        &lt;2&gt;如果a[i] != b[j] 那么dp[i][j] = dp[i-1][j]
+            就是指当当前字符不等的时候，只能抛弃当前字符
+        dp[0][0] = 1, dp[i][0] = 0 (把任意一个字符串变换为一个空串只有一个方法)
+
+      1|r0|a0|b0|b0|i0|t0| std::vector&lt;int&gt; dp(m+1);
+    ----------------------
+    r 0|r1|0 |0 |0 |0 |0 |
+    ----------------------
+    a 0|1 |a1|0 |0 |0 |0 |
+    ----------------------
+    b 0|0 |1 |b1|b0|0 |0 |
+    ----------------------
+    b 0|0 |1 |b2|b1|0 |0 |
+    ----------------------
+    b 0|0 |1 |b3|b3|0 |0 |
+    ----------------------
+    i 0|0 |1 |3 |3 |i3|0 |
+    ----------------------
+    t 0|0 |1 |3 |3 |3 |t3|
+    ----------------------
+</code></pre><h2 id="9-1-动态规划-O-nm-O-nm"><a href="#9-1-动态规划-O-nm-O-nm" class="headerlink" title="9.1 动态规划 O(nm) O(nm)"></a>9.1 动态规划 O(n<em>m) O(n</em>m)</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">numDistinct</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;a, <span class="keyword">const</span> <span class="built_in">string</span> &amp;b)</span> </span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> n = a.size();</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> m = b.size();</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; dp(n+<span class="number">1</span>, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(m+<span class="number">1</span>, <span class="number">0</span>));</div><div class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)&#123;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; ++j)&#123;</div><div class="line">            <span class="keyword">if</span>( a[i<span class="number">-1</span>] == b[j<span class="number">-1</span>]) </div><div class="line">                dp[i][j] = dp[i<span class="number">-1</span>][j<span class="number">-1</span>] + dp[i<span class="number">-1</span>][j];</div><div class="line">            <span class="keyword">else</span></div><div class="line">                dp[i][j] = dp[i<span class="number">-1</span>][j];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> dp[n][m];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="9-2-动态规划-O-n-m-滚动数组-O-n"><a href="#9-2-动态规划-O-n-m-滚动数组-O-n" class="headerlink" title="9.2 动态规划 O(n*m) + 滚动数组 O(n)"></a>9.2 动态规划 O(n*m) + 滚动数组 O(n)</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">numDistinct</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;a, <span class="keyword">const</span> <span class="built_in">string</span> &amp;b)</span> </span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> n = a.size();</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> m = b.size();</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(m+<span class="number">1</span>, <span class="number">0</span>);</div><div class="line">    dp[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; ++i)&#123;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; ++j)&#123;</div><div class="line">            dp[j] = (a[i] == b[j])? (dp[j] + dp[j<span class="number">-1</span>]):dp[j];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> dp[m];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="10、单词分解Word-Break"><a href="#10、单词分解Word-Break" class="headerlink" title="10、单词分解Word Break"></a>10、单词分解Word Break</h1><pre><code>字符串是否可以分解为给定的单词
+例如:s = &quot;catsanddog&quot;.
+dict = [&quot;cat&quot;, &quot;cats&quot;, &quot;and&quot;, &quot;sand&quot;, &quot;dog&quot;].
+A solution is [&quot;cats and dog&quot;, &quot;cat sand dog&quot;].
+思路:
+    和第一题一样的思路，就是要返回所有有可能的切分位置，如果用回溯来处理切分的话肯定是会超时
+    所以设dp[i][j]来表示[i-j]这一段是否可以切分，然后在dfs的时候利用看最后剩余的子串能否切分来剪枝
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">string</span>&amp; s,<span class="keyword">int</span> k,<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; &gt;&amp; dp,<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; had,<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; ans,<span class="built_in">unordered_set</span>&lt;<span class="built_in">string</span>&gt; &amp;dict)</span>  </span>&#123;  </div><div class="line">    <span class="keyword">int</span> n=s.length();  </div><div class="line">    <span class="keyword">if</span>(k&gt;=n)&#123;  </div><div class="line">        <span class="keyword">if</span>(!had.empty())&#123;  </div><div class="line">            <span class="built_in">string</span> ret;  </div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;had.size();i++) &#123;  </div><div class="line">                ret.append(had[i]);  </div><div class="line">                <span class="keyword">if</span>(i!=had.size()<span class="number">-1</span>)  </div><div class="line">                    ret.push_back(<span class="string">' '</span>);  </div><div class="line">            &#125;  </div><div class="line">            ans.push_back(ret);  </div><div class="line">            <span class="keyword">return</span>;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> len=<span class="number">1</span>;k+len&lt;=n;len++)&#123;  </div><div class="line">        <span class="built_in">string</span> tmp=s.substr(k,len);  </div><div class="line">        <span class="keyword">if</span>(dict.count(tmp)&gt;<span class="number">0</span> &amp;&amp; dp[n-k-len][k+len])&#123;  </div><div class="line">            had.push_back(tmp);  </div><div class="line">            dfs(s,k+len,dp,had,ans,dict);  </div><div class="line">            had.pop_back();  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;     </div><div class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; wordBreak(<span class="built_in">string</span> s, <span class="built_in">unordered_set</span>&lt;<span class="built_in">string</span>&gt; &amp;dict)&#123;</div><div class="line">    <span class="keyword">int</span> n = s.size();</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; &gt; dp(n+<span class="number">1</span>, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; (n+<span class="number">1</span>, <span class="literal">false</span>));</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">0</span>; ++i)</div><div class="line">        dp[<span class="number">0</span>][i] = <span class="literal">true</span>;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> len = <span class="number">1</span>; len &lt;= n; ++len)&#123;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> start = <span class="number">0</span>;start + len &lt;= n; ++start)&#123;</div><div class="line">            <span class="built_in">string</span> tmp = s.substr(start, len);</div><div class="line">            <span class="keyword">if</span>( dict.count(tmp) &gt; <span class="number">0</span>)</div><div class="line">                dp[len][start] = <span class="literal">true</span>;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="keyword">for</span>( <span class="keyword">int</span> left = <span class="number">1</span>; left &lt; len; ++left)&#123;</div><div class="line">                    dp[len][start] = dp[left][start] &amp;&amp; dp[len-left][start+left];  </div><div class="line">                    <span class="keyword">if</span>( dp[len][start]) <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span>( dp[n][<span class="number">0</span>] == <span class="literal">false</span>)</div><div class="line">        <span class="keyword">return</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;();</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; ans;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; had;</div><div class="line">    dfs( s, <span class="number">0</span> , dp, had, ans dict);</div><div class="line">    <span class="keyword">return</span> ans;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="11、最大可整除的子集合-368-Largest-Divisible-Subset"><a href="#11、最大可整除的子集合-368-Largest-Divisible-Subset" class="headerlink" title="11、最大可整除的子集合//368. Largest Divisible Subset"></a>11、最大可整除的子集合//368. Largest Divisible Subset</h1><pre><code>给定一个数组，求这样一个子集合，集合中的任意两个数相互取余均为0，然后子集合的长度要最长
+思路:
+    较小数对较大数取余一定为0，那么问题就变成了看较大数能不能整除这个较小数。那么如果数组是无序的，处理起来就比较麻烦，所以我们首先可以先给数组排序
+    然后设dp[i]为排序后到nums[i]最大可整除的子集合的长度,设parent[i]表示上一个整除i的整数的位置(即使用数组链表来存储输出vector)，设maxlength为最大可整除的子集合的长度，begin_index
+    表示最大可整除的子集合的长度在nums中的起始下标。
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; largestDivisibleSubset(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</div><div class="line">    sort( nums.begin(), nums.end());</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(  nums.size(), <span class="number">0</span>), parent( nums.size(), <span class="number">0</span>);</div><div class="line">    <span class="keyword">int</span> maxlength = <span class="number">0</span>, begin_index = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = nums.size() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i)</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = i; j &lt; nums.size(); ++j)&#123;</div><div class="line">            <span class="keyword">if</span>( nums[j] % nums[i] == <span class="number">0</span>&amp;&amp; dp[i] &lt; dp[j]+<span class="number">1</span>)&#123;</div><div class="line">                dp[i] = dp[j] + <span class="number">1</span>;</div><div class="line">                parent[i] = j;</div><div class="line">                <span class="keyword">if</span>( maxlength &lt; dp[i])&#123;</div><div class="line">                    maxlength = dp[i];</div><div class="line">                    begin_index = i;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</div><div class="line">    <span class="keyword">while</span>( maxlength--)&#123;</div><div class="line">        res.push_back(nums[begin_index]);</div><div class="line">        begin_index = parent[begin_index];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="12、Count-Primes计算质数"><a href="#12、Count-Primes计算质数" class="headerlink" title="12、Count Primes计算质数"></a>12、Count Primes计算质数</h1><pre><code>计算0-n中质数的个数
+思路:
+    解题方法就在第二个提示埃拉托斯特尼筛法Sieve of Eratosthenes（必须把不大于根号n的所有素数的
+    倍数剔除，剩下的就是素数。）中，这个算法的过程如下图所示，
+    我们从2开始遍历到根号n，先找到第一个质数2，然后将其所有的倍数全部标记出来，然后到下一个质
+    数3，标记其所有倍数，一次类推，直到根号n，此时数组中未被标记的数字就是质数。我们需要一个
+    n-1长度的bool型数组来记录每个数字是否被标记，长度为n-1的原因是题目说是小于n的质数个数，并
+    不包括n
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">countPrimes</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; v(n, <span class="literal">true</span>);</div><div class="line">    v[<span class="number">0</span>] = <span class="literal">false</span>;</div><div class="line">    v[<span class="number">1</span>] = <span class="literal">false</span>;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= <span class="built_in">sqrt</span>(n); ++i)</div><div class="line">        <span class="keyword">if</span>( v[i])</div><div class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> j = i*<span class="number">2</span>; j &lt; n; j += j)</div><div class="line">                v[j] = <span class="literal">false</span>;</div><div class="line">    <span class="keyword">int</span> count = <span class="built_in">std</span>::count_if(v.begin(), v.end(),[](<span class="keyword">bool</span> x)&#123; <span class="keyword">return</span> x;&#125;);</div><div class="line">    <span class="keyword">return</span> count;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="13、丑数ugly-numberII和super-ugly-number"><a href="#13、丑数ugly-numberII和super-ugly-number" class="headerlink" title="13、丑数ugly numberII和super ugly number"></a>13、丑数ugly numberII和super ugly number</h1><pre><code>丑数是指质因数因子只能是2,3,5的数
+</code></pre><h2 id="13-1-ugly-numberII-求第n个丑数"><a href="#13-1-ugly-numberII-求第n个丑数" class="headerlink" title="13.1 ugly numberII 求第n个丑数"></a>13.1 ugly numberII 求第n个丑数</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">nthUglyNumber</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;<span class="comment">//从1开始取2,3,5倍数的最小值，并记录2,3,5之前最近和谁乘过</span></div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v(<span class="number">1</span>, <span class="number">1</span>);</div><div class="line">    <span class="keyword">int</span> t2 = <span class="number">0</span>,t3 = <span class="number">0</span>,t5 = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i)&#123;</div><div class="line">        <span class="keyword">int</span> tmp;</div><div class="line">        tmp = min(<span class="number">2</span>*v[t2],<span class="number">3</span>*v[t3]);</div><div class="line">        tmp = min(<span class="number">5</span>*v[t5],tmp);</div><div class="line">        <span class="keyword">if</span>( tmp  == <span class="number">2</span>*v[t2]) t2 ++;</div><div class="line">        <span class="keyword">if</span>( tmp  == <span class="number">3</span>*v[t3]) t3 ++;</div><div class="line">        <span class="keyword">if</span>( tmp  == <span class="number">5</span>*v[t5]) t5 ++;</div><div class="line">        res.push_back(tmp);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> v[n];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="13-2-super-ugly-number"><a href="#13-2-super-ugly-number" class="headerlink" title="13.2 super ugly number"></a>13.2 super ugly number</h2><pre><code>质数因子变成了任意给定，然后求第n个丑数求法和ugly numberII的思路是一致的，只是把记录2,3,5使用次数的t2,t3,t5变成了可变的vector
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">nthSuperUglyNumber</span><span class="params">(<span class="keyword">int</span> n, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; primes)</span> </span>&#123;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(n, <span class="number">1</span>), idx(primes.size(), <span class="number">0</span>);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i) &#123;</div><div class="line">        dp[i] = INT_MAX;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; primes.size(); ++j) &#123;</div><div class="line">            dp[i] = min(dp[i], dp[idx[j]] * primes[j]);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; primes.size(); ++j) &#123;</div><div class="line">            <span class="keyword">if</span> (dp[i] == dp[idx[j]] * primes[j]) &#123;</div><div class="line">                ++idx[j];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> dp.back();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="14、Leetcode-474-Ones-and-Zeroes"><a href="#14、Leetcode-474-Ones-and-Zeroes" class="headerlink" title="14、Leetcode 474. Ones and Zeroes"></a>14、Leetcode 474. Ones and Zeroes</h1><pre><code>假设你分别有m个0s和n个1s。 另一方面，有一个字符串只包含0和1的数组。 
+现在您的任务是找到可以使用给定m 0和n 1形成的最大字符串数。 每个0和1最多可以使用一次。
+例如Array = {&quot;10&quot;, &quot;0001&quot;, &quot;111001&quot;, &quot;1&quot;, &quot;0&quot;}, m = 5, n = 3
+    最多可以合成 &quot;10&quot; &quot;0001&quot; &quot;1&quot; &quot;0&quot;共用了5个0和3个1
+    所以返回4
+思路: 
+    假设dp[i][j]是指用m个0s 和n个1s可以合成的最大的string数
+    那么dp[i][j] = max( dp[i][j] , dp[i-string.countof(0)][j-string.countof(1)])
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">findMaxForm</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; strs, <span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; dp( m+<span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;( n+<span class="number">1</span>, <span class="number">0</span>));</div><div class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">auto</span> s : strs)&#123;</div><div class="line">        <span class="keyword">int</span> numZeroes = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> numOnes = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> c : s) &#123;</div><div class="line">          <span class="keyword">if</span> (c == <span class="string">'0'</span>)</div><div class="line">            numZeroes++;</div><div class="line">          <span class="keyword">else</span> <span class="keyword">if</span> (c == <span class="string">'1'</span>)</div><div class="line">            numOnes++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = m; i &gt;= numZeroes; --i)</div><div class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> j = n; j &gt;= numOnes; --j)</div><div class="line">                dp[i][j] = max( dp[i][j], dp[i - numZeroes][j - numOnes] + <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> dp[m][n];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="15、Leetcode-516-Longest-Palindromic-Subsequence"><a href="#15、Leetcode-516-Longest-Palindromic-Subsequence" class="headerlink" title="15、Leetcode 516. Longest Palindromic Subsequence"></a>15、Leetcode 516. Longest Palindromic Subsequence</h1><pre><code>给定一个string，求最长的回文字串的长度
+例如： s = &quot;bbbab&quot; 返回结果是4 最长回文字串是&quot;bbb b&quot;
+思路：
+    假设dp[i][j]是[i,j]的最长回文字串
+    在初始时，如果i == j 的话dp[i][j] = 1;
+              如果i+1 == j时 如果s[i] == s[j] dp[i][j] = 2;
+                             如果s[i] != s[j] dp[i][j] = 1;
+    随后，如果s[i] == s[j] dp[i][j] = max( dp[i+1][j], dp[i][j-1], dp[i+1][j-1]+2);
+              s[i] != s[j] dp[i][j] = max( dp[i+1][j], dp[i][j-1], dp[i+1][j-1]);
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestPalindromeSubseq</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> n = s.size();</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; dp( n, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(n, <span class="number">0</span>));</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = i; j &lt; n; ++j)&#123;</div><div class="line">            <span class="keyword">if</span>( i == j) dp[i][j] = <span class="number">1</span>;</div><div class="line">            <span class="keyword">if</span>( i+<span class="number">1</span> == j) &#123;</div><div class="line">                <span class="keyword">if</span>( s[i] == s[j])</div><div class="line">                    dp[i][j] = <span class="number">2</span>;</div><div class="line">                <span class="keyword">else</span></div><div class="line">                    dp[i][j] = <span class="number">1</span>;</div><div class="line">            &#125;    </div><div class="line">        &#125;</div><div class="line">    <span class="comment">// for( auto i : dp)&#123;</span></div><div class="line">    <span class="comment">//     for( auto j : i)</span></div><div class="line">    <span class="comment">//         cout &lt;&lt; j &lt;&lt; ends;</span></div><div class="line">    <span class="comment">//     cout &lt;&lt; endl;</span></div><div class="line">    <span class="comment">// &#125;</span></div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = n - <span class="number">3</span>; i &gt;= <span class="number">0</span>; --i)</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = i+<span class="number">2</span>; j &lt; n; ++j)&#123;</div><div class="line">            <span class="keyword">if</span>( s[i] == s[j])</div><div class="line">                dp[i][j] = max( dp[i+<span class="number">1</span>][j], max(dp[i][j<span class="number">-1</span>], dp[i+<span class="number">1</span>][j<span class="number">-1</span>] + <span class="number">2</span>));</div><div class="line">            <span class="keyword">else</span></div><div class="line">                dp[i][j] = max( dp[i+<span class="number">1</span>][j], max(dp[i][j<span class="number">-1</span>], dp[i+<span class="number">1</span>][j<span class="number">-1</span>]));</div><div class="line">        &#125;</div><div class="line">    <span class="comment">// for( auto i : dp)&#123;</span></div><div class="line">    <span class="comment">//     for( auto j : i)</span></div><div class="line">    <span class="comment">//         cout &lt;&lt; j &lt;&lt; ends;</span></div><div class="line">    <span class="comment">//     cout &lt;&lt; endl;</span></div><div class="line">    <span class="comment">// &#125; </span></div><div class="line">    <span class="keyword">return</span> dp[<span class="number">0</span>][n<span class="number">-1</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="16、-Leetcode-486-Predict-the-Winner"><a href="#16、-Leetcode-486-Predict-the-Winner" class="headerlink" title="16、 Leetcode 486. Predict the Winner"></a>16、 Leetcode 486. Predict the Winner</h1><pre><code>给一个数组，a和b分别从数组的俩端中任意一端取数，问能否a最后取得的数和大于等于b的
+例如：[1, 5, 233, 7] a先选1 剩下[5, 233, 7] b只能取5或者7,接下来a可以取233所以a可以赢b，返回true
+思路：假设dp的上三角[i][j]存的是[i,j]a可以取到的最大和，下三角存的是[i,j]所有数的和
+    初始化dp[i][i] = nums[i]
+    |  1|  5|233|  7|
+    -----------------
+   1|  1|   |   |   |
+    -----------------
+   5|  6|  5|   |   |
+    -----------------
+ 233|239|238|233|   |
+    -----------------
+   7|246|245|240|  7|
+    -----------------
+    然后dp[i][j] = max( sum[i][j] - dp[i+1][j], sum[i][j] - dp[i][i-1]);
+    |  1|  5|233|  7|
+    -----------------
+   1|  1|  5|234|234|
+    -----------------
+   5|  6|  5|233| 12|
+    -----------------
+ 233|239|238|233|233|
+    -----------------
+   7|246|245|240|  7|
+    -----------------
+    最后求出的dp[0][n-1]就是a可以取到的最大数和，dp[n-1][0]-dp[0][n-1]是b可以取到的最小数和
+    俩数相减如果大于等于0则返回true
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">PredictTheWinner</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> n = nums.size();</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; dp( n, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(n, <span class="number">0</span>));</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</div><div class="line">        dp[i][i] = nums[i];</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i)</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; ++j)</div><div class="line">            dp[i][j] = dp[i<span class="number">-1</span>][j] + nums[i];</div><div class="line">    <span class="comment">// for( auto i : dp)&#123;</span></div><div class="line">    <span class="comment">//     for( auto j : i)</span></div><div class="line">    <span class="comment">//         cout &lt;&lt; j &lt;&lt; ends;</span></div><div class="line">    <span class="comment">//     cout &lt;&lt; endl;</span></div><div class="line">    <span class="comment">// &#125;</span></div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = n<span class="number">-2</span>; i &gt;= <span class="number">0</span>; --i)</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; n; ++j)</div><div class="line">            dp[i][j] = max( dp[j][i] - dp[i+<span class="number">1</span>][j], dp[j][i] - dp[i][j<span class="number">-1</span>]);</div><div class="line">    <span class="comment">// for( auto i : dp)&#123;</span></div><div class="line">    <span class="comment">//     for( auto j : i)</span></div><div class="line">    <span class="comment">//         cout &lt;&lt; j &lt;&lt; ends;</span></div><div class="line">    <span class="comment">//     cout &lt;&lt; endl;</span></div><div class="line">    <span class="comment">// &#125;</span></div><div class="line">    <span class="keyword">return</span> dp[<span class="number">0</span>][n<span class="number">-1</span>] &gt;= ( dp[n<span class="number">-1</span>][<span class="number">0</span>] - dp[<span class="number">0</span>][n<span class="number">-1</span>]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="17、-Leetcode-416-Partition-Equal-Subset-Sum-其实是一个01背包问题"><a href="#17、-Leetcode-416-Partition-Equal-Subset-Sum-其实是一个01背包问题" class="headerlink" title="17、 Leetcode 416. Partition Equal Subset Sum (其实是一个01背包问题)"></a>17、 Leetcode 416. Partition Equal Subset Sum (其实是一个01背包问题)</h1><pre><code>给定一个数组问这个数组能否被分解为两个子数组，俩子数组的和相等
+例如： [1,5,11,5] =&gt; [1,5,5] [11] 返回true
+思路：要使俩子数组的和相等，其实就是问能不能取出一个子数组 使其的和等于原数组和sum的一半
+    先求出sum如果sum为奇数，返回false，
+                      偶数，设dp[sum/2+1]存的dp[i]是i能否用数组的数字求和得到
+                      dp[i] = dp[i] || dp[i-nums[j]]
+    0 |1 |2 |3 |4 |5 |6 |7 |8 |9 |10|11|12|
+    1  0  0  0  0  0  0  0  0  0  0  0  0
+1   1  1  0  0  0  0  0  0  0  0  0  0  0 
+5   1  1  0  0  0  1  1  0  0  0  0  0  0  
+11  1  1  0  0  0  1  1  0  0  0  0  1  1  
+5   1  1  0  0  0  1  1  0  0  0  1  1  1  
+</code></pre><h2 id="17-1-dp"><a href="#17-1-dp" class="headerlink" title="17.1 dp"></a>17.1 dp</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">canPartition</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> sum = accumulate( nums.begin(), nums.end(), <span class="number">0</span>);</div><div class="line">    <span class="keyword">if</span>( sum&amp;<span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; dp(sum/<span class="number">2</span>+<span class="number">1</span>, <span class="literal">false</span>);</div><div class="line">    dp[<span class="number">0</span>] = <span class="literal">true</span>;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">auto</span> i : nums)</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = sum/<span class="number">2</span>; j &gt;= i; --j)</div><div class="line">            dp[j] = dp[j] || dp[j - i];</div><div class="line">    <span class="keyword">return</span> dp[sum/<span class="number">2</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="17-2-bit-operation-用bitset来记录上面数组记录的数据"><a href="#17-2-bit-operation-用bitset来记录上面数组记录的数据" class="headerlink" title="17.2 bit operation(用bitset来记录上面数组记录的数据)"></a>17.2 bit operation(用bitset来记录上面数组记录的数据)</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">canPartition</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">    <span class="built_in">bitset</span>&lt;5001&gt; bits(<span class="number">1</span>);</div><div class="line">    <span class="keyword">int</span> sum = accumulate(nums.begin(), nums.end(), <span class="number">0</span>);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> n : nums) bits |= bits &lt;&lt; n;</div><div class="line">    <span class="keyword">return</span> !(sum &amp; <span class="number">1</span>) &amp;&amp; bits[sum &gt;&gt; <span class="number">1</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="18、0-1背包问题及其变种"><a href="#18、0-1背包问题及其变种" class="headerlink" title="18、0/1背包问题及其变种"></a>18、0/1背包问题及其变种</h1><h2 id="18-1-01背包问题"><a href="#18-1-01背包问题" class="headerlink" title="18.1 01背包问题"></a>18.1 01背包问题</h2><pre><code>有N件物品和一个容量为V的背包，第i件物品的重量为c[i],价值为w[i].求解哪些物品放入背包，可以使物品的总重量不超过背包容量，且价值最大
+    思路：
+    最基本的背包问题，每件物品仅有一件，可放可不放
+    设dp[i][v]表示前i件物品恰放入一个容量为v的背包可以获得的最大价值
+    dp[i][v] = max( dp[i-1][v], dp[i-1][v-c[i]] + w[i])
+    注意：dp[i][v]当且仅当存在一个前i件物品的子集，其费用总和为v，所以在最后推完之后，最终的答案不是dp[N][v]而是max(dp[N][0-v])
+
+    其中空间复杂度和时间复杂度都为 O(N*V),但是空间复杂度可以使用滚动数组的方式优化到 O(V)
+    for i = 1..N
+        for v = V..0
+            dp[v] = max( dp[v], dp[v-c[i]] + w[i])
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Time O(N*V) Space O(V)</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">Bag</span><span class="params">( <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; c, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; w, <span class="keyword">int</span> v)</span></span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> n = c.size();</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(v+<span class="number">1</span>, <span class="number">0</span>);</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = v; j &gt;= <span class="number">0</span>; --j)</div><div class="line">            <span class="keyword">if</span>( j - c[i] &gt;= <span class="number">0</span>)</div><div class="line">                dp[j] = max( dp[j], dp[j - c[i]]+ w[i]);</div><div class="line">    <span class="keyword">return</span> dp[v];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="18-2-完全背包问题"><a href="#18-2-完全背包问题" class="headerlink" title="18.2 完全背包问题"></a>18.2 完全背包问题</h2><pre><code>有N件物品和一个容量为V的背包，每种物品有无限件可以用。第i件的重量是c[i]，价值是w[i]。求解哪些物品放入背包，可以使物品的总重量不超过背包容量，且价值最大
+    思路：
+    这和01背包问题不同的是，每件物品可以取0,1,2...件。如果任然按照01背包求解的思路，令dp[i][v]表示前i种物品恰放入容器为v的背包的最大价值。
+    可写出dp[i][v] = max( dp[i-1][v-k*c[i]] + k*w[i]|0&lt;=k*c[i]&lt;=v)
+    但是求解每个状态的时间不是常数了，总复杂度超过了O(VN)
+
+    优化：
+    如果俩件物品i，j满足c[i] &lt;= c[j]且w[i] &gt;= w[j]，则将物品j去掉不考虑。这样可以减少物品的件数来加快速度
+
+    进一步优化：
+    把第i种物品拆成重量为c[i]*(2^k)、价值为w[i]*(2^k)的若干件物品，其中k满足c[i]*(2^k) &lt; V (这是二进制的思想，不管最优策略选几件第i件物品，总可以表示成若干个2^k件物品的和)
+    这样把每种物品拆成O(log(V/c[i]))件物品
+    可以得出
+    for i = 1..N
+        for v = 0..V
+            dp[v] = max( dp[v], dp[v-c[i]] + w[i])
+
+    这里相对于01背包问题只是v的循环顺序改变了，是因为反序的话可以保证每个物品只用到一次，正序可以让这个物品用到0..n次
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">Bag</span><span class="params">( <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; c, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; w, <span class="keyword">int</span> v)</span></span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> n = c.size();</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(v+<span class="number">1</span>, <span class="number">0</span>);</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span>; j &lt; v+<span class="number">1</span>; ++j)</div><div class="line">            <span class="keyword">if</span>( j - c[i] &gt;= <span class="number">0</span>)</div><div class="line">                dp[j] = max( dp[j], dp[j - c[i]]+ w[i]);</div><div class="line">    <span class="keyword">return</span> dp[v];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="18-3-多重背包问题"><a href="#18-3-多重背包问题" class="headerlink" title="18.3 多重背包问题"></a>18.3 多重背包问题</h2><pre><code>有N种物品和一个容量为V的背包。第i种物品最多有n[i]件可用，每件重量是c[i]，价值是w[i]。求解将哪些物品装入背包可使这些物品的重量总和不超过背包容量，且价值总和最大。
+    思路：
+    和完全背包类似，只是每种物品有数量上限，令dp[i][v]表示前i种物品恰放入容器为v的背包的最大价值。
+    dp[i][v]=max{dp[i-1][v-k*c[i]]+ k*w[i]|0&lt;=k&lt;=n[i]}
+
+    给出一种方法，将原来的数量k的物品拆成若干组，每一组可以看做一件新的物品，其重量和价值为改组中所有物品的价值重量的总和，每组物品包含的元物品个数可拆为：1,2,4,(k-1)^(c+1)
+    其中c为使(k-2)^(c+1)大于0的最大整数。这样就将物品数量大大降低，同时通过对这些若干个原物品组合得到的新物品的不同组合，可以得到0到k之间的任意件物品的价值重量和，所以对所有
+    这些新物品做0-1背包，即可得到多重背包的解。转化之后的时间复杂度为O(V*∑ni=1^(log2(ki)))。
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 时间复杂度：O(m*∑log k[i])</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">multiBag</span><span class="params">( <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;c, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp;w, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp;n, <span class="keyword">int</span> v)</span></span>&#123;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; newc;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; neww;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; c.size(); ++i)&#123;<span class="comment">//把n[i]个第i种物品按照 1 2 4 8 ...(二进制优化)分成若干物品，就变成了01背包问题</span></div><div class="line">        <span class="keyword">int</span> k = <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span>( n[i] - k &gt; <span class="number">0</span>)&#123;</div><div class="line">            n[i] -= k;</div><div class="line">            newc.push_back( c[i]*k);</div><div class="line">            neww.push_back( w[i]*k);</div><div class="line">            k *= <span class="number">2</span>;</div><div class="line">        &#125;</div><div class="line">        newc.push_back( c[i]*n[i]);</div><div class="line">        neww.push_back( w[i]*n[i]);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> m = newc.size();</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(v+<span class="number">1</span>, <span class="number">0</span>);</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i)<span class="comment">//对于新的物品来进行01背包问题求解</span></div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = v; j &gt;= newc[i]; --j)</div><div class="line">                dp[j] = max( dp[j], dp[j - newc[i]]+ neww[i]);</div><div class="line">    <span class="keyword">return</span> dp[v];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code>使用单调队列的方法可以将上面的二进制优化的复杂度降低到 O(v*i)
+</code></pre><p><a href="link">http://blog.csdn.net/u013923947/article/details/40371243</a></p>
+<pre><code>首先前面的多重背包的原始转移方程式
+num[i] = min( n[i], j/c[i])//第i件物品最多可以取多少件
+dp[i][j] = max( dp[i-1][j-k*c[i]] + k*w[i]) (1&lt;=k&lt;=num[i])
+
+先看一个例子
+取num[i] = 2,c[i] = c, w[i] = w, V &gt; 9*c
+j = 6*c : dp[i][j] = max( dp[i-1][6*c], dp[i-1][6*c - c] + w, dp[i-1][6*c - 2*c] + 2*w)
+                   = max( dp[i-1][6*c], dp[i-1][5*c] + w, dp[i-1][4*c] + 2*w)
+j = 5*c : dp[i][j] = max( dp[i-1][5*c], dp[i-1][4*c] + w, dp[i-1][3*c] + 2*w)
+j = 4*c : dp[i][j] = max( dp[i-1][4*c], dp[i-1][3*c] + w, dp[i-1][2*c] + 2*w)               
+令f(j) = dp[i-1][j]的话
+j = 6*c : dp[i][j] = max( f( 6*c), f( 5*c) + w, f( 4*c) + 2*w)
+j = 5*c : dp[i][j] = max( f( 5*c), f( 4*c) + w, f( 3*c) + 2*w)
+j = 4*c : dp[i][j] = max( f( 4*c), f( 3*c) + w, f( 2*c) + 2*w)              
+=&gt;但如果将j = 6*v时，每项减去6*w，j=5*v时，每项减去5*w，j=4*v时，每项减去4*w，就得到：
+j = 6*c : dp[i][j] = max( f( 6*c) - 6*w, f( 5*c) - 5*w, f( 4*c) - 4*w) + 6*w
+j = 5*c : dp[i][j] = max( f( 5*c) - 5*w, f( 4*c) - 4*w, f( 3*c) - 3*w) + 5*w
+j = 4*c : dp[i][j] = max( f( 4*c) - 4*w, f( 3*c) - 3*w, f( 2*c) - 2*w) + 4*w            
+其中有很多的重复项
+
+所以令a = j/c[i] , b = j%c[i] 那么j = a*c[i] + b
+那么dp[i][j] = max( dp[i-1][b+(a-k)*c[i]] + k*w[i]) 
+=&gt;dp[i][j] = max( dp[i-1][b+k*c[i]] - k*w[i]) + a*w[i] (k = a-k)=&gt;( a-num[i]&lt;=k&lt;=a)
+
+对于dp[i-1][y] (y = b, b+d, b+2*d ... j)
+dp[i][j]就是求j的前面num[i] + 1个数对应的dp[i-1][b+k*c[i]] - k*w[i]的最大值再加上a*w[i]
+如果将dp[i][j]前面所有的dp[i-1][b+k*c[i]] - k*w[i]放入到一个队列中，那么，dp[i][j]就是求
+这个队列最大长度num[i]+1时，队列中的最大值，在加上a*w[i].从而把原问题转换为在O(1)的时间内
+求一个队列的最大值。
+
+解决求一个队列的最大值：
+    &lt;1&gt;用另一个队列B记录指定队列的最大值(或则记录最大值的下标),并通过下面俩个操作保证队列B的第一个元素
+    (或指向的元素)一定是指定队列的当前最大值
+    &lt;2&gt;当指定队列有元素M进入时，删除B队列中比M小的(或则队列B中所指向的元素小于等于M的)所有元素，并将M
+    (或M的地址)存入B中
+    &lt;3&gt;当指定队列有M 离开时，队列B的第一个元素若与M相等(或则队列B第一个元素的地址与M一样)，则队列B的第
+    一个元素也离队
+    上诉方法可以保证B中的第一个元素(或则指向的元素)一定是指定队列所有元素的最大值
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//“多重背包”通用模板  </span></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX_V = <span class="number">100004</span>;  </div><div class="line"><span class="comment">//c、n、w：当前所处理的这类物品的体积、个数、价值  </span></div><div class="line"><span class="comment">//V：背包体积， MAX_V：背包的体积上限值  </span></div><div class="line"><span class="comment">//dp[i]：体积为i的背包装前几种物品，能达到的价值上限。  </span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">pack</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;dp, <span class="keyword">int</span> V, <span class="keyword">int</span> c, <span class="keyword">int</span> n, <span class="keyword">int</span> w)</span>  </span>&#123;  </div><div class="line">    <span class="keyword">if</span> (n == <span class="number">0</span> || c == <span class="number">0</span>) <span class="keyword">return</span>;  </div><div class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>) &#123;               <span class="comment">//01背包  </span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = V; i &gt;= c; --i)  </div><div class="line">            <span class="keyword">if</span> (dp[i] &lt; dp[i - c] + w) dp[i] = dp[i - c] + w;  </div><div class="line">        <span class="keyword">return</span>;  </div><div class="line">    &#125;  </div><div class="line">    <span class="keyword">if</span> (n * c &gt;= V - c + <span class="number">1</span>) &#123;   <span class="comment">//完全背包(n &gt;= V / c)  </span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = c; i &lt;= V; ++i)  </div><div class="line">            <span class="keyword">if</span> (dp[i] &lt; dp[i - c] + w) dp[i] = dp[i - c] + w;  </div><div class="line">        <span class="keyword">return</span>;      </div><div class="line">    &#125;     </div><div class="line">  </div><div class="line">    <span class="keyword">int</span> va[MAX_V], vb[MAX_V];   <span class="comment">//va/vb: 主/辅助队列  </span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; c; ++j) &#123;     <span class="comment">//多重背包  </span></div><div class="line">        <span class="keyword">int</span> *pb = va, *pe = va - <span class="number">1</span>;     <span class="comment">//pb/pe分别指向队列首/末元素  </span></div><div class="line">        <span class="keyword">int</span> *qb = vb, *qe = vb - <span class="number">1</span>;     <span class="comment">//qb/qe分别指向辅助队列首/末元素    </span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = j, i = <span class="number">0</span>; k &lt;= V; k += c, ++i) &#123;  </div><div class="line">            <span class="keyword">if</span> (pe  == pb + n) &#123;       <span class="comment">//若队列大小达到指定值，第一个元素X出队。  </span></div><div class="line">                <span class="keyword">if</span> (*pb == *qb) ++qb;   <span class="comment">//若辅助队列第一个元素等于X，该元素也出队。   </span></div><div class="line">                ++pb;  </div><div class="line">            &#125;  </div><div class="line">            <span class="keyword">int</span> tt = dp[k] - i * w;  </div><div class="line">            *++pe = tt;                  <span class="comment">//元素X进队  </span></div><div class="line">            <span class="comment">//删除辅助队列所有小于X的元素，qb到qe单调递减，也可以用二分法  </span></div><div class="line">            <span class="keyword">while</span> (qe &gt;= qb &amp;&amp; *qe &lt; tt) --qe;  </div><div class="line">            *++qe = tt;              <span class="comment">//元素X也存放入辅助队列          </span></div><div class="line">            dp[k] = *qb + i * w;      <span class="comment">//辅助队列首元素恒为指定队列所有元素的最大值  </span></div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">multiBag</span><span class="params">( <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; c, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; w, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; n, <span class="keyword">int</span> v)</span></span>&#123;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(v+<span class="number">1</span>, <span class="number">0</span>);</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; c.size(); ++i)</div><div class="line">        pack( dp, v, c[i], n[i], w[i]);</div><div class="line">    <span class="keyword">return</span> dp[v];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code>对于01背包、完全背包、多重背包问题都不是很难，但是如果把它们组合起来就比较难了，需要把题目拆分成
+简单的背包问题来求解
+</code></pre><h2 id="18-4-二维背包问题"><a href="#18-4-二维背包问题" class="headerlink" title="18.4 二维背包问题"></a>18.4 二维背包问题</h2><pre><code>二维费用 的背包问题，对于每种物品，具有俩种不同的费用。选择这件物品必须同时付出这两种代价，对于每种代价都有一个
+    可付出的最大值(背包容量)。问怎样选择物品可以得到 最大的价值。设这两种代价分别为代价1 和代价2，第i件的两种代价分
+    别为a[i]和b[i]。两种代价可付出的最大值(两背包的容量)分别为V和U，物品的价值为w[i].
+
+    思路：
+        把费用加一维，状态也加一维即可。
+        设dp[i][v][u]表示前i种物品付出的两种代价分别为v和u的时候可获得的最大价值
+        转移方程为: dp[i][v][u] = max( dp[i-1][v][u], dp[i-1][v-a[i]][u-b[i]] + w[i])
+
+        物品总个数的限制：
+        有时候，&quot;二维费用&quot;的条件是以这样一种隐含的方式给出的，最多只能取M件物品，事实上相当于每件物品多了一种&quot;件数&quot;的费
+        用，每个物品的件数费用均为1，可以付出的最大件数费用为M。换句话说，dp[v][m]表示付出费用v,最多选m件时可以取得的最
+        大价值，则根据物品的类型(01,完全，多重)用不同的方法循环更新，最后在dp[0...V][0...M]中得到答案
+
+        如果恰取M件的话，在dp[0..V][M]中寻找答案
+</code></pre><h2 id="18-5-分组背包问题"><a href="#18-5-分组背包问题" class="headerlink" title="18.5 分组背包问题"></a>18.5 分组背包问题</h2><pre><code>有N件物品和一个容量为V的背包，第i件物品的重量为c[i]价值为w[i]。这些物品被划分为若干组，每组中的物品相互冲突，最
+    多选一件。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。 
+
+    思路：
+        这个问题变成了每组物品有若干种策略：是选择本组的某一种还是一件都不选。也就是说
+        设dp[k][v]表示前k组物品花费v的费用能取得的最大价值，则有
+        dp[k][v] = max( dp[k-1][v], dp[k-1][v-c[i]] + w[i]) 物品i属于第k组
+
+        然后使用滚动数组优化可得下列伪代码
+        for 所有的组k
+            for 所有属于k组的i
+                for v = V..0
+                    dp[v] = max( dp[v], dp[v-c[i]] + w[i])
+</code></pre><h2 id="18-6-有依赖的背包问题"><a href="#18-6-有依赖的背包问题" class="headerlink" title="18.6 有依赖的背包问题"></a>18.6 有依赖的背包问题</h2><pre><code>这种背包问题的物品间存在某种&apos;依赖&apos;关系。也就是说，i依赖于j，表示选择物品i则必须选择 物品j。为了简化起见，这里先设
+    没有物品既依赖于别的物品，又被别的物品所依赖；另外，没有某件物品同时依赖多件物品。 
+
+    思路：
+    我们将不依赖于别的物品的物品称为&apos;主件&apos;，依赖于某个主件的物品称为&apos;附件&apos;。这道题就可以变成，可知多有的物品由若干主件
+    和依赖于没个主件的一个附件的集合组成。
+    按照背包问题的思路，仅考虑一个主件和它的附件集合。可是，这样有非常多的策略：
+        &lt;1&gt;一个也不选
+        &lt;2&gt;仅仅选主件
+        &lt;3&gt;选主件后选一个附件
+        ...
+        这无法用状态转移方程来表示
+    考虑到所有的策略是互斥的 (只能选一个)，所以一个主件和它的附件集合实际上对应于上面的背包分组问题中的一个物品组，每个
+    选择了组件又选择了若干附件的策略吟对于这个物品组中的一个物品，其费用和价值都是这个策略的物品的值的和。但仅仅是这一步转化
+    并不能给出一个好算法，因为，物品组中的物品数没变，还是想原问题中一样多
+
+    再考虑到，可以对每组中的物品使用滚动数组的方法进行优化，这提示我们，对于一个物品组中的物品，所有费用相同的物品只留一个价
+    值最大的，这不会影响结果。所以，我们可以对主件i的附件集合先进性一次01背包，得到费用一次为0..V-c[i]所有这些值时相应的最大
+    价值dp[0..V-c[i]]。那么这个主件及它的附件集合相当于V-c[i]+1个物品的物品组(把附件取重量0..V-c[i]所能取到的最大重量看做V-c[i]
+    +1个物品，然后这些物品的重量就是用01问题解出来的相应的最大值，然后根据分组问题的互斥原理，只能从这个分组中取一个)，其中费用
+    为c[i]+k的物品的价值为dp[k] + w[i]。也就是说原来指数级的策略中有很多策略都是冗余的，通过一次01背包后，将主件i转化为 V-c[i]+1
+    个物品的物品组，就可以直接应用分组背包问题算法解决问题了。
+
+    在考虑更一般的问题：
+    依赖关系是以&apos;森林&apos;的形式给出，只有每个物品最多依赖于一个物品，且不出现循环依赖
+
+    思路：
+    解决这个问题，仍然可以用将每个主件及其附件集合转化为物品组的方式。唯一不同的是，由于附件可能还有附件，就不能将每个附件都看作
+    01背包问题来求解了，若这个附件也有集合，则他必定要被先转化成物品组，然后用分组的背包问题接触主件及其附件组中各个费用的附件所对应
+    的价值。事实上，这是一种树形DP，其特点是每个父节点都需要对它的各个儿子的属性进行一次DP以求得自己的相关属性。
+</code></pre><h2 id="18-7-泛化物品"><a href="#18-7-泛化物品" class="headerlink" title="18.7 泛化物品"></a>18.7 泛化物品</h2><pre><code>定义：
+    考虑这样一种物品，它并没有固定的费用和价值，而是它的价值随着你分配给它的费用而变化。这就是泛化物品的概念。
+    更严格的定义之。在背包容量为V的背包问题中，泛化物品是一个定义域为0..V中的整数的函数h，当分配给它的费用为v时，能得到的价值就是h(v)。 
+    这个定义有一点点抽象，另一种理解是一个泛化物品就是一个数组h[0..V]，给它费用v，可得到价值h[V]。 
+
+    一个费用为c价值为w的物品，如果在01背包问题中，那么把它看成泛化物品，它就是除了h(c) = w其他函数值都为0 的一个函数( 要么取h(c)要么不取h(0))
+    .如果是完全背包问题中的物品，那么他可以看成这样一个函数，仅当v被c整除时有h(v) = v/c * w,其它函数值均为0(v/c指价值为c的物品取了v/c个)
+    其他的都为0.如果是多重背包问题中重复次数最多为n的物品，那么他的泛化物品的函数有h(v)=v/c*w仅当v被c整除且v/c&lt;=n，其它情况函数值均为0。
+
+    一个物品组可以看做一个繁华物品h。对于一个0..V中的v，若干物品组中不存在费用为v的物品，则h(v) = 0，否则h(v)是多有费用为v的物品的最大价值。
+    依赖问题中的没个主件和附件集合等价于一个物品组，也可以看作为一个泛化物品。
+
+    泛化物品的和：
+    如果面对两个泛化物品h和l，要用给定的费用从这两个泛化物品中得到最大的价值，事实上对于一个给定的费用v，只需要枚举将这个费用如何分配给两个
+    泛化物品就可以了。同样的，对于0..V的每一个整数v，可以求得费用v分配到h和l中的最大价值dp[v],也就是dp[v] = max( h(k)+l(v-k) | 0&lt;=k&lt;=v).可以看出dp
+    夜视仪有繁华物品h和l决定的定义域为0..V的函数，=&gt;dp是一个有泛化物h和l决定的泛化物品。由此可定义泛化物品的和：h、l都是泛化物品，若泛化物品dp满足
+    dp(v)=max(h(k)+l(v-k)|0&lt;=k&lt;=v)，则称dp是h与l的和，即dp=h+l。这个运算的时间复杂度是O(V^2)。 
+
+    背包问题的泛化物品：
+    一个背包问题中，可能会给出很多条件，包括每种物品的费用、价值的属性，物品之间的分组、依赖等关系。但肯定能将问题对应于某个泛化物品。也就是说，
+    给定了所有条件后，就可以对每个非负整数v求得：若背包容量为V，将物品装入背包可得到的最大价值是多少，这可以认为是定义在非负整数机上的一键泛化物品。
+    这个泛化物品——或者说问题所对应的一个定义域为非负整数的函数——包含了关于问题本身的高度浓缩的信息。一般而言，求得这个泛化物品的一个子域（例如0..V）
+    的值之后，就可以根据这个函数的取值得到背包问题的最终答案。
+</code></pre><h2 id="18-8-背包问题的变化"><a href="#18-8-背包问题的变化" class="headerlink" title="18.8 背包问题的变化"></a>18.8 背包问题的变化</h2><h3 id="18-8-1-求解最多可以放多少件物品或者最多可以装满多少背包的空间。这都可以根据具体问题利用前面的方程求出所有状态的值（dp数组）之后得到。"><a href="#18-8-1-求解最多可以放多少件物品或者最多可以装满多少背包的空间。这都可以根据具体问题利用前面的方程求出所有状态的值（dp数组）之后得到。" class="headerlink" title="18.8.1 求解最多可以放多少件物品或者最多可以装满多少背包的空间。这都可以根据具体问题利用前面的方程求出所有状态的值（dp数组）之后得到。"></a>18.8.1 求解最多可以放多少件物品或者最多可以装满多少背包的空间。这都可以根据具体问题利用前面的方程求出所有状态的值（dp数组）之后得到。</h3><h3 id="18-8-2-如果要求的是“总价值最小”“总件数最小”，只需简单的将上面的状态转移方程中的max改成min即可。"><a href="#18-8-2-如果要求的是“总价值最小”“总件数最小”，只需简单的将上面的状态转移方程中的max改成min即可。" class="headerlink" title="18.8.2 如果要求的是“总价值最小”“总件数最小”，只需简单的将上面的状态转移方程中的max改成min即可。"></a>18.8.2 如果要求的是“总价值最小”“总件数最小”，只需简单的将上面的状态转移方程中的max改成min即可。</h3><h3 id="18-8-3-输出方案"><a href="#18-8-3-输出方案" class="headerlink" title="18.8.3 输出方案"></a>18.8.3 输出方案</h3><pre><code>一般而言，背包问题是要求一个最优值，如果要求输出这个最优值的方案，可以参照一般动态规划问题输出方案的方法：记录下每个状态的最优值是由状态转移方
+程的哪一项推出来的，换句话说，记录下它是由哪一个策略推出来的。便可根据这条策略找到上一个状态，从上一个状态接着向前推即可。
+以01背包为例，方程为dp[i][v]=max{dp[i-1][v],dp[i-1][v-c[i]]+w[i]}。再用一个数组g[i] [v]，设g[i][v]=0表示推出dp[i][v]的值时是采用了方程的前一项（
+也即dp[i][v]=dp[i-1][v]），g[i][v]表示采用了方程的后一项。注意这两项分别表示了两种策略：未选第i个物品及选了第i个物品。那么输出方案的伪代码可以
+这样写（设最终状态为dp[N][V]）：
+    v = V
+    for i = N..0
+        if ( g[i][v] == 0) cout &lt;&lt; &quot;未选第i件&quot;
+        else if ( g[i][v] == 1)  cout &lt;&lt; &quot;选第i件&quot;
+                                 v = v - c[i]
+另外，采用方程的前一项或后一项也可以在输出方案的过程中根据dp[i][v]的值实时地求出来，也即不须纪录g数组，将上述代码中的g[i] [v]==0改成dp[i][v]==dp[i-1][v]
+，g[i][v]==1改成dp[i][v]==dp[i-1][v-c[i]]+w[i]也可。
+</code></pre><h3 id="18-8-4-输出字典序最小的最优方案"><a href="#18-8-4-输出字典序最小的最优方案" class="headerlink" title="18.8.4 输出字典序最小的最优方案"></a>18.8.4 输出字典序最小的最优方案</h3><pre><code>这里“字典序最小”的意思是1..N号物品的选择方案排列出来以后字典序最小。以输出01背包最小字典序的方案为例。 
+只需要在转移时注意策略。首先，子问题的定义要略改一些。我们注意到，如果存在一个选了物品1的最优方案，那么答案一定包含物品1，原问题转化为一个背包
+容量为v-c[1]，物品为2..N的子问题。反之，如果答案不包含物品1，则转化成背包容量仍为V，物品为2..N的子问题。不管答案怎样，子问题的物品都是以i..N而
+非前所述的1..i的形式来定义的，所以状态的定义和转移方程都需要改一下。但也许更简易的方法是先把物品逆序排列一下，以下按物品已被逆序排列来叙述。 
+
+从N到1输入时，如果dp[i][v] == dp[i-1][v]及dp[i][v] == dp[i-1][v-c[i]]+w[i]同时成立，应该按照选择了物品i的方案输出
+</code></pre><h3 id="18-8-5-求方案总数"><a href="#18-8-5-求方案总数" class="headerlink" title="18.8.5 求方案总数"></a>18.8.5 求方案总数</h3><pre><code>对于这类改变问法的问题，一般只需将状态转移方程中的max改成sum即可。例如若每件物品均是01背包中的物品，转移方程即为dp[i][v]=sum(dp[i-1][v],dp[i-1][v-c[i]]+w[i])，初始条件dp[0][0]=1。 
+</code></pre><h3 id="18-8-6-最优方案总数"><a href="#18-8-6-最优方案总数" class="headerlink" title="18.8.6 最优方案总数"></a>18.8.6 最优方案总数</h3><pre><code>最优方案是指物品总价值最大的方案。还是以01背包为例。 
+结合求最大总价值和方案总数两个问题的思路，最优方案的总数可以这样求：dp[i][v]意义同前述，g[i][v]表示这个子问题的最优方案的总数，则在求dp[i][v]的同时求g[i][v]的伪代码如下： 
+
+for i=1..N 
+    for v=0..V 
+        dp[i][v]=max(dp[i-1][v],dp[i-1][v-c[i]]+w[i])
+        g[i][v]=0 
+        if(dp[i][v]==dp[i-1][v]) 
+            inc(g[i][v],g[i-1][v])
+        if(dp[i][v]==dp[i-1][v-c[i]]+w[i]) 
+            inc(g[i][v],g[i-1][v-c[i]]) 
+</code></pre><h1 id="19、-Leetcode-375-Guess-Number-Higher-or-Lower-II"><a href="#19、-Leetcode-375-Guess-Number-Higher-or-Lower-II" class="headerlink" title="19、 Leetcode 375. Guess Number Higher or Lower II"></a>19、 Leetcode 375. Guess Number Higher or Lower II</h1><ul>
+<li>问题:<ul>
+<li>给定一个数n,然后你从1..n猜取一个数x，猜错的y会被当做花费叠加到sum里,如果y &lt; x 会告知小了，反之告知大了，求要保证猜到n的任何一个数，所需要的最小花费。</li>
+</ul>
+</li>
+<li>思路:<ul>
+<li>假设在[start, end]的范围内取x错了，那么dp[start][end]的一个待取项为x + max( dp[start][x-1], dp[x+1][end]),然后x可以是从start到end任意一项，然后dp[start][end] = min( x + max( dp[start][x-1], dp[x+1][end])) (x从strat取到end)<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">getMoneyAmount</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt; <span class="keyword">int</span>&gt; &gt; dp( n+<span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;( n+<span class="number">1</span>, INT_MAX));</div><div class="line">    <span class="keyword">return</span> dpAlgorithm( dp, <span class="number">1</span>, n);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">dpAlgorithm</span><span class="params">( <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt;&amp;dp, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>( start &gt;= end ) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="keyword">if</span>( dp[start][end] != INT_MAX) <span class="keyword">return</span> dp[start][end];</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> x = start; x &lt;= end; ++x)&#123;</div><div class="line">        dp[start][end] = min( dp[start][end], x + max( dpAlgorithm( dp, start, x<span class="number">-1</span>), dpAlgorithm( dp, x+<span class="number">1</span>, end)));</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> dp[start][end];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="20、Leetcode-300-Longest-Increasing-Subsequence"><a href="#20、Leetcode-300-Longest-Increasing-Subsequence" class="headerlink" title="20、Leetcode 300. Longest Increasing Subsequence"></a>20、Leetcode 300. Longest Increasing Subsequence</h1><ul>
+<li>问题:<ul>
+<li>给定一个数组，找出该数组的最长的递增子串的长度</li>
+</ul>
+</li>
+<li>思路:<ul>
+<li>假设dp[i]是前i个的最长递增子串长度，<br>dp[i] = max( dp[j]+1, dp[i]) (i&lt;j&lt;=end)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">lengthOfLIS</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp( nums.size(), <span class="number">1</span>);</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); ++i)&#123;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; nums.size(); ++j)&#123;</div><div class="line">            <span class="keyword">if</span>( nums[j] &gt; nums[i])&#123;</div><div class="line">                dp[j] = max( dp[j], dp[i] + <span class="number">1</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> *max_element( dp.begin(), dp.end());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="21、Leetcode-376-Wiggle-Subsequence"><a href="#21、Leetcode-376-Wiggle-Subsequence" class="headerlink" title="21、Leetcode 376. Wiggle Subsequence"></a>21、Leetcode 376. Wiggle Subsequence</h1><ul>
+<li>问题：<ul>
+<li>如果连续数字之间的差异在正和负之间严格交替，则数字序列称为摆动序列。 第一个差异（如果存在）可能是正或负。 具有少于两个元素的序列通常是摆动序列。 例如，[1,7,4,9,2,5]是摆动序列，因为差异（6，-3,5，-7,3）交替是正的和负的。 相比之下，[1,4,7,2,5]和[1,7,4,5,5]不是摆动序列，第一个因为它的前两个差异是正的，而第二个差异是最后一个差值为零。 给定整数序列，返回作为摆动序列的最长子序列的长度。 通过从原始序列中删除一些数量的元素（最终也为零）获得子序列，将剩余的元素保留为其原始顺序。</li>
+</ul>
+</li>
+<li>思路：<ul>
+<li>由于摆动序列是增减交替的所以我们需要两个数组来分别存储上一次是增或则减的时候的最大长度，当i相对于i-1是增的时候increasing[i] = releasing[i-1] + 1;releasing[i] = releasing[i-1];<br>当i相对于i-1是减的时候releasing[i] = increasing[i-1] + 1;increasing[i] = increasing[i-1];</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">wiggleMaxLength</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> n = nums.size();</div><div class="line">    <span class="keyword">if</span>( n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; increasing( n, <span class="number">0</span>);</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; releasing( n, <span class="number">0</span>);</div><div class="line">    increasing[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">    releasing[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n<span class="number">-1</span>; ++i)&#123;</div><div class="line">        <span class="keyword">if</span>( nums[i] &gt; nums[i+<span class="number">1</span>])&#123;</div><div class="line">            increasing[i+<span class="number">1</span>] = increasing[i];</div><div class="line">            releasing[i+<span class="number">1</span>] = increasing[i] + <span class="number">1</span>;</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>( nums[i] &lt; nums[i+<span class="number">1</span>])&#123;</div><div class="line">            increasing[i+<span class="number">1</span>] = releasing[i] + <span class="number">1</span>;</div><div class="line">            releasing[i+<span class="number">1</span>] = releasing[i];</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            increasing[i+<span class="number">1</span>] = increasing[i];</div><div class="line">            releasing[i+<span class="number">1</span>] = releasing[i] ;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> max( increasing[n<span class="number">-1</span>], releasing[n<span class="number">-1</span>]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="22、Leetcode-576-Out-of-Boundary-Paths"><a href="#22、Leetcode-576-Out-of-Boundary-Paths" class="headerlink" title="22、Leetcode 576. Out of Boundary Paths"></a>22、Leetcode 576. Out of Boundary Paths</h1><ul>
+<li>说明：<ul>
+<li>给定一个数组的m和n，步数N，起始位置x，y求有多少种走法可以在N步之内，走到数组的边界外面<br><img src="https://github.com/muyinsuifeng/myleetcode/raw/master/image/out_of_boundary_paths_2.png" alt="out_of_boundary_paths_2" title="Optional title"><!--  ![out_of_boundary_paths_2](./image/out_of_boundary_paths_2.png "Optional title") --></li>
+</ul>
+</li>
+<li><p>思路：</p>
+<ul>
+<li><p>dp[0][0 … m -1][0 … n - 1] is 0. means the step is 0, all value is 0.<br>Current value only comes from four directions of last move or 1 if it is boundary</p>
+</li>
+<li><p>dp[step][row][col] = dp[step - 1][row - 1][col] + dp[step - 1][row + 1][col] + dp[step - 1][row][col - 1] + dp[step - 1][row][col + 1]</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">findPaths</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n, <span class="keyword">int</span> N, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</div><div class="line">    <span class="keyword">long</span> limit = <span class="number">1000000007</span>;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">long</span>&gt; &gt; &gt; dp(N+<span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">long</span>&gt; &gt;( m, <span class="built_in">vector</span>&lt;<span class="keyword">long</span>&gt;( n, <span class="number">0</span>) ) );</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= N; ++k)</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i)</div><div class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; ++j)&#123;</div><div class="line">                dp[k][i][j] += (i == <span class="number">0</span>? <span class="number">1</span> :dp[k<span class="number">-1</span>][i<span class="number">-1</span>][j]);</div><div class="line">                dp[k][i][j] += (i == m<span class="number">-1</span>? <span class="number">1</span> :dp[k<span class="number">-1</span>][i+<span class="number">1</span>][j]);</div><div class="line">                dp[k][i][j] += (j == <span class="number">0</span>? <span class="number">1</span> :dp[k<span class="number">-1</span>][i][j<span class="number">-1</span>]);</div><div class="line">                dp[k][i][j] += (j == n<span class="number">-1</span>? <span class="number">1</span> :dp[k<span class="number">-1</span>][i][j+<span class="number">1</span>]);</div><div class="line">                dp[k][i][j] %= limit;</div><div class="line">                <span class="comment">// cout &lt;&lt; "dp["&lt;&lt;k&lt;&lt;"]["&lt;&lt;i&lt;&lt;"]["&lt;&lt;j&lt;&lt;"] = " &lt;&lt; dp[k][i][j] &lt;&lt; endl;</span></div><div class="line">            &#125;</div><div class="line">    <span class="keyword">return</span> (<span class="keyword">int</span>)dp[N][x][y];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
+          
+            <a href="/tags/DP/" rel="tag"><i class="fa fa-tag"></i> DP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/24/DFS-algorithm/" rel="next" title="DFS-algorithm">
+                <i class="fa fa-chevron-left"></i> DFS-algorithm
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/24/leetcodesummary/" rel="prev" title="leetcodesummary">
+                leetcodesummary <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Gia Furler" />
+          <p class="site-author-name" itemprop="name">Gia Furler</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives">
+            
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/muyinsuifeng" title="GitHub" target="_blank">GitHub</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="muyinsuifeng@gmail.com" title="E-Mail" target="_blank">E-Mail</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="muyinsuifeng@gmail.com" title="Google" target="_blank">Google</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、三角形找一条从底到顶的最小路径"><span class="nav-number">1.</span> <span class="nav-text">1、三角形找一条从底到顶的最小路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、最大字数和"><span class="nav-number">2.</span> <span class="nav-text">2、最大字数和</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-扩展问题"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 扩展问题:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.1.2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-扩展问题"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 扩展问题:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、回文最小化分次数"><span class="nav-number">3.</span> <span class="nav-text">3、回文最小化分次数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、最佳时间买卖股票"><span class="nav-number">4.</span> <span class="nav-text">4、最佳时间买卖股票</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1"><span class="nav-number">4.1.</span> <span class="nav-text">4.1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2、不限交易次数"><span class="nav-number">4.2.</span> <span class="nav-text">4.2、不限交易次数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3、此题是限制在两次交易内"><span class="nav-number">4.3.</span> <span class="nav-text">4.3、此题是限制在两次交易内</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-1-方法一"><span class="nav-number">4.3.1.</span> <span class="nav-text">4.3.1 方法一:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-2-方法二-dp算法"><span class="nav-number">4.3.2.</span> <span class="nav-text">4.3.2 方法二:dp算法,</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-Leetcode-309-Best-Time-to-Buy-and-Sell-Stock-with-Cooldown"><span class="nav-number">4.4.</span> <span class="nav-text">4.4 Leetcode 309. Best Time to Buy and Sell Stock with Cooldown</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5、判断字符串s3是否由s1-s2交叉存取组成"><span class="nav-number">5.</span> <span class="nav-text">5、判断字符串s3是否由s1,s2交叉存取组成</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6、给定一个矩形表格，求从顶到底的最小和"><span class="nav-number">6.</span> <span class="nav-text">6、给定一个矩形表格，求从顶到底的最小和</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-备忘录法（递归）"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 备忘录法（递归）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-二维动态规划"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 二维动态规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-动态规划-O-n-2-滚动数组-O-n"><span class="nav-number">6.3.</span> <span class="nav-text">6.3 动态规划 O(n^2) + 滚动数组 O(n)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7、使俩字符串相等所需要的最小编辑次数"><span class="nav-number">7.</span> <span class="nav-text">7、使俩字符串相等所需要的最小编辑次数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-二维动态规划-O-nm-O-nm"><span class="nav-number">7.1.</span> <span class="nav-text">7.1 二维动态规划 O(nm) O(nm)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-动态规划-O-n-m-滚动数组-O-m"><span class="nav-number">7.2.</span> <span class="nav-text">7.2 动态规划  O(n*m) + 滚动数组 O(m)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8、给定一串数字，1对应A，2对应B-26对应Z，求有多少种解码方式"><span class="nav-number">8.</span> <span class="nav-text">8、给定一串数字，1对应A，2对应B,26对应Z，求有多少种解码方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-动态规划-O-n-滚动数组-O-1"><span class="nav-number">8.1.</span> <span class="nav-text">8.1 动态规划 O(n) + 滚动数组 O(1)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9、不同的子序列Distinct-Subsequences"><span class="nav-number">9.</span> <span class="nav-text">9、不同的子序列Distinct Subsequences</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-动态规划-O-nm-O-nm"><span class="nav-number">9.1.</span> <span class="nav-text">9.1 动态规划 O(nm) O(nm)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2-动态规划-O-n-m-滚动数组-O-n"><span class="nav-number">9.2.</span> <span class="nav-text">9.2 动态规划 O(n*m) + 滚动数组 O(n)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10、单词分解Word-Break"><span class="nav-number">10.</span> <span class="nav-text">10、单词分解Word Break</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11、最大可整除的子集合-368-Largest-Divisible-Subset"><span class="nav-number">11.</span> <span class="nav-text">11、最大可整除的子集合//368. Largest Divisible Subset</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12、Count-Primes计算质数"><span class="nav-number">12.</span> <span class="nav-text">12、Count Primes计算质数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#13、丑数ugly-numberII和super-ugly-number"><span class="nav-number">13.</span> <span class="nav-text">13、丑数ugly numberII和super ugly number</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#13-1-ugly-numberII-求第n个丑数"><span class="nav-number">13.1.</span> <span class="nav-text">13.1 ugly numberII 求第n个丑数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-2-super-ugly-number"><span class="nav-number">13.2.</span> <span class="nav-text">13.2 super ugly number</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#14、Leetcode-474-Ones-and-Zeroes"><span class="nav-number">14.</span> <span class="nav-text">14、Leetcode 474. Ones and Zeroes</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#15、Leetcode-516-Longest-Palindromic-Subsequence"><span class="nav-number">15.</span> <span class="nav-text">15、Leetcode 516. Longest Palindromic Subsequence</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#16、-Leetcode-486-Predict-the-Winner"><span class="nav-number">16.</span> <span class="nav-text">16、 Leetcode 486. Predict the Winner</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#17、-Leetcode-416-Partition-Equal-Subset-Sum-其实是一个01背包问题"><span class="nav-number">17.</span> <span class="nav-text">17、 Leetcode 416. Partition Equal Subset Sum (其实是一个01背包问题)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#17-1-dp"><span class="nav-number">17.1.</span> <span class="nav-text">17.1 dp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-2-bit-operation-用bitset来记录上面数组记录的数据"><span class="nav-number">17.2.</span> <span class="nav-text">17.2 bit operation(用bitset来记录上面数组记录的数据)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#18、0-1背包问题及其变种"><span class="nav-number">18.</span> <span class="nav-text">18、0/1背包问题及其变种</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#18-1-01背包问题"><span class="nav-number">18.1.</span> <span class="nav-text">18.1 01背包问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-2-完全背包问题"><span class="nav-number">18.2.</span> <span class="nav-text">18.2 完全背包问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-3-多重背包问题"><span class="nav-number">18.3.</span> <span class="nav-text">18.3 多重背包问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-4-二维背包问题"><span class="nav-number">18.4.</span> <span class="nav-text">18.4 二维背包问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-5-分组背包问题"><span class="nav-number">18.5.</span> <span class="nav-text">18.5 分组背包问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-6-有依赖的背包问题"><span class="nav-number">18.6.</span> <span class="nav-text">18.6 有依赖的背包问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-7-泛化物品"><span class="nav-number">18.7.</span> <span class="nav-text">18.7 泛化物品</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-8-背包问题的变化"><span class="nav-number">18.8.</span> <span class="nav-text">18.8 背包问题的变化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#18-8-1-求解最多可以放多少件物品或者最多可以装满多少背包的空间。这都可以根据具体问题利用前面的方程求出所有状态的值（dp数组）之后得到。"><span class="nav-number">18.8.1.</span> <span class="nav-text">18.8.1 求解最多可以放多少件物品或者最多可以装满多少背包的空间。这都可以根据具体问题利用前面的方程求出所有状态的值（dp数组）之后得到。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-8-2-如果要求的是“总价值最小”“总件数最小”，只需简单的将上面的状态转移方程中的max改成min即可。"><span class="nav-number">18.8.2.</span> <span class="nav-text">18.8.2 如果要求的是“总价值最小”“总件数最小”，只需简单的将上面的状态转移方程中的max改成min即可。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-8-3-输出方案"><span class="nav-number">18.8.3.</span> <span class="nav-text">18.8.3 输出方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-8-4-输出字典序最小的最优方案"><span class="nav-number">18.8.4.</span> <span class="nav-text">18.8.4 输出字典序最小的最优方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-8-5-求方案总数"><span class="nav-number">18.8.5.</span> <span class="nav-text">18.8.5 求方案总数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-8-6-最优方案总数"><span class="nav-number">18.8.6.</span> <span class="nav-text">18.8.6 最优方案总数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#19、-Leetcode-375-Guess-Number-Higher-or-Lower-II"><span class="nav-number">19.</span> <span class="nav-text">19、 Leetcode 375. Guess Number Higher or Lower II</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#20、Leetcode-300-Longest-Increasing-Subsequence"><span class="nav-number">20.</span> <span class="nav-text">20、Leetcode 300. Longest Increasing Subsequence</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#21、Leetcode-376-Wiggle-Subsequence"><span class="nav-number">21.</span> <span class="nav-text">21、Leetcode 376. Wiggle Subsequence</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#22、Leetcode-576-Out-of-Boundary-Paths"><span class="nav-number">22.</span> <span class="nav-text">22、Leetcode 576. Out of Boundary Paths</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gia Furler</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    本站访客数:<span id="busuanzi_value_site_uv"></span>
+  </span>
+  </div>
+  <div class="powered-by">Powered by <a class="theme-link" href="https://hexo.io">Hexo</a></div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
