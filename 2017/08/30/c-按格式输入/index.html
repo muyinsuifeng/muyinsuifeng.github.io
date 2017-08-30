@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="c/c++," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="http://blog.csdn.net/u012999985/article/details/48791641 cin接受固定格式的字符，数字，字符串1.cin在iostream里的方法 cin&amp;gt;&amp;gt;str  cin.get(ch) cin.get(str,10) cin.get() cin.getling(strs, 16) cin.getline(strs, 16, ‘’) get">
+<meta name="keywords" content="c&#x2F;c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++按格式输入">
+<meta property="og:url" content="http://yoursite.com/2017/08/30/c-按格式输入/index.html">
+<meta property="og:site_name" content="Muyinsuifeng">
+<meta property="og:description" content="http://blog.csdn.net/u012999985/article/details/48791641 cin接受固定格式的字符，数字，字符串1.cin在iostream里的方法 cin&amp;gt;&amp;gt;str  cin.get(ch) cin.get(str,10) cin.get() cin.getling(strs, 16) cin.getline(strs, 16, ‘’) get">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-08-30T08:15:27.642Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="c++按格式输入">
+<meta name="twitter:description" content="http://blog.csdn.net/u012999985/article/details/48791641 cin接受固定格式的字符，数字，字符串1.cin在iostream里的方法 cin&amp;gt;&amp;gt;str  cin.get(ch) cin.get(str,10) cin.get() cin.getling(strs, 16) cin.getline(strs, 16, ‘’) get">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/30/c-按格式输入/"/>
+
+
+
+
+
+  <title>c++按格式输入 | Muyinsuifeng</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Muyinsuifeng</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/30/c-按格式输入/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gia Furler">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Muyinsuifeng">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">c++按格式输入</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-30T10:57:53+08:00">
+                2017-08-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c-c/" itemprop="url" rel="index">
+                    <span itemprop="name">c/c++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://blog.csdn.net/u012999985/article/details/48791641" target="_blank" rel="external">http://blog.csdn.net/u012999985/article/details/48791641</a></p>
+<h1 id="cin接受固定格式的字符，数字，字符串"><a href="#cin接受固定格式的字符，数字，字符串" class="headerlink" title="cin接受固定格式的字符，数字，字符串"></a>cin接受固定格式的字符，数字，字符串</h1><h2 id="1-cin在iostream里的方法"><a href="#1-cin在iostream里的方法" class="headerlink" title="1.cin在iostream里的方法"></a>1.cin在iostream里的方法</h2><ul>
+<li>cin&gt;&gt;str </li>
+<li>cin.get(ch)</li>
+<li>cin.get(str,10)</li>
+<li>cin.get()</li>
+<li>cin.getling(strs, 16)</li>
+<li>cin.getline(strs, 16, ‘’)</li>
+<li>getline(cin, strs)</li>
+</ul>
+<a id="more"></a>
+<h2 id="cin-gt-gt-str"><a href="#cin-gt-gt-str" class="headerlink" title="cin&gt;&gt;str"></a>cin&gt;&gt;str</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//cin默认读取到空白格（空格，回车，换行，制表，换纸）结束</span></div><div class="line"><span class="keyword">char</span> ch;</div><div class="line"><span class="keyword">while</span>( <span class="built_in">cin</span> &gt;&gt; ch)&#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; ch;</div><div class="line">&#125;</div><div class="line"><span class="comment">//如</span></div><div class="line"><span class="comment">//1 2  3</span></div><div class="line"><span class="comment">//a b   c</span></div><div class="line"><span class="comment">//输出是123abc</span></div></pre></td></tr></table></figure>
+<ul>
+<li>要避免忽略空格的话需要设置cin</li>
+<li>加上cin &gt;&gt; noskipws;<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//cin默认读取到空白格（空格，回车，换行，制表，换纸）结束</span></div><div class="line"><span class="built_in">cin</span> &gt;&gt; noskipws;</div><div class="line"><span class="keyword">char</span> ch;</div><div class="line"><span class="keyword">while</span>( <span class="built_in">cin</span> &gt;&gt; ch)&#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; ch;</div><div class="line">&#125;</div><div class="line"><span class="comment">//如</span></div><div class="line"><span class="comment">//1 2  3</span></div><div class="line"><span class="comment">//a b   c</span></div><div class="line"><span class="comment">//输出是</span></div><div class="line"><span class="comment">//1 2  3</span></div><div class="line"><span class="comment">//a b   c</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="2-读取一个字符串，且包含空格"><a href="#2-读取一个字符串，且包含空格" class="headerlink" title="2.读取一个字符串，且包含空格"></a>2.读取一个字符串，且包含空格</h2><h3 id="存string"><a href="#存string" class="headerlink" title="存string"></a>存string</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="built_in">string</span> t = <span class="string">""</span>;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>getline</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">getline( <span class="built_in">cin</span>, t);<span class="comment">//可以读取（除了回车）一行</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>cin.get()</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cin</span> &gt;&gt; noskipws;</div><div class="line"><span class="keyword">char</span> tch;</div><div class="line"><span class="keyword">while</span>( <span class="built_in">cin</span>.get(tch))&#123;</div><div class="line">    t += tch;</div><div class="line">    <span class="keyword">if</span>( tch == <span class="string">'\n'</span>)</div><div class="line">         <span class="keyword">break</span>;    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>cin</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cin</span> &gt;&gt; noskipws;</div><div class="line"><span class="keyword">char</span> tch;</div><div class="line"><span class="keyword">while</span>( <span class="built_in">cin</span> &gt;&gt; tch)&#123;</div><div class="line">    t += tch;</div><div class="line">    <span class="keyword">if</span>( tch == <span class="string">'\n'</span>)</div><div class="line">         <span class="keyword">break</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="用字符数组存"><a href="#用字符数组存" class="headerlink" title="用字符数组存"></a>用字符数组存</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> str[<span class="number">15</span>];<span class="comment">//字符数组最好一个会存'\0'，所以这个只能存14个字符</span></div><div class="line"><span class="keyword">int</span> index = <span class="number">0</span>;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>cin.get()/cin</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cin</span> &gt;&gt; noskipws;</div><div class="line"><span class="keyword">char</span> ch;</div><div class="line"><span class="keyword">while</span>( <span class="built_in">cin</span>.get(ch))&#123;</div><div class="line">    <span class="keyword">if</span>( ch == <span class="string">'\n'</span>)</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">if</span>( index &lt; <span class="number">14</span>)&#123;</div><div class="line">        str[i] = ch;</div><div class="line">        str[index+<span class="number">1</span>] = <span class="string">'\0'</span>;<span class="comment">//保证结尾是'\0'</span></div><div class="line">        index++;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>cin.getline</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span>&#123;</div><div class="line">    <span class="keyword">char</span> str[<span class="number">15</span>];</div><div class="line">    <span class="built_in">cin</span>.getline( str, <span class="number">15</span>, <span class="string">'\n'</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(str) &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//输出的是str分配的内存大小</span></div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">strlen</span>(str) &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//输出的是从str开头开始，一个字符一个</span></div><div class="line">                                <span class="comment">//字符的往后数，知道遇到'\0'为止的长度</span></div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">15</span>; i++)</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; str[i] &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"><span class="comment">// 123456789abcdefghijklmn</span></div><div class="line"></div><div class="line"><span class="comment">// 123456789abcde</span></div><div class="line"><span class="comment">// 15</span></div><div class="line"><span class="comment">// 14</span></div><div class="line"><span class="comment">// 1</span></div><div class="line"><span class="comment">// 2</span></div><div class="line"><span class="comment">// 3</span></div><div class="line"><span class="comment">// 4</span></div><div class="line"><span class="comment">// 5</span></div><div class="line"><span class="comment">// 6</span></div><div class="line"><span class="comment">// 7</span></div><div class="line"><span class="comment">// 8</span></div><div class="line"><span class="comment">// 9</span></div><div class="line"><span class="comment">// a</span></div><div class="line"><span class="comment">// b</span></div><div class="line"><span class="comment">// c</span></div><div class="line"><span class="comment">// d</span></div><div class="line"><span class="comment">// e</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong> 因为cin的是时候没有限制输入长度的功能只能由程序员事先安排完成。越界的话，超出的部分，在没有受到外界干扰的时候，是’正常’的。所以在往字符数组读取的时候要注意不要越界。</strong></p>
+</li>
+</ul>
+<h2 id="3-读取多个字符串，中间用空格隔开，回车结束"><a href="#3-读取多个字符串，中间用空格隔开，回车结束" class="headerlink" title="3.读取多个字符串，中间用空格隔开，回车结束"></a>3.读取多个字符串，中间用空格隔开，回车结束</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="built_in">string</span> str[<span class="number">10</span>];</div><div class="line"><span class="keyword">char</span> tch;</div><div class="line"><span class="built_in">cin</span> &gt;&gt; noskipws;</div><div class="line"><span class="keyword">int</span> index = <span class="number">0</span>;</div><div class="line"><span class="keyword">while</span>( <span class="built_in">cin</span>.get(tch))&#123;</div><div class="line">    <span class="keyword">if</span>( tch == <span class="string">'\n'</span>)</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">if</span>( tch == <span class="string">' '</span>)&#123;</div><div class="line">        i ++;</div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">    &#125;</div><div class="line">    str[i] += tch;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="4-读取m-n个字符，每组字符用；-隔开"><a href="#4-读取m-n个字符，每组字符用；-隔开" class="headerlink" title="4.读取m*n个字符，每组字符用； 隔开"></a>4.读取m*n个字符，每组字符用； 隔开</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//a b c d;e f g h;I j k l</span></div><div class="line"><span class="keyword">char</span> data[<span class="number">100</span>][<span class="number">100</span>];</div><div class="line"><span class="keyword">int</span> num1 = <span class="number">0</span>;</div><div class="line"><span class="keyword">int</span> num2 = <span class="number">0</span>;</div><div class="line"><span class="keyword">char</span> tmp;</div><div class="line"><span class="built_in">cin</span> &gt;&gt; noskipws;</div><div class="line"><span class="keyword">while</span>( <span class="built_in">cin</span> &gt;&gt; tmp)&#123;</div><div class="line">    <span class="keyword">if</span>( tmp == <span class="string">';'</span>)&#123;</div><div class="line">        num1 ++;</div><div class="line">        num2 = <span class="number">0</span>;</div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>( tmp == <span class="string">'\n'</span>) <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span>( tmp == <span class="string">' '</span>) <span class="keyword">continue</span>;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">        data[num1][num2] = tmp;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="5-读取m-n个数字，每组数字用；隔开"><a href="#5-读取m-n个数字，每组数字用；隔开" class="headerlink" title="5.读取m*n个数字，每组数字用；隔开"></a>5.读取m*n个数字，每组数字用；隔开</h2><ul>
+<li>1 2 3 4;11 12 13 14; 5 6 7 8</li>
+<li>注意：如果用cin &gt;&gt; (int) a;的话，读到;就会停止</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> num[<span class="number">100</span>][<span class="number">100</span>];</div><div class="line"><span class="keyword">int</span> tmp;</div><div class="line"><span class="keyword">while</span>( <span class="built_in">cin</span> &gt;&gt; tmp)&#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; tmp &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//1 2 3 4;11 12 13 14;5 6 7 8</span></div><div class="line"><span class="comment">//1</span></div><div class="line"><span class="comment">//2</span></div><div class="line"><span class="comment">//3</span></div><div class="line"><span class="comment">//4</span></div></pre></td></tr></table></figure>
+<ul>
+<li>如果再加上用cin &gt;&gt; noskipws;的话，在读完第一个数字后就会停止(无论是;还是空格) </li>
+<li>如果这个数组矩阵是大小固定的，那么就可以用for循环n次来解决先读取固定数目的数字，再用cin&gt;&gt;字符读取一个；再用一个for来循环m次读取组数。然而，我们的m与n都是不固定的，而且要用cin&gt;&gt;数字的话，导致无法在循环中判断每一个字符。所以，这里考虑<strong>先读取字符，然后转换成数字再处理。</strong><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span>&#123;</div><div class="line">    <span class="built_in">string</span> data[<span class="number">20</span>][<span class="number">20</span>];</div><div class="line">    <span class="keyword">int</span> num[<span class="number">20</span>][<span class="number">20</span>];</div><div class="line">    <span class="keyword">int</span> index1 = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> index2 = <span class="number">0</span>;</div><div class="line">    <span class="keyword">char</span> tmp;</div><div class="line">    <span class="built_in">cin</span> &gt;&gt; noskipws;</div><div class="line">    <span class="keyword">while</span>( <span class="built_in">cin</span> &gt;&gt; tmp)&#123;</div><div class="line">        <span class="keyword">if</span>( tmp == <span class="string">';'</span>)&#123;</div><div class="line">            index1 ++;</div><div class="line">            index2 = <span class="number">0</span>;</div><div class="line">            <span class="keyword">continue</span>;</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>( tmp == <span class="string">'\n'</span>) <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( tmp == <span class="string">' '</span>)&#123;</div><div class="line">            index2 ++;</div><div class="line">            <span class="keyword">continue</span>;</div><div class="line">        &#125;<span class="keyword">else</span> data[index1][index2] += tmp;</div><div class="line">        <span class="comment">// cout &lt;&lt; tmp &lt;&lt; endl;    </span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line"></div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; index1+<span class="number">1</span>; ++i)</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span>; j &lt; index2+<span class="number">1</span>; ++j)&#123;</div><div class="line">    <span class="comment">//      cout &lt;&lt; data[i][j] &lt;&lt; endl;</span></div><div class="line">            <span class="keyword">char</span> *ch = <span class="keyword">new</span> <span class="keyword">char</span>(<span class="number">10</span>);</div><div class="line">            <span class="built_in">strncpy</span>( ch,  data[i][j].c_str(), <span class="number">20</span>);</div><div class="line">            <span class="built_in">sscanf</span>( ch, <span class="string">"%d"</span>, &amp;num[i][j]);</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; num[i][j] &lt;&lt; <span class="string">" "</span>;</div><div class="line">        &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//1 2 3 4;11 12 13 14;5 6 7 8</span></div><div class="line"><span class="comment">//1 2 3 4 11 12 13 14 5 6 7 8</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="6-读取m-n个字符串。每组用-隔开"><a href="#6-读取m-n个字符串。每组用-隔开" class="headerlink" title="6.读取m*n个字符串。每组用; 隔开"></a>6.读取m*n个字符串。每组用; 隔开</h2><ul>
+<li>其实就是5中的前半部分，这里就不实现了</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c-c/" rel="tag"><i class="fa fa-tag"></i> c/c++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/24/leetcodesummary/" rel="next" title="leetcodesummary">
+                <i class="fa fa-chevron-left"></i> leetcodesummary
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Gia Furler" />
+          <p class="site-author-name" itemprop="name">Gia Furler</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives">
+            
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/muyinsuifeng" title="GitHub" target="_blank">GitHub</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="muyinsuifeng@gmail.com" title="E-Mail" target="_blank">E-Mail</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="muyinsuifeng@gmail.com" title="Google" target="_blank">Google</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#cin接受固定格式的字符，数字，字符串"><span class="nav-number">1.</span> <span class="nav-text">cin接受固定格式的字符，数字，字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-cin在iostream里的方法"><span class="nav-number">1.1.</span> <span class="nav-text">1.cin在iostream里的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cin-gt-gt-str"><span class="nav-number">1.2.</span> <span class="nav-text">cin>>str</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-读取一个字符串，且包含空格"><span class="nav-number">1.3.</span> <span class="nav-text">2.读取一个字符串，且包含空格</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存string"><span class="nav-number">1.3.1.</span> <span class="nav-text">存string</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用字符数组存"><span class="nav-number">1.3.2.</span> <span class="nav-text">用字符数组存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-读取多个字符串，中间用空格隔开，回车结束"><span class="nav-number">1.4.</span> <span class="nav-text">3.读取多个字符串，中间用空格隔开，回车结束</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-读取m-n个字符，每组字符用；-隔开"><span class="nav-number">1.5.</span> <span class="nav-text">4.读取m*n个字符，每组字符用； 隔开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-读取m-n个数字，每组数字用；隔开"><span class="nav-number">1.6.</span> <span class="nav-text">5.读取m*n个数字，每组数字用；隔开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-读取m-n个字符串。每组用-隔开"><span class="nav-number">1.7.</span> <span class="nav-text">6.读取m*n个字符串。每组用; 隔开</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gia Furler</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    本站访客数:<span id="busuanzi_value_site_uv"></span>
+  </span>
+  </div>
+  <div class="powered-by">Powered by <a class="theme-link" href="https://hexo.io">Hexo</a></div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
